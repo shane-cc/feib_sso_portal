@@ -1,3 +1,4 @@
+import { Typography } from '@sso-platform/common-ui';
 import styles from './index.module.css';
 
 export function Index() {
@@ -11,10 +12,10 @@ export function Index() {
       <div className="wrapper">
         <div className="container">
           <div id="welcome">
-            <h1>
+            <Typography variant="h1">
               <span> Hello there, </span>
               Welcome sso-portal 👋
-            </h1>
+            </Typography>
           </div>
 
           <div id="hero" className="rounded">

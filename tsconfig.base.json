@@ -14,7 +14,10 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@sso-platform/common-ui": ["libs/common-ui/src/index.ts"],
+      "@sso-platform/theme": ["libs/theme/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
