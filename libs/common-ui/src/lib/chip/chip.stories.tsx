@@ -80,6 +80,7 @@ export const General = () => {
             label={`Chip ${item}`}
           />
         ))}
+        <Chip id="" label="Disabled" defaultCheckedStatus disabled />
       </StyledRow>
       <StyledRow>
         <StyledTypography variant="caption" color="GrayText">

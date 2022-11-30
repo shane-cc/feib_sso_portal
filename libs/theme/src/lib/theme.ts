@@ -232,6 +232,16 @@ export const theme = createTheme({
           fontSize: 12,
           lightHeight: 1.25,
         },
+        filledPrimary: {
+          '&.Mui-disabled': {
+            color: COLORS.black,
+            fontWeight: 300,
+            borderColor: alpha(COLORS.grey[900], 0.32),
+            backgroundColor: COLORS.white,
+            borderWidth: 1,
+            borderStyle: 'solid',
+          },
+        },
       },
     },
   },
