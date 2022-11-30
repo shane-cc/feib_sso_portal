@@ -208,5 +208,22 @@ export const theme = createTheme({
         },
       },
     },
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          '.Mui-selected[aria-current="true"]': {
+            color: COLORS.primary.dark,
+            backgroundColor: alpha(COLORS.primary.dark, 0.16),
+            ':hover': {
+              backgroundColor: alpha(COLORS.primary.dark, 0.32),
+            },
+          },
+          '.MuiPaginationItem-root': {
+            borderRadius: 8,
+          },
+        },
+      },
+    },
   },
 });
