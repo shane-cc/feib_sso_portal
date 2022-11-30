@@ -1,4 +1,10 @@
-import { createTheme, SimplePaletteColorOptions } from '@mui/material/styles';
+import {
+  createTheme,
+  SimplePaletteColorOptions,
+  alpha,
+} from '@mui/material/styles';
+import { COLORS } from './colors';
+import { softButton } from './variants/softButton';
 
 declare module '@mui/material/styles' {
   interface PaletteColorOptions extends SimplePaletteColorOptions {
@@ -15,6 +21,13 @@ declare module '@mui/material/styles' {
     '900'?: string;
   }
 }
+
+declare module '@mui/material/Button' {
+  interface ButtonPropsVariantOverrides {
+    soft: true;
+  }
+}
+
 const font = `'Noto Sans TC', sans-serif`;
 export const theme = createTheme({
   typography: {
@@ -88,36 +101,78 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      lighter: '#E1C8FA',
-      light: '#A898D6',
-      main: '#8E75D6',
-      dark: '#5209AE',
-      darker: '#3E006F',
+      lighter: COLORS.primary.lighter,
+      light: COLORS.primary.light,
+      main: COLORS.primary.main,
+      dark: COLORS.primary.dark,
+      darker: COLORS.primary.darker,
     },
     secondary: {
-      lighter: '#FFD6EF',
-      light: '#FF84B0',
-      main: '#E5618D',
-      dark: '#B71965',
-      darker: '#7A094D',
+      lighter: COLORS.secondary.lighter,
+      light: COLORS.secondary.light,
+      main: COLORS.secondary.main,
+      dark: COLORS.secondary.dark,
+      darker: COLORS.secondary.darker,
     },
     info: {
-      lighter: '#DAF5C4',
-      light: '#C3E886',
-      main: '#9DCB3B',
-      dark: '#65A41E',
-      darker: '#2B550A',
+      lighter: COLORS.info.lighter,
+      light: COLORS.info.light,
+      main: COLORS.info.main,
+      dark: COLORS.info.dark,
+      darker: COLORS.info.darker,
     },
     grey: {
-      '100': '#F9FAFB',
-      '200': '#F4F6F8',
-      '300': '#DFE3E8',
-      '400': '#C4CDD5',
-      '500': '#919EAB',
-      '600': '#637381',
-      '700': '#454F5B',
-      '800': '#212B36',
-      '900': '#161C24',
+      '100': COLORS.grey['100'],
+      '200': COLORS.grey['200'],
+      '300': COLORS.grey['300'],
+      '400': COLORS.grey['400'],
+      '500': COLORS.grey['500'],
+      '600': COLORS.grey['600'],
+      '700': COLORS.grey['700'],
+      '800': COLORS.grey['800'],
+      '900': COLORS.grey['900'],
+    },
+  },
+  components: {
+    MuiButton: {
+      variants: [...softButton],
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderRadius: 6,
+          padding: '6px 22px',
+          fontSize: 14,
+          lineHeight: 1.7,
+        },
+        containedInfo: {
+          color: '#fff',
+        },
+        sizeLarge: {
+          fontSize: 15,
+          lineHeight: 1.75,
+        },
+        sizeSmall: {
+          fontSize: 13,
+          lineHeight: 1.25,
+          padding: '5px 10px',
+        },
+        outlinedInherit: {
+          borderColor: alpha(COLORS.grey[500], 0.32),
+        },
+        outlinedInfo: {
+          ':hover': {
+            backgroundColor: alpha(COLORS.info.main, 0.08),
+          },
+        },
+        textInfo: {
+          ':hover': {
+            backgroundColor: alpha(COLORS.info.main, 0.08),
+          },
+        },
+        colorInherit: {
+          color: COLORS.black,
+        },
+      },
     },
   },
 });

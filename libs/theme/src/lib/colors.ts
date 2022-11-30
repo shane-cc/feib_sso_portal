@@ -1,0 +1,36 @@
+export const COLORS = {
+  black: '#2A2136',
+  white: '#FFFFFF',
+  primary: {
+    lighter: '#E1C8FA',
+    light: '#A898D6',
+    main: '#8E75D6',
+    dark: '#5209AE',
+    darker: '#3E006F',
+  },
+  secondary: {
+    lighter: '#FFD6EF',
+    light: '#FF84B0',
+    main: '#E5618D',
+    dark: '#B71965',
+    darker: '#7A094D',
+  },
+  info: {
+    lighter: '#DAF5C4',
+    light: '#C3E886',
+    main: '#9DCB3B',
+    dark: '#65A41E',
+    darker: '#2B550A',
+  },
+  grey: {
+    '100': '#F9FAFB',
+    '200': '#F4F6F8',
+    '300': '#DFE3E8',
+    '400': '#C4CDD5',
+    '500': '#919EAB',
+    '600': '#637381',
+    '700': '#454F5B',
+    '800': '#212B36',
+    '900': '#161C24',
+  },
+};

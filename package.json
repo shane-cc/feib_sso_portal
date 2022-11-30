@@ -9,9 +9,9 @@
   },
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.10.5",
+    "@emotion/react": "11.10.4",
     "@emotion/server": "^11.10.0",
-    "@emotion/styled": "^11.10.5",
+    "@emotion/styled": "11.10.4",
     "@fontsource/noto-sans-tc": "^4.5.12",
     "@mui/icons-material": "^5.10.16",
     "@mui/material": "^5.10.16",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@babel/core": "7.12.13",
     "@babel/preset-typescript": "7.12.13",
+    "@emotion/babel-plugin": "11.10.2",
     "@nrwl/cli": "15.2.1",
     "@nrwl/cypress": "15.2.1",
     "@nrwl/eslint-plugin-nx": "15.2.1",
