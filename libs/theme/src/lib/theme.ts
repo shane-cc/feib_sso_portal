@@ -174,5 +174,39 @@ export const theme = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: COLORS.black,
+          borderColor: 'currentcolor',
+          borderWidth: 1,
+          borderStyle: 'solid',
+        },
+        colorPrimary: {
+          color: COLORS.primary.main,
+          ':hover': {
+            backgroundColor: alpha(COLORS.primary.main, 0.08),
+          },
+        },
+        colorSecondary: {
+          color: COLORS.secondary.main,
+          ':hover': {
+            backgroundColor: alpha(COLORS.secondary.main, 0.08),
+          },
+        },
+        colorInfo: {
+          color: COLORS.info.main,
+          ':hover': {
+            backgroundColor: alpha(COLORS.info.main, 0.08),
+          },
+        },
+        colorInherit: {
+          color: COLORS.black,
+          ':hover': {
+            backgroundColor: alpha(COLORS.black, 0.08),
+          },
+        },
+      },
+    },
   },
 });
