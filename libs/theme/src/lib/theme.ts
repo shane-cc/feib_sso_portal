@@ -225,5 +225,14 @@ export const theme = createTheme({
         },
       },
     },
+    MuiChip: {
+      styleOverrides: {
+        root: {
+          padding: '0px 2.5px',
+          fontSize: 12,
+          lightHeight: 1.25,
+        },
+      },
+    },
   },
 });
