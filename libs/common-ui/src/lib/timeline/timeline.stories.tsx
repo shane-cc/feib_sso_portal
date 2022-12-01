@@ -6,7 +6,8 @@ import { TimelineConnector } from './timeline-connector';
 import { TimelineDot } from './timeline-dot';
 import { TimelineContent } from './timeline-content';
 import styled from '@emotion/styled';
-import Typography from '../typography/typography';
+import { Typography } from '../typography/typography';
+import { Paper } from '../paper/paper';
 import { COLORS } from '@sso-platform/theme';
 
 const Story: ComponentMeta<typeof Timeline> = {
@@ -19,6 +20,7 @@ const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  width: fit-content;
 `;
 
 type TimelineData = {
@@ -64,28 +66,34 @@ const timelineData: TimelineData[] = [
 export const WithConnector = () => {
   return (
     <StyledContainer>
-      <Timeline>
-        {timelineData.map(({ platform, action, date, type }, idx) => (
-          <TimelineItem key={idx}>
-            <TimelineSeparator>
-              <TimelineDot color={type} />
-              {idx < timelineData.length - 1 && <TimelineConnector />}
-            </TimelineSeparator>
-            <TimelineContent>
-              <Typography variant="body2">
-                {platform} | {action}
-              </Typography>
-              <Typography
-                variant="caption"
-                color={COLORS.primary.greyish}
-                sx={{ display: 'block' }}
-              >
-                {date}
-              </Typography>
-            </TimelineContent>
-          </TimelineItem>
-        ))}
-      </Timeline>
+      <Paper
+        sx={{
+          padding: '1rem',
+        }}
+      >
+        <Timeline>
+          {timelineData.map(({ platform, action, date, type }, idx) => (
+            <TimelineItem key={idx}>
+              <TimelineSeparator>
+                <TimelineDot color={type} />
+                {idx < timelineData.length - 1 && <TimelineConnector />}
+              </TimelineSeparator>
+              <TimelineContent>
+                <Typography variant="body2">
+                  {platform} | {action}
+                </Typography>
+                <Typography
+                  variant="caption"
+                  color={COLORS.primary.greyish}
+                  sx={{ display: 'block' }}
+                >
+                  {date}
+                </Typography>
+              </TimelineContent>
+            </TimelineItem>
+          ))}
+        </Timeline>
+      </Paper>
     </StyledContainer>
   );
 };
@@ -99,29 +107,35 @@ const StyledRow = styled.div`
 export const WithoutConnector = () => {
   return (
     <StyledContainer>
-      <Timeline>
-        {timelineData.map(({ platform, action, date, type }, idx) => (
-          <TimelineItem key={idx} dense>
-            <TimelineSeparator>
-              <TimelineDot color={type} />
-            </TimelineSeparator>
-            <TimelineContent>
-              <StyledRow>
-                <Typography variant="body2">
-                  {platform} | {action}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  color={COLORS.primary.greyish}
-                  sx={{ display: 'block' }}
-                >
-                  {date}
-                </Typography>
-              </StyledRow>
-            </TimelineContent>
-          </TimelineItem>
-        ))}
-      </Timeline>
+      <Paper
+        sx={{
+          padding: '0 1rem',
+        }}
+      >
+        <Timeline>
+          {timelineData.map(({ platform, action, date, type }, idx) => (
+            <TimelineItem key={idx} dense>
+              <TimelineSeparator>
+                <TimelineDot color={type} />
+              </TimelineSeparator>
+              <TimelineContent>
+                <StyledRow>
+                  <Typography variant="body2">
+                    {platform} | {action}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    color={COLORS.primary.greyish}
+                    sx={{ display: 'block' }}
+                  >
+                    {date}
+                  </Typography>
+                </StyledRow>
+              </TimelineContent>
+            </TimelineItem>
+          ))}
+        </Timeline>
+      </Paper>
     </StyledContainer>
   );
 };

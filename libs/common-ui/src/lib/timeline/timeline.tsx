@@ -1,4 +1,4 @@
-import { Timeline as MuiTimeline } from '@mui/lab';
+import { Timeline as MuiTimeline, timelineItemClasses } from '@mui/lab';
 import type { TimelineProps as MuiTimelineProps } from '@mui/lab';
 import { forwardRef } from 'react';
 
@@ -6,16 +6,23 @@ import { forwardRef } from 'react';
 export interface TimelineProps extends MuiTimelineProps {}
 
 export const Timeline = forwardRef<HTMLUListElement, TimelineProps>(
-  (props, ref) => {
+  ({ sx, children, ...rest }, ref) => {
     return (
       <MuiTimeline
         nonce={undefined}
         onResize={undefined}
         onResizeCapture={undefined}
-        {...props}
+        {...rest}
         ref={ref}
+        sx={{
+          ...sx,
+          [`& .${timelineItemClasses.root}:before`]: {
+            flex: 0,
+            padding: 0,
+          },
+        }}
       >
-        {props.children}
+        {children}
       </MuiTimeline>
     );
   }
