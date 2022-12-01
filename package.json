@@ -14,6 +14,7 @@
     "@emotion/styled": "11.10.4",
     "@fontsource/noto-sans-tc": "^4.5.12",
     "@mui/icons-material": "^5.10.16",
+    "@mui/lab": "^5.0.0-alpha.110",
     "@mui/material": "^5.10.16",
     "@nrwl/next": "15.2.1",
     "core-js": "^3.6.5",

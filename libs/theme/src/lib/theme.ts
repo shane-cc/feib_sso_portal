@@ -1,3 +1,4 @@
+import type {} from '@mui/lab/themeAugmentation';
 import {
   createTheme,
   SimplePaletteColorOptions,
@@ -241,6 +242,13 @@ export const theme = createTheme({
             borderWidth: 1,
             borderStyle: 'solid',
           },
+        },
+      },
+    },
+    MuiTimelineDot: {
+      styleOverrides: {
+        root: {
+          boxShadow: 'none',
         },
       },
     },

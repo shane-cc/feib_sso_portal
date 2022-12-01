@@ -7,6 +7,7 @@ export const COLORS = {
     main: '#8E75D6',
     dark: '#5209AE',
     darker: '#3E006F',
+    greyish: '#706381',
   },
   secondary: {
     lighter: '#FFD6EF',
