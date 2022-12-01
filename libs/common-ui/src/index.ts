@@ -3,6 +3,8 @@ import '@fontsource/noto-sans-tc/400.css';
 import '@fontsource/noto-sans-tc/500.css';
 import '@fontsource/noto-sans-tc/700.css';
 
+export * from './lib/paper/paper';
+
 export * from './lib/timeline/timeline';
 export * from './lib/timeline/timeline-separator';
 export * from './lib/timeline/timeline-content';
