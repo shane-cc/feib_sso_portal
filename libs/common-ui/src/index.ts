@@ -8,6 +8,9 @@ export * from './lib/dialog/dialog-title';
 export * from './lib/dialog/dialog-content';
 export * from './lib/dialog/dialog-actions';
 export * from './lib/dialog/dialog-content-text';
+export * from './lib/dialog/confirm-dialog';
+export * from './lib/dialog/error-dialog';
+export * from './lib/dialog/loading-dialog';
 export * from './lib/stack/stack';
 
 export * from './lib/container/container';

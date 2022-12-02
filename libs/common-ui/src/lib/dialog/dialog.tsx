@@ -9,7 +9,7 @@ export interface DialogProps extends MuiDialogProps {
 
 export const Dialog = forwardRef<HTMLDivElement, DialogProps>((props, ref) => {
   return (
-    <MuiDialog {...props} ref={ref} scroll="paper">
+    <MuiDialog {...props} ref={ref} scroll="paper" fullWidth>
       {props.children}
     </MuiDialog>
   );
