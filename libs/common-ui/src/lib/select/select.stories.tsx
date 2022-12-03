@@ -2,7 +2,6 @@ import type { ComponentMeta } from '@storybook/react';
 import { Select } from './select';
 import styled from '@emotion/styled';
 import SearchIcon from '@mui/icons-material/Search';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { COLORS } from '@sso-platform/theme';
 import { Option } from './option';
 import { ChangeEvent, useState } from 'react';
