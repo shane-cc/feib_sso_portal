@@ -3,6 +3,10 @@ import '@fontsource/noto-sans-tc/400.css';
 import '@fontsource/noto-sans-tc/500.css';
 import '@fontsource/noto-sans-tc/700.css';
 
+export * from './lib/form-control-label/form-control-label';
+
+export * from './lib/checkbox/checkbox';
+
 export * from './lib/select/select';
 export * from './lib/select/option';
 export * from './lib/text-field/text-field';
