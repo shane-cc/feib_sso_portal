@@ -3,6 +3,8 @@ import '@fontsource/noto-sans-tc/400.css';
 import '@fontsource/noto-sans-tc/500.css';
 import '@fontsource/noto-sans-tc/700.css';
 
+export * from './lib/radio-group/radio-group';
+export * from './lib/radio-group/radio';
 export * from './lib/form-control-label/form-control-label';
 
 export * from './lib/checkbox/checkbox';
