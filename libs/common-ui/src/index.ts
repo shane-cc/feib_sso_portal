@@ -3,6 +3,8 @@ import '@fontsource/noto-sans-tc/400.css';
 import '@fontsource/noto-sans-tc/500.css';
 import '@fontsource/noto-sans-tc/700.css';
 
+export * from './lib/text-field/text-field';
+export * from './lib/text-field/input-icon';
 export * from './lib/dialog/dialog';
 export * from './lib/dialog/dialog-title';
 export * from './lib/dialog/dialog-content';

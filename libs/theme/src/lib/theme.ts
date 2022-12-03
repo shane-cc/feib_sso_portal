@@ -252,5 +252,70 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          '.MuiOutlinedInput-root': {
+            borderRadius: 8,
+          },
+          '.MuiFormHelperText-root': {
+            fontSize: 12,
+            color: COLORS.primary.greyish,
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          fontSize: 16,
+          lineHeight: 1.5,
+          '&.Mui-error .MuiOutlinedInput-notchedOutline': {
+            borderColor: COLORS.secondary.main,
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: COLORS.black,
+            borderWidth: 1,
+            color: COLORS.black,
+          },
+          '&.Mui-error:hover .MuiOutlinedInput-notchedOutline': {
+            borderWidth: 2,
+          },
+          '&.Mui-focused.Mui-error .MuiOutlinedInput-notchedOutline': {
+            borderColor: COLORS.secondary.main,
+            borderWidth: 2,
+            color: COLORS.secondary.main,
+          },
+          '&.Mui-disabled': {
+            backgroundColor: COLORS.grey[100],
+          },
+        },
+        sizeSmall: {
+          fontSize: 14,
+        },
+      },
+    },
+    MuiInputLabel: {
+      styleOverrides: {
+        root: {
+          color: COLORS.primary.label,
+          '&.Mui-focused': {
+            color: COLORS.black,
+          },
+          '&.Mui-error.Mui-focused': {
+            color: COLORS.secondary.main,
+          },
+          '&.Mui-error': {
+            color: COLORS.primary.label,
+          },
+          '&.Mui-error.MuiInputLabel-shrink': {
+            color: COLORS.secondary.main,
+          },
+        },
+        sizeSmall: {
+          fontSize: 14,
+        },
+      },
+    },
   },
 });

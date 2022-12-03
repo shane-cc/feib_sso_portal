@@ -8,6 +8,7 @@ export const COLORS = {
     dark: '#5209AE',
     darker: '#3E006F',
     greyish: '#706381',
+    label: '#9C91AB',
   },
   secondary: {
     lighter: '#FFD6EF',
