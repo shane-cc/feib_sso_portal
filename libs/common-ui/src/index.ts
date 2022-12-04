@@ -3,6 +3,10 @@ import '@fontsource/noto-sans-tc/400.css';
 import '@fontsource/noto-sans-tc/500.css';
 import '@fontsource/noto-sans-tc/700.css';
 
+export * from './lib/breadcrumbs/breadcrumbs';
+export * from './lib/breadcrumbs/breadcrumb-item';
+export * from './lib/link/link';
+
 export * from './lib/radio-group/radio-group';
 export * from './lib/radio-group/radio';
 export * from './lib/form-control-label/form-control-label';

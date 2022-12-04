@@ -317,5 +317,21 @@ export const theme = createTheme({
         },
       },
     },
+    MuiBreadcrumbs: {
+      styleOverrides: {
+        root: {
+          fontSize: 14,
+          lineHeight: 1.6,
+          color: COLORS.primary.greyish,
+        },
+        separator: {
+          marginLeft: '1rem',
+          marginRight: '1rem',
+          color: COLORS.primary.label,
+          fontSize: 14,
+          lineHeight: 1.6,
+        },
+      },
+    },
   },
 });
