@@ -365,5 +365,56 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTabs: {
+      styleOverrides: {
+        root: {
+          backgroundColor: COLORS.white,
+          border: 'none',
+          minHeight: 'unset',
+        },
+        flexContainer: {
+          backgroundColor: COLORS.white,
+          justifyContent: 'flex-end',
+          height: '100%',
+          minHeight: 'inherit',
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          color: COLORS.primary.greyish,
+          backgroundColor: COLORS.grey[300],
+          width: '10rem',
+          textTransform: 'none',
+          fontSize: 14,
+          lineHeight: 1.6,
+          fontWeight: 500,
+          opacity: 0.4,
+          paddingTop: 9,
+          paddingBottom: 9,
+          height: '100%',
+          minHeight: 'inherit',
+          '&:first-of-type': {
+            borderTopLeftRadius: 8,
+          },
+          '&:last-of-type': {
+            borderTopRightRadius: 8,
+          },
+          '&:not(:last-child)': {
+            borderRight: `2px dashed ${alpha(COLORS.grey[400], 1)}`,
+            borderOffset: 2,
+          },
+          '&.Mui-selected': {
+            opacity: 1,
+            color: COLORS.white,
+            backgroundColor: COLORS.primary.main,
+            '&:not(:last-child)': {
+              borderRight: `2px dashed ${alpha(COLORS.primary.main, 0.5)}`,
+            },
+          },
+        },
+      },
+    },
   },
 });
