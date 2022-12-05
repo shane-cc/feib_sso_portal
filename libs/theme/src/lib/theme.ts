@@ -133,8 +133,20 @@ export const theme = createTheme({
       '800': COLORS.grey['800'],
       '900': COLORS.grey['900'],
     },
+    text: {
+      primary: COLORS.black,
+      secondary: COLORS.primary.greyish,
+    },
   },
   components: {
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: COLORS.black,
+          wordBreak: 'break-word',
+        },
+      },
+    },
     MuiButton: {
       variants: [...softButton],
       styleOverrides: {
@@ -330,6 +342,26 @@ export const theme = createTheme({
           color: COLORS.primary.label,
           fontSize: 14,
           lineHeight: 1.6,
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          position: 'relative',
+          filter: `drop-shadow(0px 9px 16px ${alpha(
+            COLORS.primary.label,
+            0.18
+          )}) drop-shadow(0px 2px 2px ${alpha(COLORS.primary.label, 0.32)})`,
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          '&:last-child': {
+            paddingBottom: 18,
+          },
         },
       },
     },

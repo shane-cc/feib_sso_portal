@@ -41,6 +41,7 @@
       "options": {
         "uiFramework": "@storybook/react",
         "outputPath": "dist/storybook/common-ui",
+        "staticDir": ["libs/common-ui/assets"],
         "config": {
           "configFolder": "libs/common-ui/.storybook"
         }
