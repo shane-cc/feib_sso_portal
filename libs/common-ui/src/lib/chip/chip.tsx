@@ -10,8 +10,14 @@ export interface ChipProps extends MuiChipProps {
 }
 
 export const Chip: React.FC<ChipProps> = (props) => {
-  const { handleDelete, handleClick, defaultCheckedStatus, id, ...rest } =
-    props;
+  const {
+    disabled,
+    handleDelete,
+    handleClick,
+    defaultCheckedStatus,
+    id,
+    ...rest
+  } = props;
   const [isChecked, setIsChecked] = useState(false);
 
   const onClick = () => {
@@ -27,15 +33,21 @@ export const Chip: React.FC<ChipProps> = (props) => {
 
   useEffect(() => {
     setIsChecked(defaultCheckedStatus);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [defaultCheckedStatus]);
 
   return (
     <MuiChip
       variant="filled"
       color={isChecked ? 'primary' : 'default'}
       onClick={typeof handleClick === 'function' ? onClick : undefined}
-      onDelete={typeof handleDelete === 'function' ? onDelete : undefined}
+      disabled={disabled}
+      onDelete={
+        typeof handleDelete === 'function'
+          ? onDelete
+          : isChecked && !disabled
+          ? onClick
+          : undefined
+      }
       {...rest}
     />
   );

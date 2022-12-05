@@ -416,5 +416,19 @@ export const theme = createTheme({
         },
       },
     },
+    MuiAccordionSummary: {
+      styleOverrides: {
+        content: {
+          margin: '.5rem 0',
+        },
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          paddingBottom: '.8rem',
+        },
+      },
+    },
   },
 });

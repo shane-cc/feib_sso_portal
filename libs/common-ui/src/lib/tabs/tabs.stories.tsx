@@ -5,7 +5,6 @@ import styled from '@emotion/styled';
 import { SyntheticEvent, useState } from 'react';
 import Paper from '../paper/paper';
 import Typography from '../typography/typography';
-import { COLORS } from '@sso-platform/theme';
 
 const Story: ComponentMeta<typeof Tabs> = {
   component: Tabs,
