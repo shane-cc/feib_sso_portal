@@ -2,7 +2,7 @@ import type { ComponentMeta } from '@storybook/react';
 import { Menu } from './menu';
 import { MenuItem } from './menu-item';
 import styled from '@emotion/styled';
-import Button from '../button/button';
+import { Button } from '../button';
 import { MouseEvent, useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';

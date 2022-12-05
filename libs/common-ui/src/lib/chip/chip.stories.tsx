@@ -3,7 +3,7 @@ import { Chip } from './chip';
 import styled from '@emotion/styled';
 import Typography from '../typography/typography';
 import { useState } from 'react';
-import Button from '../button/button';
+import { Button } from '../button';
 
 const Story: ComponentMeta<typeof Chip> = {
   component: Chip,

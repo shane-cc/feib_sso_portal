@@ -9,7 +9,7 @@ import { DialogContentText } from './dialog-content-text';
 import { DialogActions } from './dialog-actions';
 import { ConfirmDialog } from './confirm-dialog';
 import { Box } from '../box/box';
-import { Button } from '../button/button';
+import { Button } from '../button';
 import { ErrorDialog } from './error-dialog';
 import { LoadingDialog } from './loading-dialog';
 
