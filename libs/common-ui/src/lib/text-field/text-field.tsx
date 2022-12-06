@@ -1,12 +1,6 @@
 import { TextField as MuiTextField } from '@mui/material';
 import type { TextFieldProps as MuiTextFieldProps } from '@mui/material';
-import {
-  FocusEventHandler,
-  forwardRef,
-  ReactNode,
-  useEffect,
-  useState,
-} from 'react';
+import { FocusEventHandler, forwardRef, ReactNode, useState } from 'react';
 import { InputIcon } from './input-icon';
 
 /* eslint-disable-next-line */

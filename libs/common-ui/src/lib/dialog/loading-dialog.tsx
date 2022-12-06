@@ -1,10 +1,7 @@
-import {
-  CircularProgress,
-  Dialog,
-  DialogContent,
-  Stack,
-  Typography,
-} from '@sso-platform/common-ui';
+import { Dialog, DialogContent } from '../dialog';
+import { CircularProgress } from '../circular-progress';
+import { Stack } from '../stack';
+import { Typography } from '../typography';
 import { ReactNode } from 'react';
 
 interface LoadingDialogProps {
@@ -28,7 +25,7 @@ export const LoadingDialog: React.FC<LoadingDialogProps> = ({
   message,
 }) => {
   return (
-    <Dialog open={isOpen} onClose={() => {}} maxWidth="xs">
+    <Dialog open={isOpen} onClose={() => null} maxWidth="xs">
       <DialogContent>
         <Stack direction="column" alignItems="center" py=".5rem">
           {icon || <CircularProgress color={color || 'primary'} />}

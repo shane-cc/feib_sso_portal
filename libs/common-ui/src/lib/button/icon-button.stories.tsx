@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { useTheme } from '@mui/material/styles';
 import type { ComponentMeta } from '@storybook/react';
-import Typography from '../typography/typography';
+import { Typography } from '../typography';
 import { IconButton } from './icon-button';
 import EditIcon from '@mui/icons-material/Edit';
 

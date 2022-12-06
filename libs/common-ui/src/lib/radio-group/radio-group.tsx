@@ -1,6 +1,6 @@
 import { RadioGroup as MuiRadioGroup } from '@mui/material';
 import type { RadioGroupProps as MuiRadioGroupProps } from '@mui/material';
-import { FormControlLabel } from '../form-control-label/form-control-label';
+import { FormControlLabel } from '../form-control-label';
 import { Radio } from './radio';
 import { forwardRef } from 'react';
 

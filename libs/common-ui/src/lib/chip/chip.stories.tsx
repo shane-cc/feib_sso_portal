@@ -1,7 +1,7 @@
 import type { ComponentMeta } from '@storybook/react';
 import { Chip } from './chip';
 import styled from '@emotion/styled';
-import Typography from '../typography/typography';
+import { Typography } from '../typography';
 import { useState } from 'react';
 import { Button } from '../button';
 

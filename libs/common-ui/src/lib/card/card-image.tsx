@@ -3,7 +3,7 @@ import type { CardMediaProps as MuiCardMediaProps } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import { forwardRef } from 'react';
 import { COLORS } from '@sso-platform/theme';
-import Box from '../box/box';
+import { Box } from '../box';
 
 export type CardImageProps = MuiCardMediaProps & {
   image: string;

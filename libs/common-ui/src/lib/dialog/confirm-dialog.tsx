@@ -1,10 +1,5 @@
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-} from '@sso-platform/common-ui';
+import { Dialog, DialogActions, DialogContent, DialogTitle } from '../dialog';
+import { Button } from '../button';
 import { ReactNode } from 'react';
 
 interface ConfirmDialogProps {

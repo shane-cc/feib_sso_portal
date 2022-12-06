@@ -3,7 +3,7 @@ import { Card } from './card';
 import { CardImage } from './card-image';
 import { CardContent } from './card-content';
 import styled from '@emotion/styled';
-import Divider from '../divider/divider';
+import { Divider } from '../divider';
 import { CardTitle } from './card-title';
 import { CardAdvancedMenu } from './card-advanced-menu';
 import { MenuItem } from '../menu';
@@ -12,8 +12,8 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import PolicyIcon from '@mui/icons-material/Policy';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { COLORS } from '@sso-platform/theme';
-import Typography from '../typography/typography';
-import Stack from '../stack/stack';
+import { Typography } from '../typography';
+import { Stack } from '../stack';
 import { Button } from '../button';
 
 const Story: ComponentMeta<typeof Card> = {

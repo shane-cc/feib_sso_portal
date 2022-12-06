@@ -1,7 +1,7 @@
 import type { ComponentMeta } from '@storybook/react';
 import { CircularProgress } from './circular-progress';
 import styled from '@emotion/styled';
-import Typography from '../typography/typography';
+import { Typography } from '../typography';
 
 const Story: ComponentMeta<typeof CircularProgress> = {
   component: CircularProgress,

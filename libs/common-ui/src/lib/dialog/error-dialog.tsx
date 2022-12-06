@@ -1,11 +1,11 @@
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from '@sso-platform/common-ui';
+} from '../dialog';
+import { Button } from '../button';
 import { ReactNode } from 'react';
 import ErrorIcon from '@mui/icons-material/Error';
 

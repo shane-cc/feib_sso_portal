@@ -1,7 +1,7 @@
 import { MenuItem as MuiMenuItem } from '@mui/material';
 import type { MenuItemProps as MuiMenuItemProps } from '@mui/material';
 import { forwardRef, ReactNode } from 'react';
-import { ListItemIcon, ListItemText } from '@sso-platform/common-ui';
+import { ListItemIcon, ListItemText } from '../list';
 import { MenuDivider } from './menu-divider';
 import { makeStyles } from 'tss-react/mui';
 

@@ -1,7 +1,7 @@
 import { TableContainer as MuiTableContainer } from '@mui/material';
 import type { TableContainerProps as MuiTableContainerProps } from '@mui/material';
 import { forwardRef } from 'react';
-import Box from '../box/box';
+import { Box } from '../box';
 
 /* eslint-disable-next-line */
 export interface TableContainerProps extends MuiTableContainerProps {

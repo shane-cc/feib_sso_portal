@@ -6,8 +6,8 @@ import { TimelineConnector } from './timeline-connector';
 import { TimelineDot } from './timeline-dot';
 import { TimelineContent } from './timeline-content';
 import styled from '@emotion/styled';
-import { Typography } from '../typography/typography';
-import { Paper } from '../paper/paper';
+import { Typography } from '../typography';
+import { Paper } from '../paper';
 import { COLORS } from '@sso-platform/theme';
 
 const Story: ComponentMeta<typeof Timeline> = {

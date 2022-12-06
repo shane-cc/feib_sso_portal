@@ -2,14 +2,14 @@ import type { ComponentMeta } from '@storybook/react';
 import { Accordion } from './accordion';
 import styled from '@emotion/styled';
 import { AccordionSummary } from './accordion-summary';
-import Typography from '../typography/typography';
+import { Typography } from '../typography';
 import { Button } from '../button';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
 import { SyntheticEvent, useState } from 'react';
 import { AccordionDetails } from './accordion-details';
-import Chip from '../chip/chip';
-import Stack from '../stack/stack';
+import { Chip } from '../chip';
+import { Stack } from '../stack';
 
 const Story: ComponentMeta<typeof Accordion> = {
   component: Accordion,

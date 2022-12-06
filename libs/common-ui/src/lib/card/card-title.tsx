@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
-import { Stack, StackProps } from '../stack/stack';
-import { Typography } from '../typography/typography';
+import { Stack, StackProps } from '../stack';
+import { Typography } from '../typography';
 import { CardContent } from './card-content';
 
 export interface CardTitleProps extends StackProps {

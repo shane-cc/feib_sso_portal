@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { TextField, TextFieldProps } from '../text-field/text-field';
+import { TextField, TextFieldProps } from '../text-field';
 import { Option } from './option';
 
 /* eslint-disable-next-line */

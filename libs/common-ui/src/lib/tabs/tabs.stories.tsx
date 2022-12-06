@@ -3,8 +3,8 @@ import { Tabs } from './tabs';
 import { Tab } from './tab';
 import styled from '@emotion/styled';
 import { SyntheticEvent, useState } from 'react';
-import Paper from '../paper/paper';
-import Typography from '../typography/typography';
+import { Paper } from '../paper';
+import { Typography } from '../typography';
 
 const Story: ComponentMeta<typeof Tabs> = {
   component: Tabs,
