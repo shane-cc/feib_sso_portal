@@ -16,6 +16,18 @@ export type TextFieldProps = MuiTextFieldProps & {
   label: string;
 };
 
+const getLabelText = (options: {
+  value?: string;
+  label: string;
+  placeholder?: string;
+  withIcon?: boolean;
+}): string => {
+  const { value, label, placeholder, withIcon = false } = options;
+  return (typeof value !== 'undefined' && value.length > 0) || withIcon
+    ? label || ''
+    : `${label}${placeholder}`;
+};
+
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
   (
     {
@@ -32,7 +44,12 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     ref
   ) => {
     const [customLabel, setCustomLabel] = useState<string>(
-      value ? label || '' : `${label}${placeholder}`
+      getLabelText({
+        value: value as string,
+        label,
+        placeholder,
+        withIcon: Boolean(startIcon || endIcon),
+      })
     );
 
     const handleFocus: FocusEventHandler<
@@ -42,11 +59,14 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
     };
 
     const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      if (!e.target.value && !value) {
-        setCustomLabel(`${label}${placeholder}`);
-      } else {
-        setCustomLabel(label);
-      }
+      setCustomLabel(
+        getLabelText({
+          value: e.target.value,
+          label,
+          placeholder,
+          withIcon: Boolean(startIcon || endIcon),
+        })
+      );
       typeof onBlur === 'function' && onBlur(e);
     };
 
@@ -72,6 +92,13 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
             <InputIcon position="end">{endIcon}</InputIcon>
           ) : null,
         }}
+        InputLabelProps={
+          endIcon
+            ? {
+                shrink: true,
+              }
+            : {}
+        }
       />
     );
   }

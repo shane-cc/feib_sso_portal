@@ -167,7 +167,11 @@ export const theme = createTheme({
         sizeSmall: {
           fontSize: 13,
           lineHeight: 1.25,
-          padding: '5px 10px',
+          padding: '5px 20px',
+          width: 'fit-content',
+          '&.MuiButton-soft': {
+            padding: '5px 15px',
+          },
         },
         outlinedInherit: {
           borderColor: alpha(COLORS.grey[500], 0.32),
@@ -427,6 +431,29 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           paddingBottom: '.8rem',
+        },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          backgroundColor: alpha(COLORS.primary.main, 0.08),
+          '.MuiTableCell-root': {
+            color: COLORS.primary.greyish,
+          },
+          '.MuiTableCell-head.MuiTableCell-sizeSmall': {
+            padding: '1rem 1.25rem',
+          },
+        },
+      },
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          padding: '1rem 1.25rem',
+        },
+        sizeSmall: {
+          padding: '.5rem 1.25rem',
         },
       },
     },

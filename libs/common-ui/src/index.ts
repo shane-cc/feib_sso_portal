@@ -3,6 +3,12 @@ import '@fontsource/noto-sans-tc/400.css';
 import '@fontsource/noto-sans-tc/500.css';
 import '@fontsource/noto-sans-tc/700.css';
 
+export * from './lib/collapse';
+
+export * from './lib/toolbar';
+
+export * from './lib/table';
+
 export * from './lib/accordion';
 
 export * from './lib/tabs';
