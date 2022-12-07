@@ -6,18 +6,34 @@ import '@fontsource/noto-sans-tc/500.css';
 import '@fontsource/noto-sans-tc/700.css';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from '@sso-platform/theme';
+import { CssBaseline } from '@mui/material';
+import { CacheProvider, EmotionCache } from '@emotion/react';
+import { createEmotionCache } from '@sso-platform/theme';
 
-function CustomApp({ Component, pageProps }: AppProps) {
+const clientSideEmotionCache = createEmotionCache();
+
+interface CustomAppProps extends AppProps {
+  emotionCache?: EmotionCache;
+}
+
+function CustomApp({
+  Component,
+  emotionCache = clientSideEmotionCache,
+  pageProps,
+}: CustomAppProps) {
   return (
     <>
-      <Head>
-        <title>Welcome to sso-portal!</title>
-      </Head>
-      <ThemeProvider theme={theme}>
-        <main className="app">
-          <Component {...pageProps} />
-        </main>
-      </ThemeProvider>
+      <CacheProvider value={emotionCache}>
+        <Head>
+          <title>Welcome to sso-portal!</title>
+        </Head>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <main>
+            <Component {...pageProps} />
+          </main>
+        </ThemeProvider>
+      </CacheProvider>
     </>
   );
 }

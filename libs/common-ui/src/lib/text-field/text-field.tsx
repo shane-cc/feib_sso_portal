@@ -2,6 +2,7 @@ import { TextField as MuiTextField } from '@mui/material';
 import type { TextFieldProps as MuiTextFieldProps } from '@mui/material';
 import { FocusEventHandler, forwardRef, ReactNode, useState } from 'react';
 import { InputIcon } from './input-icon';
+import { PasswordIcon } from './password-icon';
 
 /* eslint-disable-next-line */
 export type TextFieldProps = MuiTextFieldProps & {
@@ -19,7 +20,7 @@ const getLabelText = (options: {
   const { value, label, placeholder, withIcon = false } = options;
   return (typeof value !== 'undefined' && value.length > 0) || withIcon
     ? label || ''
-    : `${label}${placeholder}`;
+    : `${label}${placeholder || ''}`;
 };
 
 export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
@@ -33,10 +34,12 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
       placeholder,
       onChange,
       onBlur,
+      type = 'text',
       ...rest
     },
     ref
   ) => {
+    const [showPassword, setShowPassword] = useState<boolean>(false);
     const [customLabel, setCustomLabel] = useState<string>(
       getLabelText({
         value: value as string,
@@ -45,6 +48,10 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         withIcon: Boolean(startIcon || endIcon),
       })
     );
+
+    const togglePassword = () => {
+      setShowPassword((prev) => !prev);
+    };
 
     const handleFocus: FocusEventHandler<
       HTMLInputElement | HTMLTextAreaElement
@@ -78,13 +85,20 @@ export const TextField = forwardRef<HTMLDivElement, TextFieldProps>(
         onChange={onChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
+        type={type === 'password' ? (showPassword ? 'text' : 'password') : type}
         InputProps={{
           startAdornment: startIcon ? (
             <InputIcon position="start">{startIcon}</InputIcon>
           ) : null,
-          endAdornment: endIcon ? (
-            <InputIcon position="end">{endIcon}</InputIcon>
-          ) : null,
+          endAdornment:
+            type === 'password' ? (
+              <PasswordIcon
+                showPassword={showPassword}
+                togglePassword={togglePassword}
+              />
+            ) : endIcon ? (
+              <InputIcon position="end">{endIcon}</InputIcon>
+            ) : null,
         }}
         InputLabelProps={
           endIcon

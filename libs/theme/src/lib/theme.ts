@@ -139,6 +139,17 @@ export const theme = createTheme({
     },
   },
   components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 6,
+          filter: `drop-shadow(0px 9px 16px ${alpha(
+            COLORS.primary.label,
+            0.18
+          )}) drop-shadow(0px 2px 2px ${alpha(COLORS.primary.label, 0.32)})`,
+        },
+      },
+    },
     MuiTypography: {
       styleOverrides: {
         root: {

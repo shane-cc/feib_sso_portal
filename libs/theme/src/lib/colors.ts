@@ -35,4 +35,7 @@ export const COLORS = {
     '800': '#212B36',
     '900': '#161C24',
   },
+  skin: {
+    main: '#F6D0C7',
+  },
 };
