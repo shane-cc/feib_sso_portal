@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@sso-platform/common-layout": ["libs/common-layout/src/index.ts"],
       "@sso-platform/common-ui": ["libs/common-ui/src/index.ts"],
       "@sso-platform/theme": ["libs/theme/src/index.ts"]
     }

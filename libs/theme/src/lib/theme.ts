@@ -139,6 +139,13 @@ export const theme = createTheme({
     },
   },
   components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          fontFamily: font,
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {
@@ -465,6 +472,13 @@ export const theme = createTheme({
         },
         sizeSmall: {
           padding: '.5rem 1.25rem',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: COLORS.white,
         },
       },
     },
