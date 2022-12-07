@@ -42,7 +42,7 @@ export const useStyles = makeStyles()((theme) => ({
     position: 'absolute',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)',
+    transform: 'translate(-50%, -60%)',
     padding: theme.spacing(4.5),
   },
   formContent: {
