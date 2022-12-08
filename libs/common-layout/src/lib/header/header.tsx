@@ -33,6 +33,8 @@ export const Header: React.FC<HeaderProps> = ({
     <AppBar className={classes.root}>
       <Toolbar className={classes.container}>
         <Box className={classes.logoBackground} />
+        <Box className={classes.logoBackground} />
+        <Box className={classes.logoBackground} />
         <Link href="/">
           <Box className={classes.logo}>
             <Image src="/feib_logo.svg" alt="遠東銀行" fill />
