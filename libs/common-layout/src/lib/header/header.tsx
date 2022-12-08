@@ -30,7 +30,7 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   return (
-    <AppBar className={classes.root}>
+    <AppBar className={classes.root} position="sticky">
       <Toolbar className={classes.container}>
         <Box className={classes.logoBackground} />
         <Box className={classes.logoBackground} />

@@ -3,13 +3,15 @@ import type { ContainerProps as MuiContainerProps } from '@mui/material';
 import { forwardRef } from 'react';
 
 /* eslint-disable-next-line */
-export interface ContainerProps extends MuiContainerProps {}
+export interface ContainerProps extends MuiContainerProps {
+  // maxWidth?: string;
+}
 
 export const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  (props, ref) => {
+  ({ children, ...rest }, ref) => {
     return (
-      <MuiContainer {...props} ref={ref}>
-        {props.children}
+      <MuiContainer {...rest} ref={ref}>
+        {children}
       </MuiContainer>
     );
   }
