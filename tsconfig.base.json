@@ -18,6 +18,7 @@
       "@sso-platform/common-layout": ["libs/common-layout/src/index.ts"],
       "@sso-platform/common-page": ["libs/common-page/src/index.ts"],
       "@sso-platform/common-ui": ["libs/common-ui/src/index.ts"],
+      "@sso-platform/shared": ["libs/shared/src/index.ts"],
       "@sso-platform/theme": ["libs/theme/src/index.ts"]
     }
   },

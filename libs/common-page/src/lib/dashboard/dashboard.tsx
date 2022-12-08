@@ -1,17 +1,14 @@
-import styled from '@emotion/styled';
+import { Layout } from '@sso-platform/common-layout';
+import { Typography } from '@sso-platform/common-ui';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}
 
-const StyledDashboard = styled.div`
-  color: pink;
-`;
-
 export function Dashboard(props: DashboardProps) {
   return (
-    <StyledDashboard>
-      <h1>Welcome to Dashboard!</h1>
-    </StyledDashboard>
+    <Layout>
+      <Typography variant="h4">Dashboard</Typography>
+    </Layout>
   );
 }
 

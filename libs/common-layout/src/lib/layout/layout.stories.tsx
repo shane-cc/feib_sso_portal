@@ -1,6 +1,5 @@
 import type { ComponentMeta } from '@storybook/react';
 import { Layout } from './layout';
-import styled from '@emotion/styled';
 import { Box, Typography } from '@sso-platform/common-ui';
 
 const Story: ComponentMeta<typeof Layout> = {
@@ -8,12 +7,6 @@ const Story: ComponentMeta<typeof Layout> = {
   title: 'Layout',
 };
 export default Story;
-
-const StyledContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-`;
 
 export const General = () => (
   <Layout>
