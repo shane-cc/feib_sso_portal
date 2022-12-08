@@ -11,7 +11,7 @@ const config: StorybookConfig = {
     '../src/lib/**/*.stories.mdx',
     '../src/lib/**/*.stories.@(js|jsx|ts|tsx)',
   ],
-  staticDirs: ['@sso-portal/shared/assets'],
+  staticDirs: ['libs/shared/src/assets'],
   addons: [
     ...(rootMain.addons || []),
     '@nrwl/react/plugins/storybook',

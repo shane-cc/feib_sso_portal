@@ -58,6 +58,7 @@ export const useStyles = makeStyles()((theme) => ({
     display: 'block',
     position: 'relative',
     cursor: 'pointer',
+    textDecoration: 'none',
     '&:after': {
       content: '""',
       display: 'block',
@@ -66,7 +67,7 @@ export const useStyles = makeStyles()((theme) => ({
       position: 'absolute',
       bottom: '-3px',
       left: 0,
-      backgroundColor: theme.palette.primary.main,
+      backgroundColor: COLORS.primary.main,
     },
   },
 }));

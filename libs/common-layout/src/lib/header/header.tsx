@@ -45,9 +45,13 @@ export const Header: React.FC<HeaderProps> = ({
         </Typography>
         <Stack direction="row" alignItems="center" gap="2rem">
           <Link href={activeAccountLink}>
-            <LinkEl underline="none" className={classes.activeAccount}>
+            <Typography
+              variant="body1"
+              color="primary"
+              className={classes.activeAccount}
+            >
               Hi, {activeAccountName}
-            </LinkEl>
+            </Typography>
           </Link>
           <Button
             variant="contained"

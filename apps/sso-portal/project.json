@@ -16,6 +16,11 @@
             "input": "libs/common-ui/src/assets",
             "glob": "**/*",
             "output": "assets"
+          },
+          {
+            "input": "libs/shared/src/assets",
+            "glob": "**/*",
+            "output": ""
           }
         ]
       },
@@ -37,6 +42,11 @@
             "input": "libs/common-ui/src/assets",
             "glob": "**/*",
             "output": "assets"
+          },
+          {
+            "input": "libs/shared/src/assets",
+            "glob": "**/*",
+            "output": ""
           }
         ]
       },

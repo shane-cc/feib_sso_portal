@@ -1,14 +1,8 @@
-import { Container, Typography } from '@sso-platform/common-ui';
+import { Dashboard } from '@sso-platform/common-page';
+import { NextPage } from 'next';
 
-export function Index() {
-  return (
-    <Container>
-      <Typography variant="h1">
-        <span> Hello there, </span>
-        Welcome sso-portal 👋
-      </Typography>
-    </Container>
-  );
-}
+export const Index: NextPage = () => {
+  return <Dashboard />;
+};
 
 export default Index;

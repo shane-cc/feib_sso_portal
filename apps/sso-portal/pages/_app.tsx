@@ -9,12 +9,19 @@ import { theme } from '@sso-platform/theme';
 import { CssBaseline } from '@mui/material';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { createEmotionCache } from '@sso-platform/theme';
+import styled from '@emotion/styled';
 
 const clientSideEmotionCache = createEmotionCache();
 
 interface CustomAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
+
+const StyledMain = styled.main`
+  a {
+    text-decoration: none;
+  }
+`;
 
 function CustomApp({
   Component,
@@ -29,9 +36,9 @@ function CustomApp({
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <main>
+          <StyledMain>
             <Component {...pageProps} />
-          </main>
+          </StyledMain>
         </ThemeProvider>
       </CacheProvider>
     </>

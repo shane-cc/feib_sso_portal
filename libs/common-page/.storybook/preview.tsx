@@ -14,3 +14,7 @@ export const decorators = [
     </ThemeProvider>
   ),
 ];
+
+export const parameters = {
+  layout: 'fullscreen',
+};
