@@ -1,6 +1,15 @@
-import { Box, Container } from '@sso-platform/common-ui';
+import {
+  Box,
+  BreadcrumbItem,
+  Breadcrumbs,
+  Container,
+  Stack,
+  Typography,
+} from '@sso-platform/common-ui';
+import Link from 'next/link';
 import { ReactNode } from 'react';
 import { Header } from '../header';
+import { PageTitle } from '../page-title';
 import { useStyles } from './layout.style';
 
 /* eslint-disable-next-line */

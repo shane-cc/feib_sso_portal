@@ -20,6 +20,9 @@ interface CustomAppProps extends AppProps {
 const StyledMain = styled.main`
   a {
     text-decoration: none;
+    '&:hover': {
+      text-decoration: none;
+    }
   }
 `;
 

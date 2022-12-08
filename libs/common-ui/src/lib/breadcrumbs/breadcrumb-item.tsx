@@ -1,3 +1,4 @@
+import { COLORS } from '@sso-platform/theme';
 import { forwardRef } from 'react';
 import { Link, LinkProps } from '../link/link';
 
@@ -15,10 +16,11 @@ export const BreadcrumbItem = forwardRef<
     <Link
       {...rest}
       ref={ref}
-      underline="hover"
-      color={isCurrentPage ? 'text.primary' : 'inherit'}
+      underline="none"
+      color={isCurrentPage ? COLORS.black : COLORS.primary.greyish}
       href={href}
       aria-current={isCurrentPage ? 'page' : undefined}
+      component="span"
     >
       {label}
     </Link>

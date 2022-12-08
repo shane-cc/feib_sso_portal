@@ -304,6 +304,7 @@ export const theme = createTheme({
         root: {
           fontSize: 16,
           lineHeight: 1.5,
+          backgroundColor: COLORS.white,
           '&.Mui-error .MuiOutlinedInput-notchedOutline': {
             borderColor: COLORS.secondary.main,
           },
