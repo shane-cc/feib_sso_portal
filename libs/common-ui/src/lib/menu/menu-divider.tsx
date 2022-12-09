@@ -7,7 +7,7 @@ const useStyles = makeStyles<{ color: string }>()((_theme, { color }) => ({
     height: 1,
     display: 'flex',
     position: 'absolute',
-    bottom: '-.25rem',
+    top: '-.25rem',
     left: 0,
   },
 }));
@@ -26,9 +26,9 @@ export const MenuDivider = () => {
         <path
           d="M0.5 0.5H136.5"
           stroke={COLORS.grey[500]}
-          stroke-opacity="0.24"
-          stroke-linecap="square"
-          stroke-dasharray="4 5"
+          strokeOpacity="0.24"
+          strokeLinecap="square"
+          strokeDasharray="4 5"
         />
       </svg>
     </div>

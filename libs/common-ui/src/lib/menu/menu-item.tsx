@@ -32,7 +32,7 @@ export const MenuItem = forwardRef<HTMLLIElement, MenuItemProps>(
         sx={
           divider
             ? {
-                marginBottom: '.5rem',
+                marginTop: '.5rem',
               }
             : {}
         }

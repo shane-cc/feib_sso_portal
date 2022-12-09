@@ -1,12 +1,25 @@
-import { IBreadcrumb, Layout, PageTitle } from '@sso-platform/common-layout';
-import { Button, Stack, TextField, Typography } from '@sso-platform/common-ui';
+import {
+  IBreadcrumb,
+  Layout,
+  PageTitle,
+  SystemCard,
+} from '@sso-platform/common-layout';
+import {
+  Button,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from '@sso-platform/common-ui';
 import SearchIcon from '@mui/icons-material/Search';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import { KeyboardEvent, useState } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { CreateSystemDialog } from './create-system-dialog/create-system-dialog';
+import { System } from '@sso-platform/types';
+import { getSystemList } from '@sso-platform/shared';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}
@@ -27,6 +40,8 @@ type ValidationQuerySchema = z.infer<typeof validationQuerySchema>;
 export const Dashboard: React.FC<DashboardProps> = () => {
   const router = useRouter();
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
+  const [systemList, setSystemList] = useState<System[]>([]);
+
   const methods = useForm<ValidationQuerySchema>({
     resolver: zodResolver(validationQuerySchema),
     defaultValues: {
@@ -63,6 +78,15 @@ export const Dashboard: React.FC<DashboardProps> = () => {
   const handleCloseCreateDialog = () => {
     setShowCreateDialog(false);
   };
+
+  useEffect(() => {
+    const fetchSystemList = async () => {
+      const systemList = await getSystemList();
+      setSystemList(systemList);
+      console.log(systemList);
+    };
+    fetchSystemList();
+  }, []);
 
   return (
     <Layout>
@@ -118,6 +142,13 @@ export const Dashboard: React.FC<DashboardProps> = () => {
           </Button>
         </Stack>
       </Stack>
+      <Grid container spacing={2}>
+        {systemList.map((system) => (
+          <Grid item xs={6} sm={4} md={3} key={system.systemId}>
+            <SystemCard system={system} />
+          </Grid>
+        ))}
+      </Grid>
       <CreateSystemDialog
         isOpen={showCreateDialog}
         handleClose={handleCloseCreateDialog}
