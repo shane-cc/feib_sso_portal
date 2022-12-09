@@ -10,8 +10,10 @@ import { CssBaseline } from '@mui/material';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { createEmotionCache } from '@sso-platform/theme';
 import styled from '@emotion/styled';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const clientSideEmotionCache = createEmotionCache();
+const queryClient = new QueryClient();
 
 interface CustomAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -37,12 +39,14 @@ function CustomApp({
         <Head>
           <title>Welcome to sso-portal!</title>
         </Head>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <StyledMain>
-            <Component {...pageProps} />
-          </StyledMain>
-        </ThemeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <StyledMain>
+              <Component {...pageProps} />
+            </StyledMain>
+          </ThemeProvider>
+        </QueryClientProvider>
       </CacheProvider>
     </>
   );

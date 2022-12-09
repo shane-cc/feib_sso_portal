@@ -15,11 +15,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import { KeyboardEvent, useEffect, useState } from 'react';
+import { KeyboardEvent, useState } from 'react';
 import { useRouter } from 'next/router';
 import { CreateSystemDialog } from './create-system-dialog/create-system-dialog';
-import { System } from '@sso-platform/types';
-import { getSystemList } from '@sso-platform/shared';
+import { getSystemList, GetSystemListResponse } from '@sso-platform/shared';
+import { useQuery } from 'react-query';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}
@@ -40,7 +40,11 @@ type ValidationQuerySchema = z.infer<typeof validationQuerySchema>;
 export const Dashboard: React.FC<DashboardProps> = () => {
   const router = useRouter();
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
-  const [systemList, setSystemList] = useState<System[]>([]);
+  const { data } = useQuery<GetSystemListResponse, Error>(
+    'systemList',
+    getSystemList
+  );
+  const systemList = data?.data ?? [];
 
   const methods = useForm<ValidationQuerySchema>({
     resolver: zodResolver(validationQuerySchema),
@@ -78,15 +82,6 @@ export const Dashboard: React.FC<DashboardProps> = () => {
   const handleCloseCreateDialog = () => {
     setShowCreateDialog(false);
   };
-
-  useEffect(() => {
-    const fetchSystemList = async () => {
-      const systemList = await getSystemList();
-      setSystemList(systemList);
-      console.log(systemList);
-    };
-    fetchSystemList();
-  }, []);
 
   return (
     <Layout>

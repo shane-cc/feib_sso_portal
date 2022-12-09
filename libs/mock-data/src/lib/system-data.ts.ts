@@ -79,10 +79,10 @@ export const generateSystemData = (): System[] => {
       systemImage:
         'https://cdn2.iconfinder.com/data/icons/social-media-2189/48/21-Gmail-256.png',
       auth: {
-        isAuthEditable: true,
+        isAuthEditable: false,
         isViewable: true,
         isEditable: true,
-        isDeletable: true,
+        isDeletable: false,
         isAdminAssignable: true,
       },
     },
