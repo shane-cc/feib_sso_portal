@@ -1,4 +1,5 @@
 import {
+  ActionHistorySummary,
   IBreadcrumb,
   Layout,
   PageTitle,
@@ -7,6 +8,7 @@ import {
 import {
   Button,
   Grid,
+  Paper,
   Stack,
   TextField,
   Typography,
@@ -15,11 +17,19 @@ import SearchIcon from '@mui/icons-material/Search';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import { KeyboardEvent, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { CreateSystemDialog } from './create-system-dialog/create-system-dialog';
-import { getSystemList, GetSystemListResponse } from '@sso-platform/shared';
+import {
+  getActionHistory,
+  GetActionHistoryResponse,
+  getSystemList,
+  GetSystemListResponse,
+} from '@sso-platform/shared';
 import { useQuery } from 'react-query';
+import Link from 'next/link';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { COLORS } from '@sso-platform/theme';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {}
@@ -32,7 +42,7 @@ const breadcrumbs: IBreadcrumb[] = [
 ];
 
 const validationQuerySchema = z.object({
-  systemQuery: z.string().min(1, '請填寫系統代碼／系統名稱'),
+  systemQuery: z.string(),
 });
 
 type ValidationQuerySchema = z.infer<typeof validationQuerySchema>;
@@ -40,11 +50,17 @@ type ValidationQuerySchema = z.infer<typeof validationQuerySchema>;
 export const Dashboard: React.FC<DashboardProps> = () => {
   const router = useRouter();
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
-  const { data } = useQuery<GetSystemListResponse, Error>(
-    'systemList',
-    getSystemList
+  const [searchQuery, setSearchQuery] = useState<string>();
+  const { data: systemListData } = useQuery<GetSystemListResponse, Error>(
+    ['systemList', searchQuery],
+    () => getSystemList({ query: searchQuery })
   );
-  const systemList = data?.data ?? [];
+  const systemList = systemListData?.data ?? [];
+  const { data: actionHistoryData } = useQuery<GetActionHistoryResponse, Error>(
+    'actionHistorySummary',
+    () => getActionHistory({ limit: 5 })
+  );
+  const actionHistoryList = actionHistoryData?.data ?? [];
 
   const methods = useForm<ValidationQuerySchema>({
     resolver: zodResolver(validationQuerySchema),
@@ -56,19 +72,10 @@ export const Dashboard: React.FC<DashboardProps> = () => {
     control,
     handleSubmit,
     formState: { errors },
-    clearErrors,
   } = methods;
 
   const onSearch = (data: ValidationQuerySchema) => {
-    // TODO: call api
-    console.log(data);
-  };
-
-  const handleKeyUp = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') return;
-    if (errors.systemQuery) {
-      clearErrors();
-    }
+    setSearchQuery(data.systemQuery);
   };
 
   const handleCreateSystem = () => {
@@ -96,7 +103,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
           showBreadcrumb
           breadcrumbs={breadcrumbs}
         />
-        <Stack direction="row" gap="1rem">
+        <Stack direction="row" gap="1rem" alignItems="flex-start">
           <form onSubmit={handleSubmit(onSearch)}>
             <Controller
               control={control}
@@ -114,7 +121,6 @@ export const Dashboard: React.FC<DashboardProps> = () => {
                   error={!!errors.systemQuery}
                   helperText={errors.systemQuery?.message}
                   onSubmit={handleSubmit(onSearch)}
-                  onKeyUp={handleKeyUp}
                 />
               )}
             />
@@ -122,27 +128,61 @@ export const Dashboard: React.FC<DashboardProps> = () => {
           <Button
             variant="contained"
             color="secondary"
-            size="small"
             onClick={handleCreateSystem}
           >
             新增子系統
           </Button>
-          <Button
-            variant="soft"
-            color="info"
-            size="small"
-            onClick={handleGoToHistory}
-          >
+          <Button variant="soft" color="info" onClick={handleGoToHistory}>
             操作記錄查詢
           </Button>
         </Stack>
       </Stack>
-      <Grid container spacing={2}>
-        {systemList.map((system) => (
-          <Grid item xs={6} sm={4} md={3} key={system.systemId}>
-            <SystemCard system={system} />
-          </Grid>
-        ))}
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={9} container spacing={2}>
+          {systemList.map((system) => (
+            <Grid item xs={6} sm={4} md={3} key={system.systemId}>
+              <SystemCard system={system} />
+            </Grid>
+          ))}
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <Paper
+            sx={{
+              padding: '1rem',
+            }}
+          >
+            <Stack
+              direction="row"
+              justifyContent="space-between"
+              alignItems="center"
+              paddingX="1rem"
+              paddingTop="1rem"
+            >
+              <Typography variant="h6">近5次活動紀錄</Typography>
+              <Link href="/action-history">
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  gap=".3rem"
+                  sx={{
+                    borderBottom: `1px solid transparent`,
+                    transition: 'all .3s ease',
+                    '&:hover': {
+                      borderBottom: `1px solid ${COLORS.black}`,
+                    },
+                  }}
+                >
+                  <Typography variant="body2">查看完整紀錄</Typography>
+                  <ArrowForwardIosIcon
+                    sx={{ fontSize: '1rem' }}
+                    htmlColor={COLORS.black}
+                  />
+                </Stack>
+              </Link>
+            </Stack>
+            <ActionHistorySummary actionHistoryList={actionHistoryList} />
+          </Paper>
+        </Grid>
       </Grid>
       <CreateSystemDialog
         isOpen={showCreateDialog}

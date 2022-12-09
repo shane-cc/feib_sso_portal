@@ -5,7 +5,6 @@ import {
   Stack,
   Toolbar,
   Typography,
-  Link as LinkEl,
 } from '@sso-platform/common-ui';
 import Image from 'next/image';
 import Link from 'next/link';
