@@ -1,0 +1,32 @@
+{
+  "name": "mock-data",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/mock-data/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/mock-data",
+        "main": "libs/mock-data/src/index.ts",
+        "tsConfig": "libs/mock-data/tsconfig.lib.json",
+        "assets": ["libs/mock-data/*.md"]
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "mock-data:build",
+        "command": "cd dist/libs/mock-data/src && npx json-server --watch index.js --port 3000"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "mock-data:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

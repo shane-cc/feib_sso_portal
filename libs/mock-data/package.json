@@ -1,0 +1,10 @@
+{
+  "name": "@sso-platform/mock-data",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@types/node": "^18.11.12"
+  },
+  "dependencies": {
+    "json-server": "^0.17.1"
+  }
+}
