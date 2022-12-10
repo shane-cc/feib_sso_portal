@@ -19,25 +19,30 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { CreateSystemDialog } from './create-system-dialog/create-system-dialog';
 import {
+  GeneralMessage,
   getActionHistory,
   GetActionHistoryResponse,
   getSystemList,
   GetSystemListResponse,
+  PageRoutes,
+  QueryCacheKey,
 } from '@sso-platform/shared';
 import { useQuery } from 'react-query';
 import Link from 'next/link';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { COLORS } from '@sso-platform/theme';
+import { CreateSystemDialog } from './create-system-dialog/create-system-dialog';
 
 /* eslint-disable-next-line */
-export interface DashboardProps {}
+export interface DashboardProps {
+  isSSOPortal?: boolean;
+}
 
 const breadcrumbs: IBreadcrumb[] = [
   {
     label: 'Dashboard',
-    link: '/',
+    link: PageRoutes.HOME,
   },
 ];
 
@@ -47,17 +52,19 @@ const validationQuerySchema = z.object({
 
 type ValidationQuerySchema = z.infer<typeof validationQuerySchema>;
 
-export const Dashboard: React.FC<DashboardProps> = () => {
+export const Dashboard: React.FC<DashboardProps> = ({
+  isSSOPortal = false,
+}) => {
   const router = useRouter();
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>();
   const { data: systemListData } = useQuery<GetSystemListResponse, Error>(
-    ['systemList', searchQuery],
+    [QueryCacheKey.SYSTEM_LIST, searchQuery],
     () => getSystemList({ query: searchQuery })
   );
   const systemList = systemListData?.data ?? [];
   const { data: actionHistoryData } = useQuery<GetActionHistoryResponse, Error>(
-    'actionHistorySummary',
+    QueryCacheKey.ACTION_HISTORY_SUMMARY,
     () => getActionHistory({ limit: 5 })
   );
   const actionHistoryList = actionHistoryData?.data ?? [];
@@ -83,7 +90,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
   };
 
   const handleGoToHistory = () => {
-    return router.push('/history-query');
+    return router.push(PageRoutes.HISTORY_QUERY);
   };
 
   const handleCloseCreateDialog = () => {
@@ -139,9 +146,17 @@ export const Dashboard: React.FC<DashboardProps> = () => {
       </Stack>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={9} container spacing={2}>
-          {systemList.map((system) => (
-            <Grid item xs={6} sm={4} md={3} key={system.systemId}>
-              <SystemCard system={system} />
+          {systemList.length === 0 && (
+            <Typography
+              variant="body1"
+              sx={{ padding: '1rem', margin: '2rem auto' }}
+            >
+              {GeneralMessage.EMPTY_SYSTEM_LIST}
+            </Typography>
+          )}
+          {systemList.map((system, idx) => (
+            <Grid item xs={6} sm={4} md={3} key={`${system.systemCode}-${idx}`}>
+              <SystemCard system={system} isSSOPortal={isSSOPortal} />
             </Grid>
           ))}
         </Grid>
@@ -156,10 +171,10 @@ export const Dashboard: React.FC<DashboardProps> = () => {
               justifyContent="space-between"
               alignItems="center"
               paddingX="1rem"
-              paddingTop="1rem"
+              paddingY="1rem"
             >
               <Typography variant="h6">近5次活動紀錄</Typography>
-              <Link href="/action-history">
+              <Link href={PageRoutes.ACTION_HISTORY}>
                 <Stack
                   direction="row"
                   alignItems="center"
@@ -180,7 +195,14 @@ export const Dashboard: React.FC<DashboardProps> = () => {
                 </Stack>
               </Link>
             </Stack>
-            <ActionHistorySummary actionHistoryList={actionHistoryList} />
+            {actionHistoryList.length === 0 && (
+              <Typography sx={{ padding: '2rem 1rem' }}>
+                {GeneralMessage.EMPTY_ACTION_HISTORY}
+              </Typography>
+            )}
+            {actionHistoryList.length > 0 && (
+              <ActionHistorySummary actionHistoryList={actionHistoryList} />
+            )}
           </Paper>
         </Grid>
       </Grid>

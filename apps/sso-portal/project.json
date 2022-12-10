@@ -15,7 +15,7 @@
           {
             "input": "libs/common-ui/src/assets",
             "glob": "**/*",
-            "output": "assets"
+            "output": ""
           },
           {
             "input": "libs/shared/src/assets",

@@ -7,11 +7,14 @@ import {
   DialogTitle,
   Stack,
   TextField,
+  Typography,
 } from '@sso-platform/common-ui';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
+import { createSystem } from '@sso-platform/shared';
+import { useQueryClient } from 'react-query';
 
 interface CreateSystemDialogProps {
   isOpen: boolean;
@@ -24,12 +27,14 @@ const validationCreateSchema = z.object({
   systemUrl: z.string().url({ message: '請填寫正確的網址' }),
 });
 
-type ValidationCreateSchema = z.infer<typeof validationCreateSchema>;
+export type ValidationCreateSchema = z.infer<typeof validationCreateSchema>;
 
 export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
   isOpen,
   handleClose,
 }) => {
+  const queryClient = useQueryClient();
+  const [createSystemError, setCreateSystemError] = React.useState<string>();
   const methods = useForm<ValidationCreateSchema>({
     resolver: zodResolver(validationCreateSchema),
     defaultValues: {
@@ -46,20 +51,24 @@ export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
     reset,
   } = methods;
 
-  const onClose = () => {
-    reset();
-    clearErrors();
-    handleClose();
-  };
-
   const onReset = () => {
     reset();
     clearErrors();
+    setCreateSystemError(undefined);
   };
 
-  const onConfirm = (data: ValidationCreateSchema) => {
-    // TODO: call api
-    console.log('onConfirm: ', data);
+  const onClose = () => {
+    onReset();
+    handleClose();
+  };
+
+  const onConfirm = async (data: ValidationCreateSchema) => {
+    const { error, message } = await createSystem<ValidationCreateSchema>(data);
+    if (error) {
+      setCreateSystemError(message);
+      return;
+    }
+    queryClient.invalidateQueries('systemList');
     onClose();
   };
 
@@ -69,6 +78,18 @@ export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
         新增系統
       </DialogTitle>
       <DialogContent>
+        {createSystemError && (
+          <Typography
+            color="secondary"
+            sx={{
+              textAlign: 'center',
+              paddingTop: '.5rem',
+              paddingBottom: '1.5rem',
+            }}
+          >
+            {createSystemError}
+          </Typography>
+        )}
         <Stack my=".5rem" gap="1rem">
           <Controller
             control={control}

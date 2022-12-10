@@ -16,26 +16,35 @@ import { System } from '@sso-platform/types';
 /* eslint-disable-next-line */
 export interface SystemCardProps {
   system: System;
+  isSSOPortal: boolean;
 }
 
-export const SystemCard: React.FC<SystemCardProps> = ({ system }) => {
+export const SystemCard: React.FC<SystemCardProps> = ({
+  system,
+  isSSOPortal,
+}) => {
+  const handleClick = () => {
+    // TODO: Go to the system page with access_token using new tab
+    window.open(system.systemUrl, '_blank');
+  };
+
   return (
     <Card>
-      {system.auth.isAuthEditable && (
+      {system.auth?.isAuthEditable && (
         <CardAdvancedMenu>
-          {system.auth.isEditable && (
+          {system.auth?.isEditable && (
             <MenuItem icon={<EditIcon />} text="編輯系統" />
           )}
-          {system.auth.isAuthEditable && (
+          {system.auth?.isAuthEditable && isSSOPortal && (
             <MenuItem icon={<EditIcon />} text="編輯權限" />
           )}
-          {system.auth.isAdminAssignable && (
+          {system.auth?.isAdminAssignable && (
             <MenuItem icon={<ManageAccountsIcon />} text="管理員管理" />
           )}
-          {system.auth.isViewable && (
+          {system.auth?.isViewable && (
             <MenuItem icon={<PolicyIcon />} text="查看權限" />
           )}
-          {system.auth.isDeletable && (
+          {system.auth?.isDeletable && (
             <MenuItem
               icon={<DeleteForeverIcon htmlColor={COLORS.secondary.dark} />}
               divider
@@ -46,12 +55,13 @@ export const SystemCard: React.FC<SystemCardProps> = ({ system }) => {
         </CardAdvancedMenu>
       )}
       <CardImage
-        image={system.systemImage}
+        image={system.systemImage || ''}
         sx={{
           width: '8rem',
           height: '8rem',
         }}
         isClickable
+        onClick={handleClick}
       />
       <Divider />
       <CardTitle title={system.systemName} />

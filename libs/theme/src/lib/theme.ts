@@ -279,6 +279,15 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTimeline: {
+      styleOverrides: {
+        root: {
+          margin: 0,
+          paddingTop: 0,
+          paddingBottom: 0,
+        },
+      },
+    },
     MuiTimelineDot: {
       styleOverrides: {
         root: {

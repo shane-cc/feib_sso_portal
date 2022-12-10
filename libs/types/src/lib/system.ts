@@ -1,5 +1,5 @@
 export interface System {
-  systemId: string;
+  systemCode: string;
   systemName: string;
   systemUrl: string;
   systemImage: string;

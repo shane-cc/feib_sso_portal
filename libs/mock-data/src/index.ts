@@ -1,10 +1,16 @@
-import { IndividualActionHistory, System } from '@sso-platform/types';
-import { generateActionHistoryData } from './lib/action-history-data';
-import { generateSystemData } from './lib/system-data.ts';
+import {
+  ActionHistoryData,
+  generateActionHistoryData,
+} from './lib/action-history-data';
+import { generateSystemData, SystemData } from './lib/system-data.ts';
+
+export interface BaseData {
+  id: string;
+}
 
 interface DB {
-  systems: System[];
-  actionHistory: IndividualActionHistory[];
+  systems: SystemData[];
+  actionHistory: ActionHistoryData[];
 }
 
 module.exports = () => {

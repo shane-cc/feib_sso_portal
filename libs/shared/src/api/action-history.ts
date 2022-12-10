@@ -1,14 +1,13 @@
 import { BaseResponse, IndividualActionHistory } from '@sso-platform/types';
-import { useAxios } from './axios';
+import { apiFetcher } from './fetcher';
 
 export type GetActionHistoryResponse = BaseResponse<IndividualActionHistory[]>;
 export const getActionHistory = async (options?: {
   limit?: number;
 }): Promise<GetActionHistoryResponse> => {
   const { limit } = options || {};
-  const { data } = await useAxios().get(
-    limit ? `/actionHistory?_limit=${limit}` : '/actionHistory'
-  );
+  const url = limit ? `/actionHistory?_limit=${limit}` : '/actionHistory';
+  const { data } = await apiFetcher(url, {}, { method: 'get' });
   return {
     data: data as IndividualActionHistory[],
     status: 'success',

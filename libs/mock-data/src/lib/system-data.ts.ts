@@ -1,9 +1,12 @@
 import { System } from '@sso-platform/types';
+import { BaseData } from '..';
 
-export const generateSystemData = (): System[] => {
+export type SystemData = System & BaseData;
+export const generateSystemData = (): SystemData[] => {
   return [
     {
-      systemId: 'system-1',
+      id: '1',
+      systemCode: 'system-1',
       systemName: 'AP0 Admin Panel',
       systemUrl: 'https://ap0-admin-panel.sso-platform.com',
       systemImage:
@@ -17,7 +20,8 @@ export const generateSystemData = (): System[] => {
       },
     },
     {
-      systemId: 'system-2',
+      id: '2',
+      systemCode: 'system-2',
       systemName: '會員管理系統',
       systemUrl: 'https://member-management.sso-platform.com',
       systemImage:
@@ -31,7 +35,8 @@ export const generateSystemData = (): System[] => {
       },
     },
     {
-      systemId: 'system-3',
+      id: '3',
+      systemCode: 'system-3',
       systemName: '行政文件稽核系統',
       systemUrl: 'https://administration-audit.sso-platform.com',
       systemImage:
@@ -45,7 +50,8 @@ export const generateSystemData = (): System[] => {
       },
     },
     {
-      systemId: 'system-4',
+      id: '4',
+      systemCode: 'system-4',
       systemName: '社群銀行活動管理',
       systemUrl: 'https://sm-bank-activities.sso-platform.com',
       systemImage:
@@ -59,7 +65,8 @@ export const generateSystemData = (): System[] => {
       },
     },
     {
-      systemId: 'system-5',
+      id: '5',
+      systemCode: 'system-5',
       systemName: '中山分行訂餐系統',
       systemUrl: 'https://ch02-meal-order.sso-platform.com',
       systemImage:
@@ -73,7 +80,8 @@ export const generateSystemData = (): System[] => {
       },
     },
     {
-      systemId: 'system-6',
+      id: '6',
+      systemCode: 'system-6',
       systemName: '中山分行快遞郵件登記',
       systemUrl: 'https://ch02-mail-dilivery.sso-platform.com',
       systemImage:
