@@ -15,6 +15,8 @@ import { System } from '@sso-platform/types';
 import { useState } from 'react';
 import { UpdateSystemDialog } from '../update-system-dialog';
 import { DeleteSystemDialog } from '../delete-system-dialog';
+import { useRouter } from 'next/router';
+import { PageRoutes } from '@sso-platform/shared';
 
 /* eslint-disable-next-line */
 export interface SystemCardProps {
@@ -26,6 +28,7 @@ export const SystemCard: React.FC<SystemCardProps> = ({
   system,
   isSSOPortal,
 }) => {
+  const router = useRouter();
   const [showUpdateDialog, setShowUpdateDialog] = useState<boolean>(false);
   const [showDeleteConfirmDialog, setShowDeleteConfirmDialog] =
     useState<boolean>(false);
@@ -46,6 +49,14 @@ export const SystemCard: React.FC<SystemCardProps> = ({
     setShowDeleteConfirmDialog(false);
   };
 
+  const handleGoToAuthPage = () => {
+    router.push(`${PageRoutes.SYSTEM_AUTH}/${system.systemCode}`);
+  };
+
+  const handleGoToAuthAdminPage = () => {
+    router.push(`${PageRoutes.SYSTEM_AUTH_ADMIN}/${system.systemCode}`);
+  };
+
   const menuItemList: MenuItemData[] = [
     {
       icon: <EditIcon />,
@@ -55,21 +66,21 @@ export const SystemCard: React.FC<SystemCardProps> = ({
     },
     {
       icon: <EditIcon />,
-      text: '編輯系統',
+      text: '編輯權限',
       show: system.auth?.isAuthEditable && isSSOPortal,
-      onClick: () => null,
+      onClick: handleGoToAuthPage,
     },
     {
       icon: <ManageAccountsIcon />,
       text: '管理員管理',
       show: system.auth?.isAdminAssignable,
-      onClick: () => null,
+      onClick: handleGoToAuthAdminPage,
     },
     {
       icon: <PolicyIcon />,
       text: '查看權限',
       show: system.auth?.isViewable,
-      onClick: () => null,
+      onClick: handleGoToAuthPage,
     },
     {
       icon: <DeleteForeverIcon htmlColor={COLORS.secondary.dark} />,

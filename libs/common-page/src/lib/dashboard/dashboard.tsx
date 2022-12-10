@@ -85,10 +85,6 @@ export const Dashboard: React.FC<DashboardProps> = ({
     setShowCreateDialog(true);
   };
 
-  const handleGoToHistory = () => {
-    return router.push(PageRoutes.HISTORY_QUERY);
-  };
-
   const handleCloseCreateDialog = () => {
     setShowCreateDialog(false);
   };
@@ -135,9 +131,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
           >
             新增子系統
           </Button>
-          <Button variant="soft" color="info" onClick={handleGoToHistory}>
-            操作記錄查詢
-          </Button>
+          <Link href={PageRoutes.HISTORY_QUERY}>
+            <Button variant="soft" color="info">
+              操作記錄查詢
+            </Button>
+          </Link>
         </Stack>
       </Stack>
       <Grid container spacing={4}>
