@@ -13,8 +13,8 @@ import {
 } from '@sso-platform/common-ui';
 import { System } from '@sso-platform/types';
 import { useState } from 'react';
-import { UpdateSystemDialog } from '../update-system-dialog/update-system-dialog';
-import { DeleteSystemDialog } from '../delete-system-dialog/delete-system-dialog';
+import { UpdateSystemDialog } from '../update-system-dialog';
+import { DeleteSystemDialog } from '../delete-system-dialog';
 
 /* eslint-disable-next-line */
 export interface SystemCardProps {

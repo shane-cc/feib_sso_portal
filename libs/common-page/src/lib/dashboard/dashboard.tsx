@@ -31,7 +31,7 @@ import { useQuery } from 'react-query';
 import Link from 'next/link';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { COLORS } from '@sso-platform/theme';
-import { UpdateSystemDialog } from './update-system-dialog/update-system-dialog';
+import { UpdateSystemDialog } from './update-system-dialog';
 import { SystemCard } from './system-card';
 
 /* eslint-disable-next-line */
