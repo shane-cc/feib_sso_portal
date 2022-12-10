@@ -1,9 +1,4 @@
-import {
-  ActionHistorySummary,
-  IBreadcrumb,
-  Layout,
-  PageTitle,
-} from '@sso-platform/common-layout';
+import { IBreadcrumb, Layout, PageTitle } from '@sso-platform/common-layout';
 import {
   Button,
   Grid,
@@ -33,6 +28,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { COLORS } from '@sso-platform/theme';
 import { UpdateSystemDialog } from './update-system-dialog';
 import { SystemCard } from './system-card';
+import { ActionHistorySummary } from './action-history-summary';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {
