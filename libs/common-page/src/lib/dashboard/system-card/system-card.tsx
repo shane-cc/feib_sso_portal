@@ -113,8 +113,8 @@ export const SystemCard: React.FC<SystemCardProps> = ({
             width: '8rem',
             height: '8rem',
           }}
-          isClickable
-          onClick={handleClick}
+          isClickable={isSSOPortal}
+          onClick={isSSOPortal ? handleClick : undefined}
         />
         <Divider />
         <CardTitle title={system.systemName} />
