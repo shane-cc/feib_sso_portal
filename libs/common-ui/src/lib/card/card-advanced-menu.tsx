@@ -1,13 +1,21 @@
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { alpha } from '@mui/material';
+import { alpha, menuItemClasses } from '@mui/material';
 import { COLORS } from '@sso-platform/theme';
-import { MouseEvent, ReactNode, useState } from 'react';
+import { MouseEvent, ReactNode, useEffect, useState } from 'react';
 import { makeStyles } from 'tss-react/mui';
 import { IconButton } from '../button';
-import { Menu } from '../menu';
+import { Menu, MenuItem } from '../menu';
 
 export interface CardAdvancedMenuProps {
-  children: ReactNode;
+  menuItemList: MenuItemData[];
+}
+
+export interface MenuItemData {
+  icon: ReactNode;
+  text: string;
+  onClick: () => void;
+  show: boolean;
+  divider?: boolean;
 }
 
 const useStyles = makeStyles<{ isActive: boolean }>()(
@@ -36,7 +44,7 @@ const useStyles = makeStyles<{ isActive: boolean }>()(
 );
 
 export const CardAdvancedMenu: React.FC<CardAdvancedMenuProps> = ({
-  children,
+  menuItemList = [],
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLButtonElement>(null);
   const open = Boolean(anchorEl);
@@ -56,7 +64,19 @@ export const CardAdvancedMenu: React.FC<CardAdvancedMenuProps> = ({
         <MoreVertIcon fontSize="small" />
       </IconButton>
       <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
-        {children}
+        {menuItemList.map((item) =>
+          item.show ? (
+            <MenuItem
+              icon={item.icon}
+              text={item.text}
+              divider={item.divider}
+              onClick={() => {
+                item.onClick();
+                handleClose();
+              }}
+            />
+          ) : null
+        )}
       </Menu>
     </>
   );

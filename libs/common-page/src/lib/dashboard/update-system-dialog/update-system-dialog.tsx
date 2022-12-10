@@ -16,31 +16,35 @@ import { Controller, useForm } from 'react-hook-form';
 import { createSystem } from '@sso-platform/shared';
 import { useQueryClient } from 'react-query';
 
-interface CreateSystemDialogProps {
-  isOpen: boolean;
-  handleClose: () => void;
-}
-
-const validationCreateSchema = z.object({
+const validationUpdateSchema = z.object({
   systemCode: z.string().min(1, '請填寫系統代碼'),
   systemName: z.string().min(1, '請填寫系統名稱'),
   systemUrl: z.string().url({ message: '請填寫正確的網址' }),
 });
 
-export type ValidationCreateSchema = z.infer<typeof validationCreateSchema>;
+export type ValidationUpdateSchema = z.infer<typeof validationUpdateSchema>;
 
-export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
+interface UpdateSystemDialogProps {
+  isOpen: boolean;
+  handleClose: () => void;
+  type: 'create' | 'edit';
+  initialData?: ValidationUpdateSchema;
+}
+
+export const UpdateSystemDialog: React.FC<UpdateSystemDialogProps> = ({
   isOpen,
   handleClose,
+  type,
+  initialData,
 }) => {
   const queryClient = useQueryClient();
-  const [createSystemError, setCreateSystemError] = React.useState<string>();
-  const methods = useForm<ValidationCreateSchema>({
-    resolver: zodResolver(validationCreateSchema),
+  const [updateSystemError, setUpdateSystemError] = React.useState<string>();
+  const methods = useForm<ValidationUpdateSchema>({
+    resolver: zodResolver(validationUpdateSchema),
     defaultValues: {
-      systemCode: '',
-      systemName: '',
-      systemUrl: '',
+      systemCode: initialData?.systemCode || '',
+      systemName: initialData?.systemName || '',
+      systemUrl: initialData?.systemUrl || '',
     },
   });
   const {
@@ -54,7 +58,7 @@ export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
   const onReset = () => {
     reset();
     clearErrors();
-    setCreateSystemError(undefined);
+    setUpdateSystemError(undefined);
   };
 
   const onClose = () => {
@@ -62,10 +66,10 @@ export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
     handleClose();
   };
 
-  const onConfirm = async (data: ValidationCreateSchema) => {
-    const { error, message } = await createSystem<ValidationCreateSchema>(data);
+  const onConfirm = async (data: ValidationUpdateSchema) => {
+    const { error, message } = await createSystem<ValidationUpdateSchema>(data);
     if (error) {
-      setCreateSystemError(message);
+      setUpdateSystemError(message);
       return;
     }
     queryClient.invalidateQueries('systemList');
@@ -75,10 +79,10 @@ export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm">
       <DialogTitle onClose={onClose} icon={<AddCircleIcon />}>
-        新增系統
+        {type === 'create' ? '新增系統' : '編輯系統'}
       </DialogTitle>
       <DialogContent>
-        {createSystemError && (
+        {updateSystemError && (
           <Typography
             color="secondary"
             sx={{
@@ -87,7 +91,7 @@ export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
               paddingBottom: '1.5rem',
             }}
           >
-            {createSystemError}
+            {updateSystemError}
           </Typography>
         )}
         <Stack my=".5rem" gap="1rem">
@@ -97,6 +101,7 @@ export const CreateSystemDialog: React.FC<CreateSystemDialogProps> = ({
             render={({ field }) => (
               <TextField
                 label="系統代碼*"
+                disabled={type === 'edit'}
                 {...field}
                 error={!!errors.systemCode}
                 helperText={errors.systemCode?.message}

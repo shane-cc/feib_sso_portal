@@ -3,7 +3,6 @@ import {
   IBreadcrumb,
   Layout,
   PageTitle,
-  SystemCard,
 } from '@sso-platform/common-layout';
 import {
   Button,
@@ -32,7 +31,8 @@ import { useQuery } from 'react-query';
 import Link from 'next/link';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { COLORS } from '@sso-platform/theme';
-import { CreateSystemDialog } from './create-system-dialog/create-system-dialog';
+import { UpdateSystemDialog } from './update-system-dialog/update-system-dialog';
+import { SystemCard } from './system-card';
 
 /* eslint-disable-next-line */
 export interface DashboardProps {
@@ -206,7 +206,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </Paper>
         </Grid>
       </Grid>
-      <CreateSystemDialog
+      <UpdateSystemDialog
+        type="create"
         isOpen={showCreateDialog}
         handleClose={handleCloseCreateDialog}
       />

@@ -29,6 +29,33 @@ const StyledContainer = styled.div`
   align-items: flex-start;
 `;
 
+const menuItemList = [
+  {
+    icon: <EditIcon />,
+    text: '編輯系統',
+    show: true,
+    onClick: () => null,
+  },
+  {
+    icon: <ManageAccountsIcon />,
+    text: '管理員管理',
+    show: true,
+    onClick: () => null,
+  },
+  {
+    icon: <PolicyIcon />,
+    text: '查看權限',
+    show: true,
+    onClick: () => null,
+  },
+  {
+    icon: <DeleteForeverIcon htmlColor={COLORS.secondary.dark} />,
+    text: '刪除系統',
+    show: true,
+    onClick: () => null,
+  },
+];
+
 export const DashboardCard = () => (
   <StyledContainer>
     <Card>
@@ -56,16 +83,7 @@ export const DashboardCard = () => (
       <CardTitle title="AP0 Admin" />
     </Card>
     <Card>
-      <CardAdvancedMenu>
-        <MenuItem icon={<EditIcon />} text="編輯系統" />
-        <MenuItem icon={<ManageAccountsIcon />} text="管理員管理" />
-        <MenuItem icon={<PolicyIcon />} divider text="查看權限" />
-        <MenuItem
-          icon={<DeleteForeverIcon htmlColor={COLORS.secondary.dark} />}
-          text="刪除系統"
-          color="secondary.dark"
-        />
-      </CardAdvancedMenu>
+      <CardAdvancedMenu menuItemList={menuItemList} />
       <CardImage
         image=""
         sx={{
@@ -78,16 +96,7 @@ export const DashboardCard = () => (
       <CardTitle title="社群銀行會員管理" />
     </Card>
     <Card>
-      <CardAdvancedMenu>
-        <MenuItem icon={<EditIcon />} text="編輯系統" />
-        <MenuItem icon={<ManageAccountsIcon />} text="管理員管理" />
-        <MenuItem icon={<PolicyIcon />} divider text="查看權限" />
-        <MenuItem
-          icon={<DeleteForeverIcon htmlColor={COLORS.secondary.dark} />}
-          text="刪除系統"
-          color="secondary.dark"
-        />
-      </CardAdvancedMenu>
+      <CardAdvancedMenu menuItemList={menuItemList} />
       <CardImage
         image="/card-demo-icon.png"
         sx={{
