@@ -8,7 +8,7 @@ export const generateSystemData = (): SystemData[] => {
       id: '1',
       systemCode: 'system-1',
       systemName: 'AP0 Admin Panel',
-      systemUrl: 'https://ap0-admin-panel.sso-platform.com',
+      systemUrl: 'http://localhost:4201',
       systemImage:
         'https://cdn2.iconfinder.com/data/icons/social-media-2189/48/30-Twitter-256.png',
       auth: {

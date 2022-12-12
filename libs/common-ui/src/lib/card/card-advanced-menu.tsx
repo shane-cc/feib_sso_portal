@@ -67,6 +67,7 @@ export const CardAdvancedMenu: React.FC<CardAdvancedMenuProps> = ({
         {menuItemList.map((item) =>
           item.show ? (
             <MenuItem
+              key={item.text}
               icon={item.icon}
               text={item.text}
               divider={item.divider}

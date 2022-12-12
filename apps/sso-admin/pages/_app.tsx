@@ -37,7 +37,7 @@ function CustomApp({
     <>
       <CacheProvider value={emotionCache}>
         <Head>
-          <title>SSO Portal</title>
+          <title>SSO Admin｜權限管理後台</title>
         </Head>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>

@@ -1,6 +1,7 @@
 import { IBreadcrumb, Layout, PageTitle } from '@sso-platform/common-layout';
 import {
   Button,
+  CircularProgress,
   Grid,
   Paper,
   Stack,
@@ -12,7 +13,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import {
   GeneralMessage,
   getActionHistory,
@@ -51,18 +51,20 @@ type ValidationQuerySchema = z.infer<typeof validationQuerySchema>;
 export const Dashboard: React.FC<DashboardProps> = ({
   isSSOPortal = false,
 }) => {
-  const router = useRouter();
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>();
-  const { data: systemListData } = useQuery<GetSystemListResponse, Error>(
-    [QueryCacheKey.SYSTEM_LIST, searchQuery],
-    () => getSystemList({ query: searchQuery })
+  const { data: systemListData, isLoading: isSystemListLoading } = useQuery<
+    GetSystemListResponse,
+    Error
+  >([QueryCacheKey.SYSTEM_LIST, searchQuery], () =>
+    getSystemList({ query: searchQuery })
   );
   const systemList = systemListData?.data ?? [];
-  const { data: actionHistoryData } = useQuery<GetActionHistoryResponse, Error>(
-    QueryCacheKey.ACTION_HISTORY_SUMMARY,
-    () => getActionHistory({ limit: 5 })
-  );
+  const { data: actionHistoryData, isLoading: isActionHistoryLoading } =
+    useQuery<GetActionHistoryResponse, Error>(
+      QueryCacheKey.ACTION_HISTORY_SUMMARY,
+      () => getActionHistory({ limit: 5 })
+    );
   const actionHistoryList = actionHistoryData?.data ?? [];
 
   const methods = useForm<ValidationQuerySchema>({
@@ -124,23 +126,28 @@ export const Dashboard: React.FC<DashboardProps> = ({
               )}
             />
           </form>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleCreateSystem}
-          >
-            新增子系統
-          </Button>
-          <Link href={PageRoutes.HISTORY_QUERY}>
-            <Button variant="soft" color="info">
-              操作記錄查詢
+          {!isSSOPortal && (
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleCreateSystem}
+            >
+              新增子系統
             </Button>
-          </Link>
+          )}
+          {!isSSOPortal && (
+            <Link href={PageRoutes.HISTORY_QUERY}>
+              <Button variant="soft" color="info">
+                操作記錄查詢
+              </Button>
+            </Link>
+          )}
         </Stack>
       </Stack>
       <Grid container spacing={4}>
         <Grid item xs={12} sm={9} container spacing={2}>
-          {systemList.length === 0 && (
+          {isSystemListLoading && <CircularProgress />}
+          {!isSystemListLoading && systemList.length === 0 && (
             <Typography
               variant="body1"
               sx={{ padding: '1rem', margin: '2rem auto' }}
@@ -189,7 +196,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
                 </Stack>
               </Link>
             </Stack>
-            {actionHistoryList.length === 0 && (
+            {isActionHistoryLoading && <CircularProgress />}
+            {!isActionHistoryLoading && actionHistoryList.length === 0 && (
               <Typography sx={{ padding: '2rem 1rem' }}>
                 {GeneralMessage.EMPTY_ACTION_HISTORY}
               </Typography>
