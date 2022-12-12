@@ -96,11 +96,6 @@ export const SystemCard: React.FC<SystemCardProps> = ({
     window.open(system.systemUrl, '_blank');
   };
 
-  const handleDeleteSystem = async () => {
-    // TODO: call api to delete system
-    handleCloseDeleteConfirmDialog();
-  };
-
   return (
     <>
       <Card>
@@ -131,7 +126,6 @@ export const SystemCard: React.FC<SystemCardProps> = ({
         <DeleteSystemDialog
           isOpen={showDeleteConfirmDialog}
           handleClose={handleCloseDeleteConfirmDialog}
-          handleConfirm={handleDeleteSystem}
           deleteTarget={`${system.systemCode} ${system.systemName}`}
         />
       )}

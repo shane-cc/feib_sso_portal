@@ -1,20 +1,46 @@
 import { ConfirmDialog, DialogContentText } from '@sso-platform/common-ui';
 import React from 'react';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useMutation, useQueryClient } from 'react-query';
+import {
+  deleteSystem,
+  ErrorMessage,
+  QueryCacheKey,
+  useLoadingState,
+} from '@sso-platform/shared';
+import { ApiError } from '@sso-platform/types';
 
 interface DeleteSystemDialogProps {
   isOpen: boolean;
   handleClose: () => void;
-  handleConfirm: () => void;
   deleteTarget: string;
 }
 
 export const DeleteSystemDialog: React.FC<DeleteSystemDialogProps> = ({
   isOpen,
   handleClose,
-  handleConfirm,
   deleteTarget,
 }) => {
+  const queryClient = useQueryClient();
+  const { openDialog } = useLoadingState();
+
+  const mutation = useMutation((systemId: string) => deleteSystem(systemId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(QueryCacheKey.SYSTEM_LIST);
+      handleClose();
+    },
+    onError: (error: ApiError) => {
+      openDialog({
+        isError: true,
+        message: `${error.message} ${ErrorMessage.DELETE_SYSTEM_FAILED}`,
+      });
+    },
+  });
+
+  const onConfirm = () => {
+    mutation.mutate(deleteTarget);
+  };
+
   return (
     <ConfirmDialog
       isOpen={isOpen}
@@ -26,7 +52,7 @@ export const DeleteSystemDialog: React.FC<DeleteSystemDialogProps> = ({
       confirmButtonProps={{
         color: 'secondary',
       }}
-      onConfirm={handleConfirm}
+      onConfirm={onConfirm}
     >
       <DialogContentText>是否確認刪除以下權限？</DialogContentText>
       <DialogContentText

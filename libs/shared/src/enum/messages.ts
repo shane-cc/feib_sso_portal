@@ -9,4 +9,9 @@ export enum ErrorMessage {
   'API_MISSING' = '請求資源錯誤！',
   'NO_RESPONSE' = 'API 沒有回應！',
   'NETWORK_ERROR' = '網路連線異常！',
+  'SYSTEM_LIST_FAILED' = '無法取得系統列表！',
+  'ACTION_HISTORY_FAILED' = '無法取得操作紀錄！',
+  'CREATE_SYSTEM_FAILED' = '新增系統失敗！',
+  'UPDATE_SYSTEM_FAILED' = '更新系統失敗！',
+  'DELETE_SYSTEM_FAILED' = '刪除系統失敗！',
 }

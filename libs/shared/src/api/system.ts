@@ -22,3 +22,13 @@ export async function updateSystem<T>(data: T): Promise<BaseResponse> {
     method: 'put',
   });
 }
+
+export async function deleteSystem(id: string): Promise<BaseResponse> {
+  return await apiFetcher(
+    `/systems/${id}`,
+    {},
+    {
+      method: 'delete',
+    }
+  );
+}

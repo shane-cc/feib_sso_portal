@@ -15,6 +15,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import {
   createSystem,
+  ErrorMessage,
   QueryCacheKey,
   updateSystem,
 } from '@sso-platform/shared';
@@ -72,13 +73,18 @@ export const UpdateSystemDialog: React.FC<UpdateSystemDialogProps> = ({
   };
 
   const onSuccess = () => {
-    console.log('onSuccess: ');
     queryClient.invalidateQueries(QueryCacheKey.SYSTEM_LIST);
     onClose();
   };
 
   const onError = (error: ApiError) => {
-    setUpdateSystemError(error.message as string);
+    setUpdateSystemError(
+      `${error.message} ${
+        type === 'create'
+          ? ErrorMessage.CREATE_SYSTEM_FAILED
+          : ErrorMessage.UPDATE_SYSTEM_FAILED
+      }`
+    );
   };
 
   const createMutation = useMutation(
