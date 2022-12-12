@@ -13,8 +13,13 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
-import { createSystem } from '@sso-platform/shared';
-import { useQueryClient } from 'react-query';
+import {
+  createSystem,
+  QueryCacheKey,
+  updateSystem,
+} from '@sso-platform/shared';
+import { useMutation, useQueryClient } from 'react-query';
+import { ApiError } from 'next/dist/server/api-utils';
 
 const validationUpdateSchema = z.object({
   systemCode: z.string().min(1, '請填寫系統代碼'),
@@ -66,14 +71,35 @@ export const UpdateSystemDialog: React.FC<UpdateSystemDialogProps> = ({
     handleClose();
   };
 
-  const onConfirm = async (data: ValidationUpdateSchema) => {
-    const { error, message } = await createSystem<ValidationUpdateSchema>(data);
-    if (error) {
-      setUpdateSystemError(message);
-      return;
-    }
-    queryClient.invalidateQueries('systemList');
+  const onSuccess = () => {
+    console.log('onSuccess: ');
+    queryClient.invalidateQueries(QueryCacheKey.SYSTEM_LIST);
     onClose();
+  };
+
+  const onError = (error: ApiError) => {
+    setUpdateSystemError(error.message as string);
+  };
+
+  const createMutation = useMutation(
+    (data: ValidationUpdateSchema) => createSystem(data),
+    {
+      onSuccess,
+      onError,
+    }
+  );
+  const updateMutation = useMutation(
+    (data: ValidationUpdateSchema) => updateSystem(data),
+    {
+      onSuccess,
+      onError,
+    }
+  );
+
+  const onConfirm = async (data: ValidationUpdateSchema) => {
+    type === 'create'
+      ? createMutation.mutate(data)
+      : updateMutation.mutate(data);
   };
 
   return (

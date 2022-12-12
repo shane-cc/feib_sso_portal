@@ -8,22 +8,17 @@ export async function getSystemList(options?: {
   const { query } = options || {};
   const url =
     query || (query && query.length > 0) ? `/systems?q=${query}` : '/systems';
-  const { data } = await apiFetcher(url, {}, { method: 'get' });
-  return {
-    data: data as System[],
-    status: 'success',
-    error: false,
-  };
+  return await apiFetcher(url, {}, { method: 'get' });
 }
 
 export async function createSystem<T>(data: T): Promise<BaseResponse> {
-  const { error, status, message } = await apiFetcher('/systems', data, {
+  return await apiFetcher('/systems', data, {
     method: 'post',
   });
-  return {
-    data,
-    status,
-    error,
-    message: message || '新增系統異常！',
-  };
+}
+
+export async function updateSystem<T>(data: T): Promise<BaseResponse> {
+  return await apiFetcher('/systems/3', data, {
+    method: 'put',
+  });
 }

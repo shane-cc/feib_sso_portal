@@ -7,4 +7,9 @@ const instance = axios.create({
   },
 });
 
+instance.interceptors.response.use((result) => {
+  // TODO: May need to handle auth token here
+  return result;
+});
+
 export const useAxios = () => instance;

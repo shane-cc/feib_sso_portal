@@ -1,4 +1,4 @@
-import { BaseResponse } from '@sso-platform/types';
+import { ApiError, BaseResponse } from '@sso-platform/types';
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import { ErrorMessage } from '../enum';
 import { useAxios } from './axios';
@@ -38,12 +38,18 @@ export async function apiFetcher(
         status: 'success',
       };
     }
-    return {
+    if (result.status >= 400 && result.status < 500) {
+      throw new ApiError({
+        data: result.data,
+        message: ErrorMessage.API_MISSING,
+        status: 'error',
+      });
+    }
+    throw new ApiError({
       data: result.data,
       message: ErrorMessage.API_FAILED,
-      error: true,
       status: 'error',
-    };
+    });
   } catch (error) {
     if (axios.isCancel(error)) {
       return {
@@ -53,10 +59,9 @@ export async function apiFetcher(
       };
     }
 
-    return {
-      message: ErrorMessage.NETWORK_ERROR,
-      error: true,
+    throw new ApiError({
+      message: ErrorMessage.API_FAILED,
       status: 'error',
-    };
+    });
   }
 }

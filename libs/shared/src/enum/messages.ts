@@ -6,6 +6,7 @@ export enum GeneralMessage {
 export enum ErrorMessage {
   'API_FAILED' = 'API 呼叫失敗！',
   'API_CANCELED' = 'API 呼叫已取消！',
+  'API_MISSING' = '請求資源錯誤！',
   'NO_RESPONSE' = 'API 沒有回應！',
   'NETWORK_ERROR' = '網路連線異常！',
 }

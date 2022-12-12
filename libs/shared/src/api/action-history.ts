@@ -7,10 +7,5 @@ export const getActionHistory = async (options?: {
 }): Promise<GetActionHistoryResponse> => {
   const { limit } = options || {};
   const url = limit ? `/actionHistory?_limit=${limit}` : '/actionHistory';
-  const { data } = await apiFetcher(url, {}, { method: 'get' });
-  return {
-    data: data as IndividualActionHistory[],
-    status: 'success',
-    error: false,
-  };
+  return await apiFetcher(url, {}, { method: 'get' });
 };
