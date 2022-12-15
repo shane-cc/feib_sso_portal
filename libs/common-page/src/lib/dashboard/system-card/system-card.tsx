@@ -92,7 +92,7 @@ export const SystemCard: React.FC<SystemCardProps> = ({
   ];
 
   const handleClick = () => {
-    // TODO: Go to the system page with access_token using new tab
+    // TODO: Open a new tab and call SSO api (with login token and systemCode?) to redirect to the system page
     window.open(system.systemUrl, '_blank');
   };
 

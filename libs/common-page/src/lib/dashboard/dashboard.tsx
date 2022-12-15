@@ -53,6 +53,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
 }) => {
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>();
+
   const { data: systemListData, isLoading: isSystemListLoading } = useQuery<
     GetSystemListResponse,
     Error
@@ -60,6 +61,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
     getSystemList({ query: searchQuery })
   );
   const systemList = systemListData?.data ?? [];
+
   const { data: actionHistoryData, isLoading: isActionHistoryLoading } =
     useQuery<GetActionHistoryResponse, Error>(
       QueryCacheKey.ACTION_HISTORY_SUMMARY,
