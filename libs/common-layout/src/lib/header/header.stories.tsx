@@ -16,10 +16,6 @@ const StyledContainer = styled.div`
 
 export const General = () => (
   <StyledContainer>
-    <Header
-      title="Bankee SSO Portal"
-      activeAccountName="Daniel"
-      activeAccountLink="/actions-history"
-    />
+    <Header title="Bankee SSO Portal" activeAccountName="Daniel" />
   </StyledContainer>
 );

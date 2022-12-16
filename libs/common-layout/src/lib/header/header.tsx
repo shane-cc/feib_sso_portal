@@ -32,7 +32,7 @@ export const Header: React.FC<HeaderProps> = ({ title, activeAccountName }) => {
         <Box className={classes.logoBackground} />
         <Link href={PageRoutes.HOME}>
           <Box className={classes.logo}>
-            <Image src="/feib_logo.svg" alt="遠東銀行" fill />
+            <Image src="/assets/feib_logo.svg" alt="遠東銀行" fill />
           </Box>
         </Link>
         <Typography variant="h1" fontSize={27}>

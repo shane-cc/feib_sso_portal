@@ -15,12 +15,12 @@
           {
             "input": "libs/common-ui/src/assets",
             "glob": "**/*",
-            "output": ""
+            "output": "assets"
           },
           {
             "input": "libs/shared/src/assets",
             "glob": "**/*",
-            "output": ""
+            "output": "assets"
           }
         ]
       },
@@ -41,12 +41,12 @@
           {
             "input": "libs/common-ui/src/assets",
             "glob": "**/*",
-            "output": ""
+            "output": "assets"
           },
           {
             "input": "libs/shared/src/assets",
             "glob": "**/*",
-            "output": ""
+            "output": "assets"
           }
         ]
       },

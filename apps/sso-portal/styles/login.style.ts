@@ -8,7 +8,7 @@ export const useStyles = makeStyles()((theme) => ({
     position: 'relative',
     width: '100vw',
     height: '100vh',
-    backgroundImage: `url(/login-bg.jpg)`,
+    // backgroundImage: `url(/assets/login-bg.jpg)`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',

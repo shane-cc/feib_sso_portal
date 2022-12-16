@@ -44,7 +44,12 @@ export const Login: NextPage<LoginProps> = () => {
   };
 
   return (
-    <Box className={classes.root}>
+    <Box
+      className={classes.root}
+      sx={{
+        backgroundImage: `url(/assets/login-bg.jpg)`,
+      }}
+    >
       <Box component="header" className={classes.header}>
         <Box className={classes.logo}>
           <Image src="/assets/feib_logo.svg" alt="遠東銀行" fill />

@@ -1,16 +1,3 @@
-<style>
-  * {
-    font-family: '微軟雅黑', sans-serif;
-  }
-  p {
-    display: inline;
-  }
-  .bg-cyan {
-    background-color: lightcyan;
-    font-weight: 600;
-  }
-</style>
-
 # FEIB SSO Platform Project Usage
 
 ---
@@ -136,11 +123,11 @@ _專案架構與資料夾內容規劃說明如下：_
   - Contains all the shared types through all the component library and apps
 * shared
   **contains all the shared utility functions, assets and constants**
-  - <p class="bg-cyan">api</p> Contains the axios configuration, custom fetcher function and all the api services
-  * <p class="bg-cyan">assets</p> Contains all the static files that should be shared through out all the libraries and apps
-  * <p class="bg-cyan">enum</p> Contains all the enum and constants that should be shared through out all the libraries and apps
-  * <p class="bg-cyan">store</p> Contains all the state management and configuration that should be shared through out all libraries and apps
-  * <p class="bg-cyan">routes</p> Contains all the routes name in both sso-portal and sso-admin
+  - <strong style="background-color: lightcyan; display: inline-block;">api</strong><br /> Contains the axios configuration, custom fetcher function and all the api services
+  * <strong style="background-color: lightcyan; display: inline-block;">assets</strong><br />> Contains all the static files that should be shared through out all the libraries and apps
+  * <strong style="background-color: lightcyan; display: inline-block;">enum</strong><br /> Contains all the enum and constants that should be shared through out all the libraries and apps
+  * <strong style="background-color: lightcyan; display: inline-block;">store</strong><br /> Contains all the state management and configuration that should be shared through out all libraries and apps
+  * <strong style="background-color: lightcyan; display: inline-block;">routes</strong><br /> Contains all the routes name in both sso-portal and sso-admin
 * mock-data
   - Contains the json-server configuration and all the mock data generation functions
   - Active the mocking json server with the following command:
