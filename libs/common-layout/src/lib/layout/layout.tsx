@@ -4,19 +4,32 @@ import {
   ErrorDialog,
   LoadingDialog,
 } from '@sso-platform/common-ui';
-import { useLoadingState } from '@sso-platform/shared';
-import { ReactNode } from 'react';
+import { useAuthState, useLoadingState } from '@sso-platform/shared';
+import { ReactNode, useEffect } from 'react';
 import { Header } from '../header';
 import { useStyles } from './layout.style';
 
 /* eslint-disable-next-line */
 export interface LayoutProps {
   children: ReactNode;
+  page: string;
+  authFuncs: string[];
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout: React.FC<LayoutProps> = ({
+  children,
+  page,
+  authFuncs,
+}) => {
   const { classes } = useStyles();
   const { isError, isLoading, message, closeDialog } = useLoadingState();
+  const { getAuthFuncs, setAuthCodes } = useAuthState();
+
+  useEffect(() => {
+    setAuthCodes(authFuncs);
+    getAuthFuncs(authFuncs);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   return (
     <>

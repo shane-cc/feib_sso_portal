@@ -14,6 +14,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import {
+  AdminAuth,
   GeneralMessage,
   getActionHistory,
   GetActionHistoryResponse,
@@ -94,7 +95,17 @@ export const Dashboard: React.FC<DashboardProps> = ({
   };
 
   return (
-    <Layout>
+    <Layout
+      page="dashboard"
+      authFuncs={[
+        AdminAuth.CREATE_SYSTEM,
+        AdminAuth.DELETE_SYSTEM,
+        AdminAuth.ASSIGN_SYSTEM_ADMIN,
+        AdminAuth.EDIT_SYSTEM,
+        AdminAuth.READ_SYSTEM_ADMIN,
+        AdminAuth.READ_SYSTEM_AUTH,
+      ]}
+    >
       <Stack
         direction="row"
         justifyContent="space-between"

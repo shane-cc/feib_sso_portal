@@ -13,10 +13,6 @@ export const generateSystemData = (): SystemData[] => {
         'https://cdn2.iconfinder.com/data/icons/social-media-2189/48/30-Twitter-256.png',
       auth: {
         isAuthEditable: true,
-        isViewable: true,
-        isEditable: true,
-        isDeletable: true,
-        isAdminAssignable: true,
       },
     },
     {
@@ -28,10 +24,6 @@ export const generateSystemData = (): SystemData[] => {
         'https://cdn2.iconfinder.com/data/icons/social-media-2189/48/22-Yahoo-256.png',
       auth: {
         isAuthEditable: true,
-        isViewable: true,
-        isEditable: false,
-        isDeletable: false,
-        isAdminAssignable: true,
       },
     },
     {
@@ -43,10 +35,6 @@ export const generateSystemData = (): SystemData[] => {
         'https://cdn2.iconfinder.com/data/icons/social-media-2189/48/29-Slack-256.png',
       auth: {
         isAuthEditable: true,
-        isViewable: true,
-        isEditable: true,
-        isDeletable: true,
-        isAdminAssignable: true,
       },
     },
     {
@@ -58,10 +46,6 @@ export const generateSystemData = (): SystemData[] => {
         'https://cdn2.iconfinder.com/data/icons/social-media-2189/48/16-Reddit-256.png',
       auth: {
         isAuthEditable: false,
-        isViewable: true,
-        isEditable: true,
-        isDeletable: false,
-        isAdminAssignable: true,
       },
     },
     {
@@ -73,10 +57,6 @@ export const generateSystemData = (): SystemData[] => {
         'https://cdn2.iconfinder.com/data/icons/social-media-2189/48/19-Digg-256.png',
       auth: {
         isAuthEditable: true,
-        isViewable: true,
-        isEditable: true,
-        isDeletable: true,
-        isAdminAssignable: true,
       },
     },
     {
@@ -88,10 +68,6 @@ export const generateSystemData = (): SystemData[] => {
         'https://cdn2.iconfinder.com/data/icons/social-media-2189/48/21-Gmail-256.png',
       auth: {
         isAuthEditable: false,
-        isViewable: true,
-        isEditable: true,
-        isDeletable: false,
-        isAdminAssignable: true,
       },
     },
   ];

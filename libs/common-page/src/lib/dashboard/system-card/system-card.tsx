@@ -16,7 +16,7 @@ import { useState } from 'react';
 import { UpdateSystemDialog } from '../update-system-dialog';
 import { DeleteSystemDialog } from '../delete-system-dialog';
 import { useRouter } from 'next/router';
-import { PageRoutes } from '@sso-platform/shared';
+import { AdminAuth, PageRoutes, useAuthState } from '@sso-platform/shared';
 
 /* eslint-disable-next-line */
 export interface SystemCardProps {
@@ -29,6 +29,7 @@ export const SystemCard: React.FC<SystemCardProps> = ({
   isSSOPortal,
 }) => {
   const router = useRouter();
+  const { hasAuthFunc } = useAuthState();
   const [showUpdateDialog, setShowUpdateDialog] = useState<boolean>(false);
   const [showDeleteConfirmDialog, setShowDeleteConfirmDialog] =
     useState<boolean>(false);
@@ -61,7 +62,7 @@ export const SystemCard: React.FC<SystemCardProps> = ({
     {
       icon: <EditIcon />,
       text: '編輯系統',
-      show: system.auth?.isEditable,
+      show: hasAuthFunc(AdminAuth.EDIT_SYSTEM),
       onClick: handleUpdateDialog,
     },
     {
@@ -73,19 +74,19 @@ export const SystemCard: React.FC<SystemCardProps> = ({
     {
       icon: <ManageAccountsIcon />,
       text: '管理員管理',
-      show: system.auth?.isAdminAssignable,
+      show: hasAuthFunc(AdminAuth.ASSIGN_SYSTEM_ADMIN),
       onClick: handleGoToAuthAdminPage,
     },
     {
       icon: <PolicyIcon />,
       text: '查看權限',
-      show: system.auth?.isViewable,
+      show: hasAuthFunc(AdminAuth.READ_SYSTEM_AUTH),
       onClick: handleGoToAuthPage,
     },
     {
       icon: <DeleteForeverIcon htmlColor={COLORS.secondary.dark} />,
       text: '刪除系統',
-      show: system.auth?.isDeletable,
+      show: hasAuthFunc(AdminAuth.DELETE_SYSTEM),
       onClick: handleDeleteConfirmDialog,
       divider: true,
     },
@@ -99,7 +100,7 @@ export const SystemCard: React.FC<SystemCardProps> = ({
   return (
     <>
       <Card>
-        {system.auth?.isAuthEditable && (
+        {menuItemList.some((auth) => auth.show) && (
           <CardAdvancedMenu menuItemList={menuItemList} />
         )}
         <CardImage
