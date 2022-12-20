@@ -61,7 +61,7 @@ export const General = () => (
         </Toolbar>
         <Table>
           <TableHead>
-            <TableRow>
+            <TableRow hover={false}>
               <TableCell>No.</TableCell>
               <TableCell>權限代碼</TableCell>
               <TableCell>權限描述</TableCell>

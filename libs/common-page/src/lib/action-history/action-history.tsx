@@ -79,7 +79,7 @@ export const ActionHistory: React.FC<ActionHistoryProps> = () => {
           <TableContainer>
             <Table>
               <TableHead>
-                <TableRow>
+                <TableRow hover={false}>
                   <TableCell>系統名稱</TableCell>
                   <TableCell>功能分類</TableCell>
                   <TableCell colSpan={2}>動作權限名稱／權限代碼</TableCell>

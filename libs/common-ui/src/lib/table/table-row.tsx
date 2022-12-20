@@ -8,7 +8,11 @@ export interface TableRowProps extends MuiTableRowProps {}
 export const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
   (props, ref) => {
     return (
-      <MuiTableRow {...props} ref={ref}>
+      <MuiTableRow
+        {...props}
+        ref={ref}
+        hover={typeof props.hover !== 'undefined' ? props.hover : true}
+      >
         {props.children}
       </MuiTableRow>
     );
