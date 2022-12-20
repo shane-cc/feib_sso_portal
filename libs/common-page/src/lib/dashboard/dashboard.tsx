@@ -22,6 +22,7 @@ import {
   GetSystemListResponse,
   PageRoutes,
   QueryCacheKey,
+  useAuthState,
 } from '@sso-platform/shared';
 import { useQuery } from 'react-query';
 import Link from 'next/link';
@@ -52,6 +53,7 @@ type ValidationQuerySchema = z.infer<typeof validationQuerySchema>;
 export const Dashboard: React.FC<DashboardProps> = ({
   isSSOPortal = false,
 }) => {
+  const { hasAuthFunc } = useAuthState();
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>();
 
@@ -97,14 +99,18 @@ export const Dashboard: React.FC<DashboardProps> = ({
   return (
     <Layout
       page="dashboard"
-      authFuncs={[
-        AdminAuth.CREATE_SYSTEM,
-        AdminAuth.DELETE_SYSTEM,
-        AdminAuth.ASSIGN_SYSTEM_ADMIN,
-        AdminAuth.EDIT_SYSTEM,
-        AdminAuth.READ_SYSTEM_ADMIN,
-        AdminAuth.READ_SYSTEM_AUTH,
-      ]}
+      authFuncs={
+        isSSOPortal
+          ? []
+          : [
+              AdminAuth.CREATE_SYSTEM,
+              AdminAuth.DELETE_SYSTEM,
+              AdminAuth.ASSIGN_SYSTEM_ADMIN,
+              AdminAuth.EDIT_SYSTEM,
+              AdminAuth.READ_SYSTEM_ADMIN,
+              AdminAuth.READ_SYSTEM_AUTH,
+            ]
+      }
     >
       <Stack
         direction="row"
@@ -139,7 +145,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
               )}
             />
           </form>
-          {!isSSOPortal && (
+          {!isSSOPortal && hasAuthFunc(AdminAuth.CREATE_SYSTEM) && (
             <Button
               variant="contained"
               color="secondary"
@@ -158,7 +164,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
         </Stack>
       </Stack>
       <Grid container spacing={4}>
-        <Grid item xs={12} sm={9} container spacing={2}>
+        <Grid item xs={12} md={8} lg={9} container spacing={2}>
           {isSystemListLoading && <CircularProgress />}
           {!isSystemListLoading && systemList.length === 0 && (
             <Typography
@@ -169,15 +175,18 @@ export const Dashboard: React.FC<DashboardProps> = ({
             </Typography>
           )}
           {systemList.map((system, idx) => (
-            <Grid item xs={6} sm={4} md={3} key={`${system.systemCode}-${idx}`}>
+            <Grid item xs={6} md={4} lg={3} key={`${system.systemCode}-${idx}`}>
               <SystemCard system={system} isSSOPortal={isSSOPortal} />
             </Grid>
           ))}
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} md={4} lg={3}>
           <Paper
             sx={{
               padding: '1rem',
+              minWidth: {
+                lg: '300px',
+              },
             }}
           >
             <Stack

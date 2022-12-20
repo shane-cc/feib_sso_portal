@@ -17,7 +17,7 @@ export const useAuthState = create<AuthState>()(
     page: '',
     authCodes: [],
     authFuncs: [],
-    setAuthCodes: (authCodes) => set({ authCodes }),
+    setAuthCodes: (authCodes) => set((state) => ({ ...state, authCodes })),
     getAuthFuncs: async (authCodes) => {
       const { data } = await getAuthFuncs(authCodes);
       set({ authFuncs: data || [] });

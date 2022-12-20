@@ -1,4 +1,4 @@
-import { useStyles } from '../../styles/login.style';
+import { useStyles } from '../styles/login.style';
 import Image from 'next/image';
 import {
   Box,

@@ -1,8 +1,7 @@
-import { ColorVaraints } from './theme';
-
 export interface IndividualActionHistory {
   platform: string;
-  action: string;
+  authFunctionCategory: string;
+  authFunctionName: string;
+  authFunctionCode: string;
   date: string;
-  type?: ColorVaraints;
 }

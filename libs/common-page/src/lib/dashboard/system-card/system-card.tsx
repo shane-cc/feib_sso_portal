@@ -62,7 +62,7 @@ export const SystemCard: React.FC<SystemCardProps> = ({
     {
       icon: <EditIcon />,
       text: '編輯系統',
-      show: hasAuthFunc(AdminAuth.EDIT_SYSTEM),
+      show: !isSSOPortal && hasAuthFunc(AdminAuth.EDIT_SYSTEM),
       onClick: handleUpdateDialog,
     },
     {
@@ -74,19 +74,19 @@ export const SystemCard: React.FC<SystemCardProps> = ({
     {
       icon: <ManageAccountsIcon />,
       text: '管理員管理',
-      show: hasAuthFunc(AdminAuth.ASSIGN_SYSTEM_ADMIN),
+      show: !isSSOPortal && hasAuthFunc(AdminAuth.ASSIGN_SYSTEM_ADMIN),
       onClick: handleGoToAuthAdminPage,
     },
     {
       icon: <PolicyIcon />,
       text: '查看權限',
-      show: hasAuthFunc(AdminAuth.READ_SYSTEM_AUTH),
+      show: !isSSOPortal && hasAuthFunc(AdminAuth.READ_SYSTEM_AUTH),
       onClick: handleGoToAuthPage,
     },
     {
       icon: <DeleteForeverIcon htmlColor={COLORS.secondary.dark} />,
       text: '刪除系統',
-      show: hasAuthFunc(AdminAuth.DELETE_SYSTEM),
+      show: !isSSOPortal && hasAuthFunc(AdminAuth.DELETE_SYSTEM),
       onClick: handleDeleteConfirmDialog,
       divider: true,
     },
