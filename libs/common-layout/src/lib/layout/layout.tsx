@@ -1,8 +1,10 @@
 import {
   Box,
+  ConfirmDialog,
   Container,
   ErrorDialog,
   LoadingDialog,
+  Typography,
 } from '@sso-platform/common-ui';
 import { useAuthState, useLoadingState } from '@sso-platform/shared';
 import { ReactNode, useEffect } from 'react';
@@ -22,7 +24,15 @@ export const Layout: React.FC<LayoutProps> = ({
   authFuncs,
 }) => {
   const { classes } = useStyles();
-  const { isError, isLoading, message, closeDialog } = useLoadingState();
+  const {
+    isError,
+    isLoading,
+    isConfirm,
+    message,
+    closeDialog,
+    onConfirm,
+    title,
+  } = useLoadingState();
   const { getAuthFuncs, setAuthCodes } = useAuthState();
 
   useEffect(() => {
@@ -42,6 +52,17 @@ export const Layout: React.FC<LayoutProps> = ({
       {isLoading && <LoadingDialog isOpen={isLoading} />}
       {isError && (
         <ErrorDialog isOpen={isError} onClose={closeDialog} message={message} />
+      )}
+      {isConfirm && (
+        <ConfirmDialog
+          isOpen={isConfirm}
+          onClose={closeDialog}
+          title={title}
+          onConfirm={onConfirm}
+          onCancel={closeDialog}
+        >
+          <Typography>{message}</Typography>
+        </ConfirmDialog>
       )}
     </>
   );

@@ -16,20 +16,24 @@ import { useState } from 'react';
 import { UpdateSystemDialog } from '../update-system-dialog';
 import { DeleteSystemDialog } from '../delete-system-dialog';
 import { useRouter } from 'next/router';
-import { AdminAuth, PageRoutes, useAuthState } from '@sso-platform/shared';
+import {
+  AdminAuth,
+  AppType,
+  PageRoutes,
+  useAuthState,
+  useBaseState,
+} from '@sso-platform/shared';
 
 /* eslint-disable-next-line */
 export interface SystemCardProps {
   system: System;
-  isSSOPortal: boolean;
 }
 
-export const SystemCard: React.FC<SystemCardProps> = ({
-  system,
-  isSSOPortal,
-}) => {
+export const SystemCard: React.FC<SystemCardProps> = ({ system }) => {
   const router = useRouter();
   const { hasAuthFunc } = useAuthState();
+  const { appType } = useBaseState();
+  const isSSOPortal = appType === AppType.SSO_PORTAL;
   const [showUpdateDialog, setShowUpdateDialog] = useState<boolean>(false);
   const [showDeleteConfirmDialog, setShowDeleteConfirmDialog] =
     useState<boolean>(false);

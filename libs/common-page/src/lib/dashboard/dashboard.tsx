@@ -15,6 +15,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import {
   AdminAuth,
+  AppType,
   GeneralMessage,
   getActionHistory,
   GetActionHistoryResponse,
@@ -23,6 +24,7 @@ import {
   PageRoutes,
   QueryCacheKey,
   useAuthState,
+  useBaseState,
 } from '@sso-platform/shared';
 import { useQuery } from 'react-query';
 import Link from 'next/link';
@@ -33,9 +35,7 @@ import { SystemCard } from './system-card';
 import { ActionHistorySummary } from './action-history-summary';
 
 /* eslint-disable-next-line */
-export interface DashboardProps {
-  isSSOPortal?: boolean;
-}
+export interface DashboardProps {}
 
 const breadcrumbs: IBreadcrumb[] = [
   {
@@ -50,10 +50,10 @@ const validationQuerySchema = z.object({
 
 type ValidationQuerySchema = z.infer<typeof validationQuerySchema>;
 
-export const Dashboard: React.FC<DashboardProps> = ({
-  isSSOPortal = false,
-}) => {
+export const Dashboard: React.FC<DashboardProps> = () => {
   const { hasAuthFunc } = useAuthState();
+  const { appType } = useBaseState();
+  const isSSOPortal = appType === AppType.SSO_PORTAL;
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>();
 
@@ -176,7 +176,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           )}
           {systemList.map((system, idx) => (
             <Grid item xs={6} md={4} lg={3} key={`${system.systemCode}-${idx}`}>
-              <SystemCard system={system} isSSOPortal={isSSOPortal} />
+              <SystemCard system={system} />
             </Grid>
           ))}
         </Grid>

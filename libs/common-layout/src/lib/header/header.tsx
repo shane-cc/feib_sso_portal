@@ -6,10 +6,17 @@ import {
   Toolbar,
   Typography,
 } from '@sso-platform/common-ui';
-import { PageRoutes } from '@sso-platform/shared';
+import {
+  AppType,
+  LoadingStateType,
+  PageRoutes,
+  useBaseState,
+  useLoadingState,
+} from '@sso-platform/shared';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useStyles } from './header.style';
+import { useRouter } from 'next/router';
 
 export interface HeaderProps {
   title: string;
@@ -18,10 +25,28 @@ export interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ title, activeAccountName }) => {
   const { classes } = useStyles();
+  const router = useRouter();
+  const { openDialog } = useLoadingState();
+  const { appType } = useBaseState();
+  const isSSOPortal = appType === AppType.SSO_PORTAL;
+
+  const onLogout = () => {
+    openDialog({
+      type: LoadingStateType.CONFIRM,
+      message: '您是否確定登出？',
+      title: '是否確定登出？',
+      onConfirm: handleLogout,
+    });
+  };
 
   const handleLogout = () => {
-    // TODO: logout function implementation
+    // TODO: call logout api(?)
     console.log('logout');
+    if (isSSOPortal) {
+      router.replace(PageRoutes.SSO_LOGIN);
+      return;
+    }
+    // TODO: redirect to loged out page?
   };
 
   return (
@@ -52,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({ title, activeAccountName }) => {
             variant="contained"
             color="primary"
             size="small"
-            onClick={handleLogout}
+            onClick={onLogout}
             sx={{ padding: '.5rem 2rem' }}
           >
             登出

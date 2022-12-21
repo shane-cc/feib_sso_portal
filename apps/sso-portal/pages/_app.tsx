@@ -11,6 +11,8 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import { createEmotionCache } from '@sso-platform/theme';
 import styled from '@emotion/styled';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { AppType, useBaseState } from '@sso-platform/shared';
+import { useEffect } from 'react';
 
 const clientSideEmotionCache = createEmotionCache();
 const queryClient = new QueryClient();
@@ -33,6 +35,13 @@ function CustomApp({
   emotionCache = clientSideEmotionCache,
   pageProps,
 }: CustomAppProps) {
+  const { setAppType } = useBaseState();
+
+  useEffect(() => {
+    setAppType(AppType.SSO_PORTAL);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <CacheProvider value={emotionCache}>

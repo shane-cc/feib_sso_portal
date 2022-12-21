@@ -1,4 +1,5 @@
 export enum PageRoutes {
+  'SSO_LOGIN' = '/login',
   'HOME' = '/',
   'ACTION_HISTORY' = '/action-history',
   'SYSTEMS' = '/systems',
