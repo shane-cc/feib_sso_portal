@@ -7,13 +7,17 @@ export const enum AppType {
 }
 
 interface BaseState {
-  appType: AppType;
+  appType: AppType | '';
+  appTitle: string;
   setAppType: (appType: AppType) => void;
+  setAppTitle: (appTitle: string) => void;
 }
 
 export const useBaseState = create<BaseState>()(
   devtools((set) => ({
-    appType: AppType.SSO_PORTAL,
+    appType: '',
+    appTitle: '',
     setAppType: (appType) => set((state) => ({ ...state, appType })),
+    setAppTitle: (appTitle) => set((state) => ({ ...state, appTitle })),
   }))
 );

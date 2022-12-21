@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import {
   deleteSystem,
   ErrorMessage,
+  LoadingStateType,
   QueryCacheKey,
   useLoadingState,
 } from '@sso-platform/shared';
@@ -31,7 +32,7 @@ export const DeleteSystemDialog: React.FC<DeleteSystemDialogProps> = ({
     },
     onError: (error: ApiError) => {
       openDialog({
-        isError: true,
+        type: LoadingStateType.ERROR,
         message: `${error.message} ${ErrorMessage.DELETE_SYSTEM_FAILED}`,
       });
     },

@@ -22,29 +22,26 @@ export const ActionHistorySummary: React.FC<ActionHistorySummaryProps> = ({
 }) => {
   return (
     <Timeline>
-      {timelineData.map(
-        ({ platform, date, authFunctionName, authFunctionCode }, idx) => (
-          <TimelineItem key={idx}>
-            <TimelineSeparator>
-              <TimelineDot color="primary" />
-              {idx < timelineData.length - 1 && <TimelineConnector />}
-            </TimelineSeparator>
-            <TimelineContent>
-              <Typography variant="body2">
-                {platform} | {authFunctionName}{' '}
-                {authFunctionCode ? ` / ${authFunctionCode}` : ''}
-              </Typography>
-              <Typography
-                variant="caption"
-                color={COLORS.primary.greyish}
-                sx={{ display: 'block' }}
-              >
-                {date}
-              </Typography>
-            </TimelineContent>
-          </TimelineItem>
-        )
-      )}
+      {timelineData.map(({ platform, date, authFunctionName }, idx) => (
+        <TimelineItem key={idx}>
+          <TimelineSeparator>
+            <TimelineDot color="primary" />
+            {idx < timelineData.length - 1 && <TimelineConnector />}
+          </TimelineSeparator>
+          <TimelineContent>
+            <Typography variant="body2">
+              {platform} | {authFunctionName}
+            </Typography>
+            <Typography
+              variant="caption"
+              color={COLORS.primary.greyish}
+              sx={{ display: 'block' }}
+            >
+              {date}
+            </Typography>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
     </Timeline>
   );
 };

@@ -3,3 +3,4 @@ export * from './lib/api';
 export * from './lib/action-history';
 export * from './lib/theme';
 export * from './lib/auth';
+export * from './lib/auth-management';

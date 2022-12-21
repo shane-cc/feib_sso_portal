@@ -1,9 +1,9 @@
 export interface Auth {
-  authCode: string;
-  authName: string;
+  authFunctionCode: string;
+  authFunctionName: string;
 }
 
 export interface AuthFunc {
-  authCode: string;
+  authFunctionCode: string;
   isAuth: boolean;
 }

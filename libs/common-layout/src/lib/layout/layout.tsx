@@ -6,7 +6,11 @@ import {
   LoadingDialog,
   Typography,
 } from '@sso-platform/common-ui';
-import { useAuthState, useLoadingState } from '@sso-platform/shared';
+import {
+  useAuthState,
+  useBaseState,
+  useLoadingState,
+} from '@sso-platform/shared';
 import { ReactNode, useEffect } from 'react';
 import { Header } from '../header';
 import { useStyles } from './layout.style';
@@ -34,6 +38,7 @@ export const Layout: React.FC<LayoutProps> = ({
     title,
   } = useLoadingState();
   const { getAuthFuncs, setAuthCodes } = useAuthState();
+  const { appTitle } = useBaseState();
 
   useEffect(() => {
     setAuthCodes(authFuncs);
@@ -44,7 +49,7 @@ export const Layout: React.FC<LayoutProps> = ({
   return (
     <>
       <Box component="main" className={classes.root}>
-        <Header title="Bankee SSO Portal" activeAccountName="Daniel" />
+        <Header title={appTitle} activeAccountName="Daniel" />
         <Container maxWidth={false} className={classes.container}>
           {children}
         </Container>

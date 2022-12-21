@@ -9,6 +9,7 @@ export type CardImageProps = MuiCardMediaProps & {
   image: string;
   isEditable?: boolean;
   isClickable?: boolean;
+  onEditClick?: () => void;
 };
 
 const useStyles = makeStyles<{
@@ -77,19 +78,37 @@ const useStyles = makeStyles<{
 }));
 
 export const CardImage = forwardRef<HTMLImageElement, CardImageProps>(
-  ({ isEditable = false, isClickable, sx, image, children, ...rest }, ref) => {
+  (
+    {
+      onEditClick,
+      isEditable = false,
+      isClickable,
+      sx,
+      image,
+      children,
+      ...rest
+    },
+    ref
+  ) => {
     const { classes } = useStyles({
       useDefaultImage: image.length === 0,
       isEditable,
       isClickable,
     });
+
     return (
       <Box className={classes.container}>
-        <Box className={classes.root} sx={sx}>
+        <Box
+          className={classes.root}
+          sx={sx}
+          onClick={isEditable ? onEditClick : undefined}
+        >
           <MuiCardMedia
             {...rest}
             ref={ref}
-            image={image.length === 0 ? '/card-default-image.png' : image}
+            image={
+              image.length === 0 ? '/assets/card-default-image.png' : image
+            }
             component="img"
           >
             {children}

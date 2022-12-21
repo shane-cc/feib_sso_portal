@@ -14,4 +14,5 @@ export enum ErrorMessage {
   'CREATE_SYSTEM_FAILED' = '新增系統失敗！',
   'UPDATE_SYSTEM_FAILED' = '更新系統失敗！',
   'DELETE_SYSTEM_FAILED' = '刪除系統失敗！',
+  'UPLOAD_SYSTEM_IMAGE_FAILED' = '上傳系統圖片失敗！',
 }

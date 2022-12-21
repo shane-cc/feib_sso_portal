@@ -1,8 +1,8 @@
 import { ActionHistory } from '@sso-platform/common-page';
 import { NextPage } from 'next';
 
-export const Index: NextPage = () => {
+export const ActionHistoryPage: NextPage = () => {
   return <ActionHistory />;
 };
 
-export default Index;
+export default ActionHistoryPage;

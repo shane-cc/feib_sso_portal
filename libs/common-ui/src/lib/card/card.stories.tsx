@@ -72,7 +72,7 @@ export const DashboardCard = () => (
     </Card>
     <Card>
       <CardImage
-        image="/card-demo-icon.png"
+        image="/assets/card-demo-icon.png"
         sx={{
           width: '8rem',
           height: '8rem',
@@ -98,7 +98,7 @@ export const DashboardCard = () => (
     <Card>
       <CardAdvancedMenu menuItemList={menuItemList} />
       <CardImage
-        image="/card-demo-icon.png"
+        image="/assets/card-demo-icon.png"
         sx={{
           width: '8rem',
           height: '8rem',

@@ -98,7 +98,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
 
   return (
     <Layout
-      page="dashboard"
+      page={isSSOPortal ? 'sso-portal-dashboard' : 'sso-admin-dashboard'}
       authFuncs={
         isSSOPortal
           ? []
@@ -174,7 +174,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
               {GeneralMessage.EMPTY_SYSTEM_LIST}
             </Typography>
           )}
-          {systemList.map((system, idx) => (
+          {systemList?.map((system, idx) => (
             <Grid item xs={6} md={4} lg={3} key={`${system.systemCode}-${idx}`}>
               <SystemCard system={system} />
             </Grid>

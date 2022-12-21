@@ -6,37 +6,37 @@ export const generateAuthData = (): AuthData[] => {
   return [
     {
       id: '1',
-      authCode: 'CREATE_SYSTEM',
+      authFunctionCode: 'CREATE_SYSTEM',
       isAuth: true,
     },
     {
       id: '2',
-      authCode: 'EDIT_SYSTEM',
+      authFunctionCode: 'EDIT_SYSTEM',
       isAuth: true,
     },
     {
       id: '3',
-      authCode: 'DELETE_SYSTEM',
+      authFunctionCode: 'DELETE_SYSTEM',
       isAuth: true,
     },
     {
       id: '4',
-      authCode: 'READ_SYSTEM_AUTH',
+      authFunctionCode: 'READ_SYSTEM_AUTH',
       isAuth: true,
     },
     {
       id: '5',
-      authCode: 'ASSIGN_SYSTEM_ADMIN',
+      authFunctionCode: 'ASSIGN_SYSTEM_ADMIN',
       isAuth: true,
     },
     {
       id: '6',
-      authCode: 'DELETE_SYSTEM_ADMIN',
+      authFunctionCode: 'DELETE_SYSTEM_ADMIN',
       isAuth: true,
     },
     {
       id: '7',
-      authCode: 'READ_SYSTEM_ADMIN',
+      authFunctionCode: 'READ_SYSTEM_ADMIN',
       isAuth: true,
     },
   ];

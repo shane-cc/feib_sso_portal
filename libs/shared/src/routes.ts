@@ -3,7 +3,9 @@ export enum PageRoutes {
   'HOME' = '/',
   'ACTION_HISTORY' = '/action-history',
   'SYSTEMS' = '/systems',
-  'SYSTEM_AUTH' = '/systems/auth',
-  'SYSTEM_AUTH_ADMIN' = '/systems/admin',
+  'SYSTEM_AUTH_MANAGEMENT' = 'auth',
+  'SYSTEM_ROLE_MANAGEMENT' = 'role',
+  'SYSTEM_MEMBER_MANAGEMENT' = 'member',
+  'SYSTEM_AUTH_ADMIN' = 'admin',
   'HISTORY_QUERY' = '/history-query',
 }

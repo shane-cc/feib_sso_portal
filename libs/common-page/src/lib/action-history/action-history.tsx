@@ -15,6 +15,7 @@ import {
 import {
   ErrorMessage,
   GetActionHistoryResponse,
+  LoadingStateType,
   PageRoutes,
   QueryCacheKey,
   getActionHistory,
@@ -54,7 +55,7 @@ export const ActionHistory: React.FC<ActionHistoryProps> = () => {
     if (isError) {
       openDialog({
         message: error?.message || ErrorMessage.ACTION_HISTORY_FAILED,
-        isError: true,
+        type: LoadingStateType.ERROR,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

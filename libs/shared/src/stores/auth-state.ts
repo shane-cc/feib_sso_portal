@@ -5,28 +5,29 @@ import { getAuthFuncs } from '../api/auth';
 
 interface AuthState {
   page: string;
-  authCodes: string[];
-  authFuncs: AuthFunc[];
-  setAuthCodes: (authCodes: string[]) => void;
-  getAuthFuncs: (authCodes: string[]) => void;
-  hasAuthFunc: (authCode: string) => boolean;
+  authFunctionCodes: string[];
+  authFunctions: AuthFunc[];
+  setAuthCodes: (authFunctionCodes: string[]) => void;
+  getAuthFuncs: (authFunctionCodes: string[]) => void;
+  hasAuthFunc: (authFunctionCode: string) => boolean;
 }
 
 export const useAuthState = create<AuthState>()(
   devtools((set, get) => ({
     page: '',
-    authCodes: [],
-    authFuncs: [],
-    setAuthCodes: (authCodes) => set((state) => ({ ...state, authCodes })),
-    getAuthFuncs: async (authCodes) => {
-      const { data } = await getAuthFuncs(authCodes);
-      set({ authFuncs: data || [] });
+    authFunctionCodes: [],
+    authFunctions: [],
+    setAuthCodes: (authFunctionCodes) =>
+      set((state) => ({ ...state, authFunctionCodes })),
+    getAuthFuncs: async (authFunctionCodes) => {
+      const { data } = await getAuthFuncs(authFunctionCodes);
+      set({ authFunctions: data || [] });
     },
-    hasAuthFunc: (authCode) => {
-      const { authFuncs } = get();
-      if (!authFuncs) return false;
-      const target = authFuncs.find(
-        (authFunc) => authFunc.authCode === authCode
+    hasAuthFunc: (authFunctionCode) => {
+      const { authFunctions } = get();
+      if (!authFunctions) return false;
+      const target = authFunctions.find(
+        (authFunc) => authFunc.authFunctionCode === authFunctionCode
       );
       return target ? target.isAuth : false;
     },

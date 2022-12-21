@@ -55,11 +55,15 @@ export const SystemCard: React.FC<SystemCardProps> = ({ system }) => {
   };
 
   const handleGoToAuthPage = () => {
-    router.push(`${PageRoutes.SYSTEM_AUTH}/${system.systemCode}`);
+    router.push(
+      `${PageRoutes.SYSTEMS}/${system.systemCode}/${PageRoutes.SYSTEM_AUTH_MANAGEMENT}`
+    );
   };
 
   const handleGoToAuthAdminPage = () => {
-    router.push(`${PageRoutes.SYSTEM_AUTH_ADMIN}/${system.systemCode}`);
+    router.push(
+      `${PageRoutes.SYSTEMS}/${system.systemCode}/${PageRoutes.SYSTEM_AUTH_ADMIN}`
+    );
   };
 
   const menuItemList: MenuItemData[] = [

@@ -35,10 +35,11 @@ function CustomApp({
   emotionCache = clientSideEmotionCache,
   pageProps,
 }: CustomAppProps) {
-  const { setAppType } = useBaseState();
+  const { setAppType, setAppTitle } = useBaseState();
 
   useEffect(() => {
     setAppType(AppType.SSO_PORTAL);
+    setAppTitle('Bankee SSO Portal');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

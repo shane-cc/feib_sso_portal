@@ -3,11 +3,13 @@ import { apiFetcher } from './fetcher';
 
 export type GetAuthFuncsResponse = BaseResponse<AuthFunc[]>;
 export async function getAuthFuncs(
-  authCodes: string[]
+  authFunctionCodes: string[]
 ): Promise<GetAuthFuncsResponse> {
   return await apiFetcher(
-    `/auths?authCode_like=${authCodes.join('|')}`,
-    authCodes,
+    `/auths?authFunctionCode_like=${
+      authFunctionCodes.length > 0 ? authFunctionCodes.join('|') : '""'
+    }`,
+    authFunctionCodes,
     {
       method: 'get',
     }
