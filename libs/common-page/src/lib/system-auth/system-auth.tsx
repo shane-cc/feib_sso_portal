@@ -1,5 +1,5 @@
 import { IBreadcrumb, Layout, PageTitle } from '@sso-platform/common-layout';
-import { Stack } from '@sso-platform/common-ui';
+import { Paper, Stack } from '@sso-platform/common-ui';
 import {
   GetSystemDataResponse,
   PageRoutes,
@@ -10,6 +10,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { SystemInfo } from './system-info';
+import { TableTabs } from './table-tabs';
+import { AuthManagement } from './auth-management';
 
 /* eslint-disable-next-line */
 export interface SystemAuthProps {}
@@ -21,7 +23,7 @@ const breadcrumbs: IBreadcrumb[] = [
   },
 ];
 
-type SystemAuthTabType =
+export type SystemAuthTabType =
   | PageRoutes.SYSTEM_AUTH_MANAGEMENT
   | PageRoutes.SYSTEM_ROLE_MANAGEMENT
   | PageRoutes.SYSTEM_MEMBER_MANAGEMENT
@@ -62,6 +64,12 @@ export const SystemAuth: React.FC<SystemAuthProps> = () => {
       </Stack>
       <Stack direction="row" gap={2}>
         <SystemInfo system={system} />
+        <Stack sx={{ width: '100%' }}>
+          <TableTabs currentTab={currentTab} />
+          {currentTab === PageRoutes.SYSTEM_AUTH_MANAGEMENT && (
+            <AuthManagement />
+          )}
+        </Stack>
       </Stack>
     </Layout>
   );

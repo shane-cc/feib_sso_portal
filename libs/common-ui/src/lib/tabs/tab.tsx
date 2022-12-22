@@ -5,9 +5,9 @@ import { forwardRef } from 'react';
 /* eslint-disable-next-line */
 export interface TabProps extends MuiTabProps {}
 
-export const Tab = forwardRef<HTMLDivElement, TabProps>((props, ref) => {
+export const Tab = forwardRef<HTMLSpanElement, TabProps>((props, ref) => {
   return (
-    <MuiTab {...props} ref={ref}>
+    <MuiTab {...props} ref={ref} component="span">
       {props.children}
     </MuiTab>
   );

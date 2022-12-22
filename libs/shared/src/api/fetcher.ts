@@ -33,6 +33,7 @@ export async function apiFetcher(
     }
     if (result.status >= 200 && result.status < 300) {
       return {
+        headers: result.headers, // TODO: check if this is needed
         data: result.data,
         error: false,
         status: 'success',

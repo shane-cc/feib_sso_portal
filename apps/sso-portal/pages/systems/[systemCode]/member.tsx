@@ -1,8 +1,8 @@
 import { SystemAuth } from '@sso-platform/common-page';
 import { NextPage } from 'next';
 
-export const SystemAuthManagementPage: NextPage = () => {
+export const SystemMemberManagementPage: NextPage = () => {
   return <SystemAuth />;
 };
 
-export default SystemAuthManagementPage;
+export default SystemMemberManagementPage;

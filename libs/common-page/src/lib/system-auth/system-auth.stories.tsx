@@ -11,6 +11,7 @@ export const AuthManagement = () => <SystemAuth />;
 
 AuthManagement.parameters = {
   nextRouter: {
+    pathname: '/systems/[systemCode]/auth',
     path: '/systems/[systemCode]/auth',
     asPath: '/systems/system-2/auth',
     query: {
