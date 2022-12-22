@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
+import { useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from '@sso-platform/theme';
 import '@fontsource/noto-sans-tc/300.css';
@@ -30,4 +31,7 @@ export const decorators = [
 
 export const parameters = {
   layout: 'fullscreen',
+  nextRouter: {
+    Provider: RouterContext.Provider,
+  },
 };

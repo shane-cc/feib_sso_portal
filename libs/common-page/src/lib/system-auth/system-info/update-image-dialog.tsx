@@ -9,10 +9,14 @@ import {
   TextField,
   Typography,
 } from '@sso-platform/common-ui';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import EditIcon from '@mui/icons-material/Edit';
 import { ChangeEvent, useRef, useState } from 'react';
-import { ErrorMessage, updateSystemImage } from '@sso-platform/shared';
+import {
+  ErrorMessage,
+  QueryCacheKey,
+  updateSystemImage,
+} from '@sso-platform/shared';
 import { ApiError } from '@sso-platform/types';
 
 interface UpdatImageDialogProps {
@@ -28,6 +32,7 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
   initialData,
   systemCode,
 }) => {
+  const queryClient = useQueryClient();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState<File>();
   const [imagePreview, setImagePreview] = useState<string>(initialData);
@@ -38,6 +43,7 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
     setImage(undefined);
     setImageError(undefined);
     setImagePreview(initialData);
+    URL.revokeObjectURL(imagePreview);
     setUpdateImageError(undefined);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -50,7 +56,8 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
   };
 
   const onSuccess = () => {
-    handleClose();
+    queryClient.invalidateQueries([QueryCacheKey.SYSTEM_LIST, systemCode]);
+    onClose();
   };
 
   const onError = (error: ApiError) => {
@@ -81,6 +88,7 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
 
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
+      URL.revokeObjectURL(imagePreview);
       setImage(e.target.files[0]);
       setImagePreview(URL.createObjectURL(e.target.files[0]));
     }

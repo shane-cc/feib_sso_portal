@@ -12,7 +12,7 @@ import {
 import { System } from '@sso-platform/types';
 import { useStyles } from './system-info.style';
 import { UpdateSystemDialog } from '../../dashboard/update-system-dialog';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { UpdateImageDialog } from './update-image-dialog';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
