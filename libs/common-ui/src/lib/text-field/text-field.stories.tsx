@@ -4,6 +4,9 @@ import styled from '@emotion/styled';
 import SearchIcon from '@mui/icons-material/Search';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { COLORS } from '@sso-platform/theme';
+import { FileInput } from './file-input';
+import { useState } from 'react';
+import { Typography } from '../typography';
 
 const Story: ComponentMeta<typeof TextField> = {
   component: TextField,
@@ -163,3 +166,29 @@ export const Sizes = () => (
     </StyledRow>
   </StyledContainer>
 );
+
+export const FileUploadInputField = () => {
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleChange = (file?: File) => {
+    if (file) {
+      setFile(file);
+    }
+  };
+
+  return (
+    <StyledContainer>
+      <StyledRow>
+        <FileInput
+          name="image"
+          label="上傳檔案"
+          value=""
+          onChange={handleChange}
+        />
+      </StyledRow>
+      <StyledRow>
+        <Typography>檔案名稱：{file?.name}</Typography>
+      </StyledRow>
+    </StyledContainer>
+  );
+};

@@ -5,6 +5,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  FileInput,
   Stack,
   TextField,
   Typography,
@@ -82,15 +83,11 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
     updateMutation.mutate();
   };
 
-  const onUploadClick = () => {
-    fileInputRef.current?.click();
-  };
-
-  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.length) {
+  const handleFileUpload = (file?: File) => {
+    if (file) {
       URL.revokeObjectURL(imagePreview);
-      setImage(e.target.files[0]);
-      setImagePreview(URL.createObjectURL(e.target.files[0]));
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file));
     }
   };
 
@@ -115,19 +112,13 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
         <Stack my=".5rem" gap="1rem">
           <CardImage image={imagePreview} />
           {!image && <Typography align="center">請選擇要上傳的圖片</Typography>}
-          <TextField
+          <FileInput
             label="上傳圖片"
+            name="image"
             error={typeof imageError === 'string' && imageError.length > 0}
             helperText={imageError}
             value={image ? image.name : ''}
-            onClick={onUploadClick}
-          />
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
             onChange={handleFileUpload}
-            hidden
           />
         </Stack>
       </DialogContent>
