@@ -63,14 +63,14 @@ export const Dashboard: React.FC<DashboardProps> = () => {
   >([QueryCacheKey.SYSTEM_LIST, searchQuery], () =>
     getSystemList({ query: searchQuery })
   );
-  const systemList = systemListData?.data ?? [];
+  const systemList = systemListData?.data?.systems ?? [];
 
   const { data: actionHistoryData, isLoading: isActionHistoryLoading } =
     useQuery<GetActionHistoryResponse, Error>(
       QueryCacheKey.ACTION_HISTORY_SUMMARY,
       () => getActionHistory({ limit: 5 })
     );
-  const actionHistoryList = actionHistoryData?.data ?? [];
+  const actionHistoryList = actionHistoryData?.data?.actionHistory ?? [];
 
   const methods = useForm<ValidationQuerySchema>({
     resolver: zodResolver(validationQuerySchema),

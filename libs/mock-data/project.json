@@ -19,7 +19,7 @@
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "mock-data:build",
-        "command": "cd dist/libs/mock-data/src && npx json-server --watch index.js --port 3000"
+        "command": "cd dist/libs/mock-data/src && node index.js"
       },
       "configurations": {
         "production": {

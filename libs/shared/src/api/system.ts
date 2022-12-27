@@ -1,7 +1,13 @@
 import { BaseResponse, System } from '@sso-platform/types';
 import { apiFetcher } from './fetcher';
 
-export type GetSystemListResponse = BaseResponse<System[]>;
+type GetSystemList = {
+  systems: System[];
+  currentPage?: number;
+  pageSize?: number;
+  totalPage: number;
+};
+export type GetSystemListResponse = BaseResponse<GetSystemList>;
 export async function getSystemList(options?: {
   query?: string;
 }): Promise<GetSystemListResponse> {
@@ -11,7 +17,10 @@ export async function getSystemList(options?: {
   return await apiFetcher(url, {}, { method: 'get' });
 }
 
-export type GetSystemDataResponse = BaseResponse<System>;
+type GetSystemData = {
+  systems: System;
+};
+export type GetSystemDataResponse = BaseResponse<GetSystemData>;
 export async function getSystemData(
   systemCode: string
 ): Promise<GetSystemDataResponse> {

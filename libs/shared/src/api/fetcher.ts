@@ -32,8 +32,8 @@ export async function apiFetcher(
       throw new AxiosError(ErrorMessage.NO_RESPONSE);
     }
     if (result.status >= 200 && result.status < 300) {
+      console.log('result.data', result.data);
       return {
-        headers: result.headers, // TODO: check if this is needed
         data: result.data,
         error: false,
         status: 'success',

@@ -1,46 +1,40 @@
-import {
-  ActionHistoryData,
-  generateActionHistoryData,
-} from './lib/action-history-data';
-import {
-  AuthAccountData,
-  generateAuthAccountData,
-} from './lib/auth-account-data';
-import { AuthAdminData, generateAuthAdminData } from './lib/auth-admin-data';
-import { AuthData, generateAuthData } from './lib/auth-data';
-import {
-  AuthFunctionData,
-  generateAuthFunctionData,
-} from './lib/auth-function-data';
-import { AuthMemberData, generateAuthMemberData } from './lib/auth-member-data';
-import { AuthRoleData, generateAuthRoleData } from './lib/auth-role-data';
-import { generateSystemData, SystemData } from './lib/system-data.ts';
+import * as jsonServer from 'json-server';
+import { db } from './lib/db';
+import axios from 'axios';
 
-export interface BaseData {
-  id: string;
-}
+const server = jsonServer.create();
+const router = jsonServer.router(db);
+const middlewares = jsonServer.defaults();
 
-interface DB {
-  systems: SystemData[];
-  actionHistory: ActionHistoryData[];
-  auths: AuthData[];
-  authFunctions: AuthFunctionData[];
-  authRoles: AuthRoleData[];
-  authMembers: AuthMemberData[];
-  authAdmins: AuthAdminData[];
-  authAccounts: AuthAccountData[];
-}
-
-module.exports = () => {
-  const data: DB = {
-    systems: generateSystemData(),
-    actionHistory: generateActionHistoryData(),
-    auths: generateAuthData(),
-    authFunctions: generateAuthFunctionData(),
-    authRoles: generateAuthRoleData(),
-    authMembers: generateAuthMemberData(),
-    authAdmins: generateAuthAdminData(),
-    authAccounts: generateAuthAccountData(),
-  };
-  return data;
+const getSearchQuery = (queryString: string, key: string): string => {
+  if (!queryString) return '';
+  const searchQuery = `&${queryString}}`;
+  const queryParts = searchQuery.split(`&${key}=`);
+  const queryValue = queryParts.pop()?.split('&').shift() || '';
+  return queryValue;
 };
+
+server.use(middlewares);
+server.use(jsonServer.bodyParser);
+(router as any).render = async (req: any, res: any) => {
+  const queryString = req._parsedUrl.query;
+  const pathname = req._parsedUrl.pathname.split('/')[1];
+  const page = getSearchQuery(queryString, '_page');
+  const limit = getSearchQuery(queryString, '_limit');
+  const totalCount = res.get('X-Total-Count')?.__wrapped__ || 0;
+  if (page) {
+    return res.jsonp({
+      [pathname]: res.locals.data,
+      currentPage: page,
+      pageSize: limit,
+      totalPage: Math.round(parseInt(totalCount[pathname].length) / 10) + 1,
+    });
+  }
+  return res.jsonp({
+    [pathname]: res.locals.data,
+  });
+};
+server.use(router);
+server.listen(3000, () => {
+  console.log('JSON Server is running');
+});

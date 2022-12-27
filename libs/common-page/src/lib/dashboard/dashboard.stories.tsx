@@ -7,4 +7,5 @@ const Story: ComponentMeta<typeof Dashboard> = {
 };
 export default Story;
 
-export const General = () => <Dashboard />;
+export const SSOPortal = () => <Dashboard />;
+export const SSOAdmin = () => <Dashboard />;

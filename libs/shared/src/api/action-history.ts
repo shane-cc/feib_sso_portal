@@ -1,7 +1,10 @@
 import { BaseResponse, IndividualActionHistory } from '@sso-platform/types';
 import { apiFetcher } from './fetcher';
 
-export type GetActionHistoryResponse = BaseResponse<IndividualActionHistory[]>;
+type GetActionHistory = {
+  actionHistory: IndividualActionHistory[];
+};
+export type GetActionHistoryResponse = BaseResponse<GetActionHistory>;
 export const getActionHistory = async (options?: {
   limit?: number;
 }): Promise<GetActionHistoryResponse> => {

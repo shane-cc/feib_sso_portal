@@ -14,7 +14,7 @@ import {
   Toolbar,
   Typography,
 } from '@sso-platform/common-ui';
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -40,7 +40,11 @@ export const AuthManagement: React.FC<AuthManagementProps> = () => {
     [QueryCacheKey.AUTH_FUNCTIONS_LIST, searchQuery, currentPage],
     () => getAuthFunctionsList({ query: searchQuery, page: currentPage })
   );
-  const authFunctionsList = authFunctionsData?.data ?? [];
+  const authFunctionsList = authFunctionsData?.data?.authFunctions ?? [];
+
+  const handleSearchQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
 
   const handlePagination = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -48,14 +52,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = () => {
   };
 
   useEffect(() => {
-    // TODO: This is only for mock data
-    if (authFunctionsData && authFunctionsData.headers) {
-      setTotalPage(
-        Math.round(
-          parseInt(authFunctionsData.headers['x-total-count'] as string) / 10
-        ) + 1
-      );
-    }
+    setTotalPage(authFunctionsData?.data?.totalPage ?? 1);
   }, [authFunctionsData]);
 
   return (
@@ -77,6 +74,8 @@ export const AuthManagement: React.FC<AuthManagementProps> = () => {
                 sx={{
                   width: '380px',
                 }}
+                value={searchQuery}
+                onChange={handleSearchQueryChange}
                 placeholder="搜尋權限代碼／權限名稱（英文字母不分大小寫）"
                 startIcon={<SearchIcon color="info" />}
               />

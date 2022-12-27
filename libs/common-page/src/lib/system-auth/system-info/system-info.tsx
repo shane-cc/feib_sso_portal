@@ -52,7 +52,7 @@ export const SystemInfo: React.FC<SystemInfoProps> = ({ system }) => {
       {system && (
         <>
           <CardImage
-            image={system.systemImage}
+            image={system.systemImage || ''}
             isEditable
             onEditClick={handleShowUpdateImageDialog}
           />

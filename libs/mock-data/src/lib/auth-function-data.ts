@@ -1,5 +1,5 @@
 import { AuthFunction } from '@sso-platform/types';
-import { BaseData } from '..';
+import { BaseData } from './db';
 
 export type AuthFunctionData = AuthFunction & BaseData;
 export const generateAuthFunctionData = (): AuthFunctionData[] => [

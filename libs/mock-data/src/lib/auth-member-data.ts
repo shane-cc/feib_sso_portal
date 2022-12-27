@@ -1,5 +1,5 @@
 import { AuthMember } from '@sso-platform/types';
-import { BaseData } from '..';
+import { BaseData } from './db';
 
 export type AuthMemberData = AuthMember & BaseData;
 export const generateAuthMemberData = (): AuthMemberData[] => [

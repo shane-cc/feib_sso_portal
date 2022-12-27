@@ -1,5 +1,5 @@
 import { IndividualActionHistory } from '@sso-platform/types';
-import { BaseData } from '..';
+import { BaseData } from './db';
 
 export type ActionHistoryData = IndividualActionHistory & BaseData;
 export const generateActionHistoryData = (): ActionHistoryData[] => {

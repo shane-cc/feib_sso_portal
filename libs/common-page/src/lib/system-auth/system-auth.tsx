@@ -1,5 +1,5 @@
 import { IBreadcrumb, Layout, PageTitle } from '@sso-platform/common-layout';
-import { Paper, Stack } from '@sso-platform/common-ui';
+import { Stack } from '@sso-platform/common-ui';
 import {
   GetSystemDataResponse,
   PageRoutes,
@@ -39,7 +39,7 @@ export const SystemAuth: React.FC<SystemAuthProps> = () => {
     [QueryCacheKey.SYSTEM_LIST, systemCode],
     () => getSystemData(systemCode as string)
   );
-  const system = systemData?.data;
+  const system = systemData?.data?.systems;
 
   useEffect(() => {
     setCurrentTab(router.pathname.split('/').pop() as SystemAuthTabType);
@@ -62,7 +62,7 @@ export const SystemAuth: React.FC<SystemAuthProps> = () => {
           ]}
         />
       </Stack>
-      <Stack direction="row" gap={2}>
+      <Stack direction="row" gap={2} alignItems="flex-start">
         <SystemInfo system={system} />
         <Stack sx={{ width: '100%' }}>
           <TableTabs currentTab={currentTab} />

@@ -1,5 +1,5 @@
 import { System } from '@sso-platform/types';
-import { BaseData } from '..';
+import { BaseData } from './db';
 
 export type SystemData = System & BaseData;
 export const generateSystemData = (): SystemData[] => {

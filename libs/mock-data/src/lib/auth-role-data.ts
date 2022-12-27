@@ -1,5 +1,5 @@
 import { AuthRoleDetail } from '@sso-platform/types';
-import { BaseData } from '..';
+import { BaseData } from './db';
 
 export type AuthRoleData = AuthRoleDetail & BaseData;
 export const generateAuthRoleData = (): AuthRoleData[] => [
