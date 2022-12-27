@@ -39,15 +39,16 @@ export async function updateSystem<T>(data: T): Promise<BaseResponse> {
   });
 }
 
-export type UpdateSystemRequest = {
+export type UpdateSystemImageRequest = {
   systemCode: string;
   image: File;
 };
 export async function updateSystemImage(
-  data: UpdateSystemRequest
+  data: UpdateSystemImageRequest
 ): Promise<BaseResponse> {
   console.log(data);
   return await {
+    data: null,
     message: 'success',
     status: 'success',
     error: false,

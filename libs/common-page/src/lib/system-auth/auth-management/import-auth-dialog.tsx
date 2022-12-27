@@ -1,6 +1,5 @@
 import {
   Button,
-  CardImage,
   Dialog,
   DialogActions,
   DialogContent,
@@ -9,39 +8,34 @@ import {
   Stack,
   Typography,
 } from '@sso-platform/common-ui';
-import { useMutation, useQueryClient } from 'react-query';
-import EditIcon from '@mui/icons-material/Edit';
+import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
 import { useState } from 'react';
+import { useMutation, useQueryClient } from 'react-query';
 import {
   ErrorMessage,
   QueryCacheKey,
-  updateSystemImage,
+  uploadSystemAuth,
 } from '@sso-platform/shared';
 import { ApiError } from '@sso-platform/types';
 
-interface UpdatImageDialogProps {
+interface ImportAuthDialogProps {
   isOpen: boolean;
   handleClose: () => void;
-  initialData: string;
   systemCode: string;
 }
 
-export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
+export const ImportAuthDialog: React.FC<ImportAuthDialogProps> = ({
   isOpen,
   handleClose,
-  initialData,
   systemCode,
 }) => {
   const queryClient = useQueryClient();
-  const [image, setImage] = useState<File>();
-  const [imagePreview, setImagePreview] = useState<string>(initialData);
-  const [updateImageError, setUpdateImageError] = useState<string>();
+  const [file, setFile] = useState<File>();
+  const [importAuthError, setImportAuthError] = useState<string>();
 
   const onReset = () => {
-    setImage(undefined);
-    setImagePreview(initialData);
-    URL.revokeObjectURL(imagePreview);
-    setUpdateImageError(undefined);
+    setFile(undefined);
+    setImportAuthError(undefined);
   };
 
   const onClose = () => {
@@ -50,20 +44,18 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
   };
 
   const onSuccess = () => {
-    queryClient.invalidateQueries([QueryCacheKey.SYSTEM_LIST, systemCode]);
+    queryClient.invalidateQueries([QueryCacheKey.AUTH_FUNCTIONS_LIST]);
     onClose();
   };
 
   const onError = (error: ApiError) => {
-    setUpdateImageError(
-      `${error.message} ${ErrorMessage.UPLOAD_SYSTEM_IMAGE_FAILED}`
-    );
+    setImportAuthError(`${error.message} ${ErrorMessage.UPLOAD_AUTH_FAILED}`);
   };
 
   const updateMutation = useMutation(
     () =>
-      updateSystemImage({
-        image: image as File,
+      uploadSystemAuth({
+        authFile: file as File,
         systemCode,
       }),
     {
@@ -78,19 +70,17 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
 
   const handleFileUpload = (file?: File) => {
     if (file) {
-      URL.revokeObjectURL(imagePreview);
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
+      setFile(file);
     }
   };
 
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm">
-      <DialogTitle onClose={onClose} icon={<EditIcon />}>
-        編輯圖片
+      <DialogTitle onClose={onClose} icon={<FileUploadRoundedIcon />}>
+        匯入權限
       </DialogTitle>
       <DialogContent>
-        {updateImageError && (
+        {importAuthError && (
           <Typography
             color="secondary"
             sx={{
@@ -99,18 +89,16 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
               paddingBottom: '1.5rem',
             }}
           >
-            {updateImageError}
+            {importAuthError}
           </Typography>
         )}
         <Stack my=".5rem" gap="1rem">
-          <CardImage image={imagePreview} />
-          {!image && <Typography align="center">請選擇要上傳的圖片</Typography>}
           <FileInput
-            label="上傳圖片"
-            name="image"
-            value={image ? image.name : ''}
+            label="檔案上傳"
+            name="authFile"
+            value={file ? file.name : ''}
             onChange={handleFileUpload}
-            accept="image/*"
+            accept=".json, .csv"
           />
         </Stack>
       </DialogContent>
@@ -119,15 +107,15 @@ export const UpdateImageDialog: React.FC<UpdatImageDialogProps> = ({
           取消
         </Button>
         <Button variant="outlined" color="inherit" onClick={onReset}>
-          重設
+          清除重設
         </Button>
         <Button
           variant="contained"
           color="primary"
           onClick={onConfirm}
-          disabled={typeof image === 'undefined'}
+          disabled={typeof file === 'undefined'}
         >
-          儲存
+          確認上傳
         </Button>
       </DialogActions>
     </Dialog>

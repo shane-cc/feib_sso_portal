@@ -54,6 +54,7 @@ export async function apiFetcher(
   } catch (error) {
     if (axios.isCancel(error)) {
       return {
+        data: null,
         message: '',
         error: false,
         status: 'canceled',

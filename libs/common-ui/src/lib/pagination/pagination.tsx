@@ -1,6 +1,6 @@
 import { Pagination as MuiPagination } from '@mui/material';
 import type { PaginationProps as MuiPaginationProps } from '@mui/material';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 /* eslint-disable-next-line */
 export interface PaginationProps extends MuiPaginationProps {
@@ -21,6 +21,10 @@ export const Pagination = forwardRef<HTMLDivElement, PaginationProps>(
       setPage(value);
       handlePagination(value);
     };
+
+    useEffect(() => {
+      setPage(currentPage);
+    }, [currentPage]);
 
     return (
       <MuiPagination

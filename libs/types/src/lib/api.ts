@@ -1,6 +1,6 @@
 export interface BaseResponse<T = any> {
   headers?: Partial<Record<string, string>>;
-  data?: T;
+  data: T;
   status: string;
   message?: string;
   error: boolean;

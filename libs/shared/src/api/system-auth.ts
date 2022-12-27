@@ -9,6 +9,7 @@ type GetAuthFunctions = {
 };
 export type GetAuthFunctionsResponse = BaseResponse<GetAuthFunctions>;
 export async function getAuthFunctionsList(options?: {
+  systemCode: string;
   page?: number;
   query?: string;
 }): Promise<GetAuthFunctionsResponse> {
@@ -18,6 +19,38 @@ export async function getAuthFunctionsList(options?: {
     {},
     {
       method: 'get',
+    }
+  );
+}
+
+export type UploadSystemAuthRequest = {
+  systemCode: string;
+  authFile: File;
+};
+export async function uploadSystemAuth(
+  data: UploadSystemAuthRequest
+): Promise<BaseResponse> {
+  console.log(data);
+  return await {
+    data: null,
+    message: 'success',
+    status: 'success',
+    error: false,
+  };
+}
+
+export type DeleteSystemAuthFunctionRequest = {
+  systemCode: string;
+  authFunctionCode: string;
+};
+export async function deleteSystemAuthFunction(
+  data: DeleteSystemAuthFunctionRequest
+): Promise<BaseResponse> {
+  return await apiFetcher(
+    `/authFunctions/${data.authFunctionCode}`,
+    {},
+    {
+      method: 'delete',
     }
   );
 }

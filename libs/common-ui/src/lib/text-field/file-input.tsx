@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef, useRef, useState } from 'react';
+import { ChangeEvent, forwardRef, useEffect, useRef, useState } from 'react';
 import TextField from './text-field';
 import { Button } from '../button';
 
@@ -30,11 +30,16 @@ export const FileInput = forwardRef<HTMLDivElement, FileInputProps>(
       fileInputRef.current?.click();
     };
 
+    useEffect(() => {
+      setFileName(value);
+    }, [value]);
+
     return (
       <>
         <TextField
           name={name}
-          label={label}
+          label=""
+          placeholder={label}
           value={fileName}
           {...rest}
           onClick={handleClick}
