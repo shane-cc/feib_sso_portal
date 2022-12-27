@@ -1,11 +1,10 @@
 import { ConfirmDialog, DialogContentText } from '@sso-platform/common-ui';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { ApiError, AuthFunction } from '@sso-platform/types';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation } from 'react-query';
 import {
   ErrorMessage,
   LoadingStateType,
-  QueryCacheKey,
   deleteSystemAuthFunction,
   useLoadingState,
 } from '@sso-platform/shared';

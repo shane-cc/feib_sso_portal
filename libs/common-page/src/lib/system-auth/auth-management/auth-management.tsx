@@ -29,8 +29,9 @@ import {
 import { ImportAuthDialog } from './import-auth-dialog';
 import { useRouter } from 'next/router';
 import { getPageQuery } from '@sso-platform/shared';
-import { DeleteAuthDialog } from './delete-auth-dialog/delete-auth-dialog';
+import { DeleteAuthDialog } from './delete-auth-dialog';
 import { AuthFunction } from '@sso-platform/types';
+import UpdateAuthDialog from './update-auth-dialog';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AuthManagementProps {
@@ -45,6 +46,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
   const { page, q } = router.query;
   const [showImportDialog, setShowImportDialog] = useState<boolean>(false);
   const [deleteTargetAuth, setDeleteTargetAuth] = useState<AuthFunction>();
+  const [updateTargetAuth, setUpdateTargetAuth] = useState<AuthFunction>();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -119,6 +121,19 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
 
   const handleShowDeleteDialog = (target: AuthFunction) => {
     setDeleteTargetAuth(target);
+  };
+
+  const handleShowUpdateDialog = (target: AuthFunction) => {
+    setUpdateTargetAuth(target);
+  };
+
+  const handleCloseUpdateDialog = () => {
+    setUpdateTargetAuth(undefined);
+  };
+
+  const handleUpdateAuthSuccess = () => {
+    handleCloseUpdateDialog();
+    refetch();
   };
 
   useEffect(() => {
@@ -220,6 +235,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
                           color="inherit"
                           size="small"
                           startIcon={<EditIcon />}
+                          onClick={() => handleShowUpdateDialog(authFunction)}
                         >
                           編輯
                         </Button>
@@ -258,6 +274,15 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
         authFunction={deleteTargetAuth as AuthFunction}
         systemCode={systemCode}
       />
+      {typeof updateTargetAuth !== 'undefined' && (
+        <UpdateAuthDialog
+          isOpen={typeof updateTargetAuth !== 'undefined'}
+          handleClose={handleCloseUpdateDialog}
+          handleSuccess={handleUpdateAuthSuccess}
+          initialData={updateTargetAuth as AuthFunction}
+          systemCode={systemCode}
+        />
+      )}
     </>
   );
 };

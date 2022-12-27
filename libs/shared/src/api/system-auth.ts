@@ -54,3 +54,20 @@ export async function deleteSystemAuthFunction(
     }
   );
 }
+
+export type UpdateSystemAuthFunctionRequest<T> = {
+  systemCode: string;
+  authFunction: T;
+};
+export async function updateSystemAuthFunction<T>(
+  data: UpdateSystemAuthFunctionRequest<T>
+): Promise<BaseResponse> {
+  return await apiFetcher(
+    // `/authFunctions/${(data.authFunction as AuthFunction).authFunctionCode}`,
+    `/authFunctions/1`,
+    data.authFunction,
+    {
+      method: 'put',
+    }
+  );
+}

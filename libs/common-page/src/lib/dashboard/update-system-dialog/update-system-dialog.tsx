@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Button,
   Dialog,
@@ -44,7 +44,7 @@ export const UpdateSystemDialog: React.FC<UpdateSystemDialogProps> = ({
   initialData,
 }) => {
   const queryClient = useQueryClient();
-  const [updateSystemError, setUpdateSystemError] = React.useState<string>();
+  const [updateSystemError, setUpdateSystemError] = useState<string>();
   const methods = useForm<ValidationUpdateSchema>({
     resolver: zodResolver(validationUpdateSchema),
     defaultValues: {

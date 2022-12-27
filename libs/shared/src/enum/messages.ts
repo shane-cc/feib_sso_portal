@@ -17,4 +17,5 @@ export enum ErrorMessage {
   'UPLOAD_SYSTEM_IMAGE_FAILED' = '上傳系統圖片失敗！',
   'UPLOAD_AUTH_FAILED' = '匯入權限設定失敗！',
   'DELETE_AUTH_FAILED' = '權限設定刪除失敗！',
+  'UPDATE_AUTH_FAILED' = '權限設定更新失敗！',
 }
