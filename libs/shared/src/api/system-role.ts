@@ -30,3 +30,20 @@ export async function getAuthRolesList(options?: {
     }
   );
 }
+
+export type DeleteSystemAuthRoleRequest = {
+  systemCode: string;
+  authRoleCode: string;
+};
+export async function deleteSystemAuthRole(
+  data: DeleteSystemAuthRoleRequest
+): Promise<BaseResponse> {
+  return await apiFetcher(
+    // `/authRoles/${data.authRoleCode}`,
+    `/authRoles/1`,
+    {},
+    {
+      method: 'delete',
+    }
+  );
+}

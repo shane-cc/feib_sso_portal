@@ -31,6 +31,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { FilterQuery } from './filter-query';
 import { RoleManagementRow } from './role-management-row';
+import { DeleteRoleDialog } from './delete-role-dialog';
 
 interface RoleManagementProps {
   systemCode: string;
@@ -248,15 +249,15 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
         isOpen={showImportDialog}
         handleClose={handleCloseImportDialog}
         systemCode={systemCode}
-      />
-      <DeleteAuthDialog
-        isOpen={typeof deleteTargetAuth !== 'undefined'}
+      />*/}
+      <DeleteRoleDialog
+        isOpen={typeof deleteTargetRole !== 'undefined'}
         handleClose={handleCloseDeleteDialog}
-        handleSuccess={handleDeleteAuthSuccess}
-        authFunction={deleteTargetAuth as AuthFunction}
+        handleSuccess={handleDeleteRoleSuccess}
+        authRole={deleteTargetRole as AuthRole}
         systemCode={systemCode}
       />
-      {typeof updateTargetAuth !== 'undefined' && (
+      {/* {typeof updateTargetAuth !== 'undefined' && (
         <UpdateAuthDialog
           isOpen={typeof updateTargetAuth !== 'undefined'}
           handleClose={handleCloseUpdateDialog}
