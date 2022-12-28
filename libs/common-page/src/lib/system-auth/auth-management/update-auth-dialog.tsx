@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
 import { useState } from 'react';
-import { ApiError, AuthFunction } from '@sso-platform/types';
+import { ApiError, AuthFunctionDetail } from '@sso-platform/types';
 import {
   BooleanType,
   ErrorMessage,
@@ -34,7 +34,7 @@ interface UpdateAuthDialogProps {
   isOpen: boolean;
   handleClose: () => void;
   handleSuccess: () => void;
-  initialData: AuthFunction;
+  initialData: AuthFunctionDetail;
   systemCode: string;
 }
 
@@ -88,7 +88,7 @@ const UpdateAuthDialog: React.FC<UpdateAuthDialogProps> = ({
 
   const mutation = useMutation(
     (data: ValidationUpdateAuthSchema) =>
-      updateSystemAuthFunction<AuthFunction>({
+      updateSystemAuthFunction<AuthFunctionDetail>({
         systemCode,
         authFunction: {
           ...data,

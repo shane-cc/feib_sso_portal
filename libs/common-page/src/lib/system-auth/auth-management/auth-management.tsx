@@ -30,7 +30,7 @@ import { ImportAuthDialog } from './import-auth-dialog';
 import { useRouter } from 'next/router';
 import { getPageQuery } from '@sso-platform/shared';
 import { DeleteAuthDialog } from './delete-auth-dialog';
-import { AuthFunction } from '@sso-platform/types';
+import { AuthFunctionDetail } from '@sso-platform/types';
 import UpdateAuthDialog from './update-auth-dialog';
 
 interface AuthManagementProps {
@@ -44,8 +44,10 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
   const router = useRouter();
   const { page, q } = router.query;
   const [showImportDialog, setShowImportDialog] = useState<boolean>(false);
-  const [deleteTargetAuth, setDeleteTargetAuth] = useState<AuthFunction>();
-  const [updateTargetAuth, setUpdateTargetAuth] = useState<AuthFunction>();
+  const [deleteTargetAuth, setDeleteTargetAuth] =
+    useState<AuthFunctionDetail>();
+  const [updateTargetAuth, setUpdateTargetAuth] =
+    useState<AuthFunctionDetail>();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
@@ -121,11 +123,11 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
     refetch();
   };
 
-  const handleShowDeleteDialog = (target: AuthFunction) => {
+  const handleShowDeleteDialog = (target: AuthFunctionDetail) => {
     setDeleteTargetAuth(target);
   };
 
-  const handleShowUpdateDialog = (target: AuthFunction) => {
+  const handleShowUpdateDialog = (target: AuthFunctionDetail) => {
     setUpdateTargetAuth(target);
   };
 
@@ -274,7 +276,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
         isOpen={typeof deleteTargetAuth !== 'undefined'}
         handleClose={handleCloseDeleteDialog}
         handleSuccess={handleDeleteAuthSuccess}
-        authFunction={deleteTargetAuth as AuthFunction}
+        authFunction={deleteTargetAuth as AuthFunctionDetail}
         systemCode={systemCode}
       />
       {typeof updateTargetAuth !== 'undefined' && (
@@ -282,7 +284,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
           isOpen={typeof updateTargetAuth !== 'undefined'}
           handleClose={handleCloseUpdateDialog}
           handleSuccess={handleUpdateAuthSuccess}
-          initialData={updateTargetAuth as AuthFunction}
+          initialData={updateTargetAuth as AuthFunctionDetail}
           systemCode={systemCode}
         />
       )}

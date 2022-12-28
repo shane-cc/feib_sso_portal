@@ -19,4 +19,6 @@ export enum ErrorMessage {
   'DELETE_AUTH_FAILED' = '權限設定刪除失敗！',
   'UPDATE_AUTH_FAILED' = '權限設定更新失敗！',
   'DELETE_ROLE_FAILED' = '角色刪除失敗！',
+  'CREATE_ROLE_FAILED' = '角色新增失敗！',
+  'UPDATE_ROLE_FAILED' = '角色更新失敗！',
 }

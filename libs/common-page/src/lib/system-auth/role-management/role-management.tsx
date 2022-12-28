@@ -22,16 +22,19 @@ import {
   getAuthRolesList,
   getPageQuery,
 } from '@sso-platform/shared';
-import { AuthFunction, AuthRole, AuthRoleDetail } from '@sso-platform/types';
+import {
+  AuthFunctionDetail,
+  AuthRole,
+  AuthRoleDetail,
+} from '@sso-platform/types';
 import { useRouter } from 'next/router';
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import SearchIcon from '@mui/icons-material/Search';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { FilterQuery } from './filter-query';
 import { RoleManagementRow } from './role-management-row';
 import { DeleteRoleDialog } from './delete-role-dialog';
+import { UpdateRoleDialog } from './update-role-dialog';
 
 interface RoleManagementProps {
   systemCode: string;
@@ -42,10 +45,10 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
   const router = useRouter();
   const { page, q } = router.query;
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
-  const [deleteTargetRole, setDeleteTargetRole] = useState<AuthRole>();
-  const [updateTargetRole, setUpdateTargetRole] = useState<AuthRole>();
+  const [deleteTargetRole, setDeleteTargetRole] = useState<AuthRoleDetail>();
+  const [updateTargetRole, setUpdateTargetRole] = useState<AuthRoleDetail>();
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filterQuery, setFilterQuery] = useState<AuthFunction[]>([]);
+  const [filterQuery, setFilterQuery] = useState<AuthFunctionDetail[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const {
@@ -116,7 +119,7 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
     setDeleteTargetRole(undefined);
   };
 
-  const handleOpenDeleteDialog = (role: AuthRole) => {
+  const handleOpenDeleteDialog = (role: AuthRoleDetail) => {
     setDeleteTargetRole(role);
   };
 
@@ -129,7 +132,7 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
     setUpdateTargetRole(undefined);
   };
 
-  const handleOpenUpdateDialog = (role: AuthRole) => {
+  const handleOpenUpdateDialog = (role: AuthRoleDetail) => {
     setUpdateTargetRole(role);
   };
 
@@ -245,11 +248,13 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
           />
         </Stack>
       </Paper>
-      {/* <ImportAuthDialog
-        isOpen={showImportDialog}
-        handleClose={handleCloseImportDialog}
+      <UpdateRoleDialog
+        isOpen={showCreateDialog}
+        handleClose={handleCloseCreateDialog}
+        handleSuccess={handleUpdateRoleSuccess}
+        type="create"
         systemCode={systemCode}
-      />*/}
+      />
       <DeleteRoleDialog
         isOpen={typeof deleteTargetRole !== 'undefined'}
         handleClose={handleCloseDeleteDialog}
@@ -257,15 +262,17 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
         authRole={deleteTargetRole as AuthRole}
         systemCode={systemCode}
       />
-      {/* {typeof updateTargetAuth !== 'undefined' && (
-        <UpdateAuthDialog
-          isOpen={typeof updateTargetAuth !== 'undefined'}
+      {typeof updateTargetRole !== 'undefined' && (
+        <UpdateRoleDialog
+          isOpen={typeof updateTargetRole !== 'undefined'}
           handleClose={handleCloseUpdateDialog}
-          handleSuccess={handleUpdateAuthSuccess}
-          initialData={updateTargetAuth as AuthFunction}
+          handleSuccess={handleUpdateRoleSuccess}
+          initialData={updateTargetRole as AuthRole}
+          authRoleFunctions={updateTargetRole.authRoleFunctions}
+          type="edit"
           systemCode={systemCode}
         />
-      )} */}
+      )}
     </>
   );
 };

@@ -102,7 +102,7 @@ export const UpdateSystemDialog: React.FC<UpdateSystemDialogProps> = ({
     }
   );
 
-  const onConfirm = async (data: ValidationUpdateSchema) => {
+  const onConfirm = (data: ValidationUpdateSchema) => {
     type === 'create'
       ? createMutation.mutate(data)
       : updateMutation.mutate(data);

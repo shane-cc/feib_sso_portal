@@ -3,6 +3,9 @@ import { Auth } from './auth';
 export interface AuthFunction {
   authFunctionCode: string;
   authFunctionName: string;
+}
+
+export interface AuthFunctionDetail extends AuthFunction {
   authFunctionCategory: string;
   isActive: boolean;
 }

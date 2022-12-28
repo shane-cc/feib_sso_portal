@@ -11,7 +11,7 @@ import {
 import { Dispatch, SetStateAction, SyntheticEvent, useState } from 'react';
 import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
 import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRounded';
-import { AuthFunction } from '@sso-platform/types';
+import { AuthFunctionDetail } from '@sso-platform/types';
 import { useQuery } from 'react-query';
 import {
   GetAuthFunctionsResponse,
@@ -20,8 +20,8 @@ import {
 } from '@sso-platform/shared';
 
 interface FilterQueryProps {
-  checkedList: AuthFunction[];
-  setCheckedList: Dispatch<SetStateAction<AuthFunction[]>>;
+  checkedList: AuthFunctionDetail[];
+  setCheckedList: Dispatch<SetStateAction<AuthFunctionDetail[]>>;
   handleSearch: () => void;
   systemCode: string;
 }
@@ -44,7 +44,7 @@ export const FilterQuery: React.FC<FilterQueryProps> = ({
     setExpended(isExpanded);
   };
 
-  const handleClick = (authFunction: AuthFunction) => {
+  const handleClick = (authFunction: AuthFunctionDetail) => {
     setCheckedList((prev) => {
       const target = prev.find(
         (item) => item.authFunctionCode === authFunction.authFunctionCode

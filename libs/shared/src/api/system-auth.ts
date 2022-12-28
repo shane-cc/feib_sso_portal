@@ -1,8 +1,8 @@
-import { AuthFunction, BaseResponse } from '@sso-platform/types';
+import { AuthFunctionDetail, BaseResponse } from '@sso-platform/types';
 import { apiFetcher } from './fetcher';
 
 type GetAuthFunctions = {
-  authFunctions: AuthFunction[];
+  authFunctions: AuthFunctionDetail[];
   currentPage?: number;
   pageSize?: number;
   totalPage: number;

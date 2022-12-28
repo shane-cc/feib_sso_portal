@@ -1,6 +1,6 @@
 import { ConfirmDialog, DialogContentText } from '@sso-platform/common-ui';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { ApiError, AuthFunction } from '@sso-platform/types';
+import { ApiError, AuthFunctionDetail } from '@sso-platform/types';
 import { useMutation } from 'react-query';
 import {
   ErrorMessage,
@@ -13,7 +13,7 @@ interface DeleteAuthDialogProps {
   isOpen: boolean;
   handleClose: () => void;
   handleSuccess: () => void;
-  authFunction?: AuthFunction;
+  authFunction?: AuthFunctionDetail;
   systemCode: string;
 }
 
