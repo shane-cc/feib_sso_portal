@@ -33,7 +33,6 @@ import { DeleteAuthDialog } from './delete-auth-dialog';
 import { AuthFunction } from '@sso-platform/types';
 import UpdateAuthDialog from './update-auth-dialog';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface AuthManagementProps {
   systemCode: string;
 }
@@ -63,7 +62,6 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
         page: getPageQuery(page),
       }),
     {
-      enabled: false,
       onSuccess: (data) => {
         setTotalPage(data.data.totalPage ?? 1);
       },
@@ -116,6 +114,10 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
 
   const handleCloseDeleteDialog = () => {
     setDeleteTargetAuth(undefined);
+  };
+
+  const handleDeleteAuthSuccess = () => {
+    handleCloseDeleteDialog();
     refetch();
   };
 
@@ -271,6 +273,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
       <DeleteAuthDialog
         isOpen={typeof deleteTargetAuth !== 'undefined'}
         handleClose={handleCloseDeleteDialog}
+        handleSuccess={handleDeleteAuthSuccess}
         authFunction={deleteTargetAuth as AuthFunction}
         systemCode={systemCode}
       />

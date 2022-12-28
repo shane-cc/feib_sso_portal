@@ -15,7 +15,9 @@ export async function getAuthFunctionsList(options?: {
 }): Promise<GetAuthFunctionsResponse> {
   const { page, query } = options || {};
   return await apiFetcher(
-    `/authFunctions?_page=${page}&_limit=10&q=${query}`,
+    `/authFunctions?${page ? `_page=${page}&_limit=10` : ''}${
+      query ? (page ? `&q=${query}` : `q=${query}`) : ''
+    }`,
     {},
     {
       method: 'get',

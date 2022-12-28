@@ -78,8 +78,8 @@ const UpdateAuthDialog: React.FC<UpdateAuthDialogProps> = ({
   };
 
   const onSuccess = () => {
+    onReset();
     handleSuccess();
-    onClose();
   };
 
   const onError = (error: ApiError) => {

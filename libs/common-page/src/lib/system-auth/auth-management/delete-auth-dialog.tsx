@@ -12,6 +12,7 @@ import {
 interface DeleteAuthDialogProps {
   isOpen: boolean;
   handleClose: () => void;
+  handleSuccess: () => void;
   authFunction?: AuthFunction;
   systemCode: string;
 }
@@ -19,6 +20,7 @@ interface DeleteAuthDialogProps {
 export const DeleteAuthDialog: React.FC<DeleteAuthDialogProps> = ({
   isOpen,
   handleClose,
+  handleSuccess,
   authFunction,
   systemCode,
 }) => {
@@ -29,7 +31,7 @@ export const DeleteAuthDialog: React.FC<DeleteAuthDialogProps> = ({
       deleteSystemAuthFunction(data),
     {
       onSuccess: () => {
-        handleClose();
+        handleSuccess();
       },
       onError: (error: ApiError) => {
         openDialog({

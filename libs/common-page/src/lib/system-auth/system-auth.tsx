@@ -12,6 +12,7 @@ import { useQuery } from 'react-query';
 import { SystemInfo } from './system-info';
 import { TableTabs } from './table-tabs';
 import { AuthManagement } from './auth-management';
+import RoleManagement from './role-management/role-management';
 
 /* eslint-disable-next-line */
 export interface SystemAuthProps {}
@@ -68,6 +69,9 @@ export const SystemAuth: React.FC<SystemAuthProps> = () => {
           <TableTabs currentTab={currentTab} />
           {currentTab === PageRoutes.SYSTEM_AUTH_MANAGEMENT && (
             <AuthManagement systemCode={systemCode as string} />
+          )}
+          {currentTab === PageRoutes.SYSTEM_ROLE_MANAGEMENT && (
+            <RoleManagement systemCode={systemCode as string} />
           )}
         </Stack>
       </Stack>

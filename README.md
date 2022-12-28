@@ -131,7 +131,8 @@ _專案架構與資料夾內容規劃說明如下：_
 * mock-data
   - Contains the json-server configuration and all the mock data generation functions
   - Active the mocking json server with the following command:
-    (will build the mock server first than serve it)
+    (will build the mock server first than serve it.)
     ```shell
     yarn nx run mock-data:serve
     ```
+    <strong>(if there is any update in mock-data project, we should stop the mock server and start it again to serve the new data.)</strong>

@@ -22,7 +22,7 @@ const StyledTypography = styled(Typography)`
   width: 6rem;
 `;
 
-export const Contained = () => {
+export const Outlined = () => {
   const theme = useTheme();
   return (
     <>
@@ -91,6 +91,82 @@ export const Contained = () => {
           <EditIcon />
         </IconButton>
         <IconButton color="inherit" disabled>
+          <EditIcon />
+        </IconButton>
+      </StyledContainer>
+    </>
+  );
+};
+
+export const Contained = () => {
+  const theme = useTheme();
+  return (
+    <>
+      <StyledContainer>
+        <StyledTypography variant="caption" color={theme.palette.grey[600]}>
+          PRIMARY
+        </StyledTypography>
+        <IconButton color="primary" size="large" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="primary" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="primary" size="small" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="primary" disabled variant="contained">
+          <EditIcon />
+        </IconButton>
+      </StyledContainer>
+      <StyledContainer>
+        <StyledTypography variant="caption" color={theme.palette.grey[600]}>
+          SECONDARY
+        </StyledTypography>
+        <IconButton color="secondary" size="large" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="secondary" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="secondary" size="small" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="secondary" disabled variant="contained">
+          <EditIcon />
+        </IconButton>
+      </StyledContainer>
+      <StyledContainer>
+        <StyledTypography variant="caption" color={theme.palette.grey[600]}>
+          INFO
+        </StyledTypography>
+        <IconButton color="info" size="large" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="info" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="info" size="small" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="info" disabled variant="contained">
+          <EditIcon />
+        </IconButton>
+      </StyledContainer>
+      <StyledContainer>
+        <StyledTypography variant="caption" color={theme.palette.grey[600]}>
+          DEFAULT
+        </StyledTypography>
+        <IconButton color="inherit" size="large" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="inherit" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="inherit" size="small" variant="contained">
+          <EditIcon />
+        </IconButton>
+        <IconButton color="inherit" disabled variant="contained">
           <EditIcon />
         </IconButton>
       </StyledContainer>

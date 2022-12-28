@@ -5,6 +5,14 @@ import { useEffect, useState } from 'react';
 export interface ChipProps extends MuiChipProps {
   handleClick?: (id: string) => void;
   handleDelete?: (id: string) => void;
+  color?:
+    | 'default'
+    | 'primary'
+    | 'secondary'
+    | 'error'
+    | 'info'
+    | 'success'
+    | 'warning';
   defaultCheckedStatus: boolean;
   id: string;
 }
@@ -15,6 +23,7 @@ export const Chip: React.FC<ChipProps> = (props) => {
     handleDelete,
     handleClick,
     defaultCheckedStatus,
+    color,
     id,
     ...rest
   } = props;
@@ -38,7 +47,7 @@ export const Chip: React.FC<ChipProps> = (props) => {
   return (
     <MuiChip
       variant="filled"
-      color={isChecked ? 'primary' : 'default'}
+      color={color || (isChecked ? 'primary' : 'default')}
       onClick={typeof handleClick === 'function' ? onClick : undefined}
       disabled={disabled}
       onDelete={

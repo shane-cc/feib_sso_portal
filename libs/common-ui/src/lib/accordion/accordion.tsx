@@ -3,13 +3,36 @@ import type { AccordionProps as MuiAccordionProps } from '@mui/material';
 import { forwardRef } from 'react';
 
 /* eslint-disable-next-line */
-export interface AccordionProps extends MuiAccordionProps {}
+export interface AccordionProps extends MuiAccordionProps {
+  disableElevation?: boolean;
+}
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  (props, ref) => {
+  ({ sx, children, disableElevation = false, ...rest }, ref) => {
     return (
-      <MuiAccordion {...props} ref={ref}>
-        {props.children}
+      <MuiAccordion
+        {...rest}
+        ref={ref}
+        sx={
+          disableElevation
+            ? {
+                boxShadow: 'none',
+                filter: 'none',
+                border: (theme) => `1px solid ${theme.palette.grey[300]}`,
+                '&::before': {
+                  display: 'none',
+                },
+                ...sx,
+              }
+            : {
+                '&::before': {
+                  display: 'none',
+                },
+                ...sx,
+              }
+        }
+      >
+        {children}
       </MuiAccordion>
     );
   }
