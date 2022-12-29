@@ -2,7 +2,7 @@ import { AuthFunc, BaseResponse } from '@sso-platform/types';
 import { apiFetcher } from './fetcher';
 
 type GetAuthFuncs = {
-  authFunctions: AuthFunc[];
+  auths: AuthFunc[];
 };
 export type GetAuthFuncsResponse = BaseResponse<GetAuthFuncs>;
 export async function getAuthFuncs(

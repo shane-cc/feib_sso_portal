@@ -49,7 +49,7 @@ export const ActionHistory: React.FC<ActionHistoryProps> = () => {
     [QueryCacheKey.ACTION_HISTORY_LIST],
     () => getActionHistory()
   );
-  const actionHistory = actionHistoryData?.data ?? [];
+  const actionHistory = actionHistoryData?.data.actionHistory ?? [];
 
   useEffect(() => {
     if (isError) {
