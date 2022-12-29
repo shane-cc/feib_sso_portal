@@ -14,11 +14,11 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
-  GetAuthFunctionsResponse,
+  GetAuthAccountsResponse,
   QueryCacheKey,
-  getAuthFunctionsList,
+  getAuthAccountsList,
 } from '@sso-platform/shared';
-import { AuthFunction } from '@sso-platform/types';
+import { AuthAccount } from '@sso-platform/types';
 import {
   ChangeEvent,
   Dispatch,
@@ -29,28 +29,28 @@ import {
 import { useQuery } from 'react-query';
 import SearchIcon from '@mui/icons-material/Search';
 
-interface AuthFunctionSelectionProps {
-  selectedAuthFunctions: AuthFunction[];
-  setSelectedAuthFunctions: Dispatch<SetStateAction<AuthFunction[]>>;
+interface AuthAccountSelectionProps {
+  selectedAuthAccounts: AuthAccount[];
+  setSelectedAuthAccounts: Dispatch<SetStateAction<AuthAccount[]>>;
   systemCode: string;
 }
 
-export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
-  selectedAuthFunctions,
-  setSelectedAuthFunctions,
+export const AuthAccountSelection: React.FC<AuthAccountSelectionProps> = ({
+  selectedAuthAccounts,
+  setSelectedAuthAccounts,
   systemCode,
 }) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const {
-    data: authFunctionsData,
-    isFetching: isAuthFunctionsLoading,
+    data: authAccountsData,
+    isFetching: isAuthAccountsLoading,
     refetch,
-  } = useQuery<GetAuthFunctionsResponse, Error>(
-    [QueryCacheKey.AUTH_FUNCTIONS_LIST, systemCode, currentPage],
+  } = useQuery<GetAuthAccountsResponse, Error>(
+    [QueryCacheKey.AUTH_ACCOUNTS_LIST, systemCode, currentPage],
     () =>
-      getAuthFunctionsList({
+      getAuthAccountsList({
         systemCode,
         page: currentPage,
         query: searchQuery,
@@ -62,30 +62,29 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
       },
     }
   );
-  const authFunctionsList = authFunctionsData?.data.authFunctions ?? [];
+  const authAccountsList = authAccountsData?.data.authAccounts ?? [];
 
-  const isAuthFunctionSelected = (authFunction: AuthFunction) =>
-    typeof selectedAuthFunctions.find(
-      (selectedAuthFunction) =>
-        selectedAuthFunction.authFunctionCode === authFunction.authFunctionCode
+  const isAuthAccountSelected = (authAccount: AuthAccount) =>
+    typeof selectedAuthAccounts.find(
+      (selectedAuthAccount) =>
+        selectedAuthAccount.memberAccount === authAccount.memberAccount
     ) !== 'undefined';
 
-  const handleAuthFunctionSelection = (authFunction: AuthFunction) => {
-    if (isAuthFunctionSelected(authFunction)) {
-      setSelectedAuthFunctions(
-        selectedAuthFunctions.filter(
-          (selectedAuthFunction) =>
-            selectedAuthFunction.authFunctionCode !==
-            authFunction.authFunctionCode
+  const handleAuthAccountSelection = (authAccount: AuthAccount) => {
+    if (isAuthAccountSelected(authAccount)) {
+      setSelectedAuthAccounts(
+        selectedAuthAccounts.filter(
+          (selectedAuthAccount) =>
+            selectedAuthAccount.memberAccount !== authAccount.memberAccount
         )
       );
     } else {
-      setSelectedAuthFunctions([...selectedAuthFunctions, authFunction]);
+      setSelectedAuthAccounts([...selectedAuthAccounts, authAccount]);
     }
   };
 
-  const handleSearchQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
+  const handleSearchQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(event.target.value);
   };
 
   const handleSearch = () => {
@@ -100,6 +99,7 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
 
   useEffect(() => {
     refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -108,10 +108,9 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
         direction="row"
         spacing={1}
         alignItems="center"
-        justifyContent="space-between"
+        justifyContent="flex-end"
       >
-        <Typography variant="h6">可設定權限</Typography>
-        <Form onSubmit={handleSearch} disabled={isAuthFunctionsLoading}>
+        <Form onSubmit={handleSearch} disabled={isAuthAccountsLoading}>
           <TextField
             label=""
             name="authQuery"
@@ -121,7 +120,7 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
             }}
             value={searchQuery}
             onChange={handleSearchQueryChange}
-            placeholder="搜尋權限代碼／權限名稱（英文字母不分大小寫）"
+            placeholder="搜尋部門 / 帳號 / 姓名（英文字母不分大小寫）"
             startIcon={<SearchIcon color="info" />}
           />
         </Form>
@@ -131,12 +130,12 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
           <TableHead>
             <TableRow hover={false}>
               <TableCell>勾選</TableCell>
-              <TableCell colSpan={2}>權限代碼</TableCell>
-              <TableCell colSpan={2}>權限描述</TableCell>
+              <TableCell colSpan={2}>部門</TableCell>
+              <TableCell colSpan={2}>帳號/名稱</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {isAuthFunctionsLoading && (
+            {isAuthAccountsLoading && (
               <TableRow>
                 <TableCell colSpan={5}>
                   <Stack direction="row" justifyContent="center" sx={{ py: 2 }}>
@@ -145,30 +144,28 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
                 </TableCell>
               </TableRow>
             )}
-            {!isAuthFunctionsLoading && authFunctionsList.length === 0 && (
+            {!isAuthAccountsLoading && authAccountsList.length === 0 && (
               <TableRow>
                 <TableCell colSpan={5}>
                   <Typography align="center" sx={{ py: 2 }}>
-                    目前沒有已設定的權限，請至權限管理分頁，點擊【匯入權限】按鈕以匯入權限。
+                    目前沒有可選擇的成員帳號，請聯絡相關網管資安人員。
                   </Typography>
                 </TableCell>
               </TableRow>
             )}
-            {authFunctionsList.length > 0 &&
-              authFunctionsList.map((authFunction, idx) => (
-                <TableRow key={`${authFunction.authFunctionCode}-${idx}`}>
+            {authAccountsList.length > 0 &&
+              authAccountsList.map((account, idx) => (
+                <TableRow key={`${account.memberAccount}-${idx}`}>
                   <TableCell>
                     <Checkbox
-                      checked={isAuthFunctionSelected(authFunction)}
-                      onChange={() => handleAuthFunctionSelection(authFunction)}
+                      checked={isAuthAccountSelected(account)}
+                      onChange={() => handleAuthAccountSelection(account)}
                       sx={{ p: 0 }}
                     />
                   </TableCell>
+                  <TableCell colSpan={2}>{account.memberDepartment}</TableCell>
                   <TableCell colSpan={2}>
-                    {authFunction.authFunctionCode}
-                  </TableCell>
-                  <TableCell colSpan={2}>
-                    {authFunction.authFunctionName}
+                    {account.memberAccount} / {account.memberName}
                   </TableCell>
                 </TableRow>
               ))}

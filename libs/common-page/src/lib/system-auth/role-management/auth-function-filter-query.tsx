@@ -19,20 +19,17 @@ import {
   getAuthFunctionsList,
 } from '@sso-platform/shared';
 
-interface FilterQueryProps {
+interface AuthFunctionFilterQueryProps {
   checkedList: AuthFunctionDetail[];
   setCheckedList: Dispatch<SetStateAction<AuthFunctionDetail[]>>;
   handleSearch: () => void;
   systemCode: string;
 }
 
-export const FilterQuery: React.FC<FilterQueryProps> = ({
-  checkedList,
-  setCheckedList,
-  handleSearch,
-  systemCode,
-}) => {
-  const [expended, setExpended] = useState<boolean>(false);
+export const AuthFunctionFilterQuery: React.FC<
+  AuthFunctionFilterQueryProps
+> = ({ checkedList, setCheckedList, handleSearch, systemCode }) => {
+  const [expanded, setExpanded] = useState<boolean>(false);
   const { data: authFunctionsData, isFetching: isAuthFunctionsLoading } =
     useQuery<GetAuthFunctionsResponse, Error>(
       [QueryCacheKey.AUTH_FUNCTIONS_LIST, systemCode],
@@ -41,7 +38,7 @@ export const FilterQuery: React.FC<FilterQueryProps> = ({
   const authFunctionsList = authFunctionsData?.data.authFunctions ?? [];
 
   const handleToggleExpanded = (_e: SyntheticEvent, isExpanded: boolean) => {
-    setExpended(isExpanded);
+    setExpanded(isExpanded);
   };
 
   const handleClick = (authFunction: AuthFunctionDetail) => {
@@ -95,14 +92,14 @@ export const FilterQuery: React.FC<FilterQueryProps> = ({
           variant="text"
           color="info"
           endIcon={
-            expended ? (
+            expanded ? (
               <KeyboardArrowUpRoundedIcon color="info" />
             ) : (
               <KeyboardArrowDownRoundedIcon color="info" />
             )
           }
         >
-          {expended ? '收闔條件篩選' : '展開條件篩選'}
+          {expanded ? '收闔條件篩選' : '展開條件篩選'}
         </Button>
       </AccordionSummary>
       <AccordionDetails

@@ -30,3 +30,15 @@ RoleManagement.parameters = {
     },
   },
 };
+
+export const MemberManagement = () => <SystemAuth />;
+MemberManagement.parameters = {
+  nextRouter: {
+    pathname: '/systems/[systemCode]/member',
+    path: '/systems/[systemCode]/member',
+    asPath: '/systems/system-2/member',
+    query: {
+      systemCode: 'system-2',
+    },
+  },
+};

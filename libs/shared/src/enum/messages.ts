@@ -21,4 +21,10 @@ export enum ErrorMessage {
   'DELETE_ROLE_FAILED' = '角色刪除失敗！',
   'CREATE_ROLE_FAILED' = '角色新增失敗！',
   'UPDATE_ROLE_FAILED' = '角色更新失敗！',
+  'NO_SELECTED_AUTH_FUNCTION' = '請至少選擇一個系統權限',
+  'DELETE_MEMBER_FAILED' = '成員帳號刪除失敗！',
+  'CREATE_MEMBER_FAILED' = '成員帳號新增失敗！',
+  'UPDATE_MEMBER_FAILED' = '成員帳號編輯失敗！',
+  'NO_SELECTED_ACCOUNT' = '請至少選擇一個成員帳號',
+  'NO_SELECTED_AUTH_ROLE' = '請至少選擇一個角色',
 }

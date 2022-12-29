@@ -22,6 +22,7 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import EditIcon from '@mui/icons-material/Edit';
 import { AuthFunctionSelection } from './auth-functions-selection';
 
 const validationUpdateSchema = z.object({
@@ -137,7 +138,7 @@ export const UpdateRoleDialog: React.FC<UpdateRoleDialogProps> = ({
 
   const onConfirm = (data: ValidationUpdateSchema) => {
     if (selectedAuthFunctions.length === 0) {
-      setUpdateRoleError('請至少選擇一個系統權限');
+      setUpdateRoleError(ErrorMessage.NO_SELECTED_AUTH_FUNCTION);
       timer = setTimeout(() => {
         setUpdateRoleError(undefined);
       }, 2000);
@@ -156,7 +157,10 @@ export const UpdateRoleDialog: React.FC<UpdateRoleDialogProps> = ({
 
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="md">
-      <DialogTitle onClose={onClose} icon={<AddCircleIcon />}>
+      <DialogTitle
+        onClose={onClose}
+        icon={type === 'create' ? <AddCircleIcon /> : <EditIcon />}
+      >
         {type === 'create' ? '新增角色' : '編輯角色'}
       </DialogTitle>
       <DialogContent>

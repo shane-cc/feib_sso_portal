@@ -1,34 +1,34 @@
 import { ConfirmDialog, DialogContentText } from '@sso-platform/common-ui';
 import {
-  DeleteSystemAuthRoleRequest,
+  DeleteSystemMemberRequest,
   ErrorMessage,
   LoadingStateType,
-  deleteSystemAuthRole,
+  deleteSystemAuthMember,
   useLoadingState,
 } from '@sso-platform/shared';
-import { ApiError, AuthRole } from '@sso-platform/types';
+import { ApiError, AuthMember } from '@sso-platform/types';
 import { useMutation } from 'react-query';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-interface DeleteRoleDialogProps {
+interface DeleteMemberDialogProps {
   isOpen: boolean;
   handleClose: () => void;
   handleSuccess: () => void;
-  authRole?: AuthRole;
+  authMember?: AuthMember;
   systemCode: string;
 }
 
-export const DeleteRoleDialog: React.FC<DeleteRoleDialogProps> = ({
+export const DeleteMemberDialog: React.FC<DeleteMemberDialogProps> = ({
   isOpen,
   handleClose,
   handleSuccess,
-  authRole,
+  authMember,
   systemCode,
 }) => {
   const { openDialog } = useLoadingState();
 
   const mutation = useMutation(
-    (data: DeleteSystemAuthRoleRequest) => deleteSystemAuthRole(data),
+    (data: DeleteSystemMemberRequest) => deleteSystemAuthMember(data),
     {
       onSuccess: () => {
         handleSuccess();
@@ -36,7 +36,7 @@ export const DeleteRoleDialog: React.FC<DeleteRoleDialogProps> = ({
       onError: (error: ApiError) => {
         openDialog({
           type: LoadingStateType.ERROR,
-          message: `${error.message} ${ErrorMessage.DELETE_ROLE_FAILED}`,
+          message: `${error.message} ${ErrorMessage.DELETE_MEMBER_FAILED}`,
         });
       },
     }
@@ -45,7 +45,7 @@ export const DeleteRoleDialog: React.FC<DeleteRoleDialogProps> = ({
   const onConfirm = () => {
     mutation.mutate({
       systemCode,
-      authRoleCode: authRole?.authRoleCode || '',
+      memberAccount: authMember?.memberAccount || '',
     });
   };
 
@@ -62,14 +62,15 @@ export const DeleteRoleDialog: React.FC<DeleteRoleDialogProps> = ({
       }}
       onConfirm={onConfirm}
     >
-      <DialogContentText>是否確認刪除以下角色？</DialogContentText>
+      <DialogContentText>是否確認刪除以下成員？</DialogContentText>
       <DialogContentText
         sx={{
           fontWeight: 'bold',
           color: 'text.primary',
         }}
       >
-        {authRole && `${authRole.authRoleCode}（${authRole.authRoleName}）`}
+        {authMember &&
+          `${authMember.memberAccount}（${authMember.memberName}）`}
       </DialogContentText>
     </ConfirmDialog>
   );

@@ -13,6 +13,7 @@ import { SystemInfo } from './system-info';
 import { TableTabs } from './table-tabs';
 import { AuthManagement } from './auth-management';
 import RoleManagement from './role-management/role-management';
+import { MemberManagement } from './member-management';
 
 /* eslint-disable-next-line */
 export interface SystemAuthProps {}
@@ -72,6 +73,9 @@ export const SystemAuth: React.FC<SystemAuthProps> = () => {
           )}
           {currentTab === PageRoutes.SYSTEM_ROLE_MANAGEMENT && (
             <RoleManagement systemCode={systemCode as string} />
+          )}
+          {currentTab === PageRoutes.SYSTEM_MEMBER_MANAGEMENT && (
+            <MemberManagement systemCode={systemCode as string} />
           )}
         </Stack>
       </Stack>

@@ -16,49 +16,48 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
-  GetAuthRolesResponse,
+  GetAuthMembersResponse,
   PageRoutes,
   QueryCacheKey,
-  getAuthRolesList,
+  getAuthMembersList,
   getPageQuery,
 } from '@sso-platform/shared';
-import {
-  AuthFunctionDetail,
-  AuthRole,
-  AuthRoleDetail,
-} from '@sso-platform/types';
+import { AuthMember, AuthRole } from '@sso-platform/types';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import SearchIcon from '@mui/icons-material/Search';
-import { AuthFunctionFilterQuery } from './auth-function-filter-query';
-import { RoleManagementRow } from './role-management-row';
-import { DeleteRoleDialog } from './delete-role-dialog';
-import { UpdateRoleDialog } from './update-role-dialog';
+import { MemberManagementRow } from './member-management-row';
+import { AuthRoleFilterQuery } from './auth-role-filter-query';
+import CreateMemberDialog from './create-member-dialog/create-member-dialog';
+import { DeleteMemberDialog } from './delete-member-dialog';
+import { UpdateMemberDialog } from './update-member-dialog';
 
-interface RoleManagementProps {
+interface MemberManagementProps {
   systemCode: string;
 }
 
-const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
-  const currentPath = `${PageRoutes.SYSTEMS}/${systemCode}/${PageRoutes.SYSTEM_ROLE_MANAGEMENT}`;
+export const MemberManagement: React.FC<MemberManagementProps> = ({
+  systemCode,
+}) => {
+  const currentPath = `${PageRoutes.SYSTEMS}/${systemCode}/${PageRoutes.SYSTEM_MEMBER_MANAGEMENT}`;
   const router = useRouter();
   const { page, q } = router.query;
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
-  const [deleteTargetRole, setDeleteTargetRole] = useState<AuthRoleDetail>();
-  const [updateTargetRole, setUpdateTargetRole] = useState<AuthRoleDetail>();
+  const [deleteTargetMember, setDeleteTargetMember] = useState<AuthMember>();
+  const [updateTargetMember, setUpdateTargetMember] = useState<AuthMember>();
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [filterQuery, setFilterQuery] = useState<AuthFunctionDetail[]>([]);
+  const [filterQuery, setFilterQuery] = useState<AuthRole[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const {
-    data: authRolesData,
-    isFetching: isAuthRolesLoading,
+    data: authMembersData,
+    isFetching: isAuthMembersLoading,
     refetch,
-  } = useQuery<GetAuthRolesResponse, Error>(
-    [QueryCacheKey.AUTH_ROLES_LIST, systemCode],
+  } = useQuery<GetAuthMembersResponse, Error>(
+    [QueryCacheKey.AUTH_MEMBERS_LIST, systemCode],
     () =>
-      getAuthRolesList({
+      getAuthMembersList({
         systemCode,
         query: q ? (q as string) : '',
         page: getPageQuery(page),
@@ -70,7 +69,7 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
       },
     }
   );
-  const authRolesList = authRolesData?.data.authRoles ?? [];
+  const authMembersList = authMembersData?.data.authMembers ?? [];
 
   const handleSearchQueryChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
@@ -115,33 +114,33 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
     setShowCreateDialog(true);
   };
 
-  const handleCreateRoleSuccess = () => {
+  const handleCreateMemberSuccess = () => {
     handleCloseCreateDialog();
     refetch();
   };
 
   const handleCloseDeleteDialog = () => {
-    setDeleteTargetRole(undefined);
+    setDeleteTargetMember(undefined);
   };
 
-  const handleOpenDeleteDialog = (role: AuthRoleDetail) => {
-    setDeleteTargetRole(role);
+  const handleOpenDeleteDialog = (member: AuthMember) => {
+    setDeleteTargetMember(member);
   };
 
-  const handleDeleteRoleSuccess = () => {
+  const handleDeleteMemberSuccess = () => {
     handleCloseDeleteDialog();
     refetch();
   };
 
   const handleCloseUpdateDialog = () => {
-    setUpdateTargetRole(undefined);
+    setUpdateTargetMember(undefined);
   };
 
-  const handleOpenUpdateDialog = (role: AuthRoleDetail) => {
-    setUpdateTargetRole(role);
+  const handleOpenUpdateDialog = (member: AuthMember) => {
+    setUpdateTargetMember(member);
   };
 
-  const handleUpdateRoleSuccess = () => {
+  const handleUpdateMemberSuccess = () => {
     handleCloseUpdateDialog();
     refetch();
   };
@@ -164,9 +163,9 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
                 width="100%"
                 alignItems="center"
               >
-                <Typography variant="h6">角色管理</Typography>
+                <Typography variant="h6">成員角色管理</Typography>
                 <Stack direction="row" gap="1rem">
-                  <Form onSubmit={handleSearch} disabled={isAuthRolesLoading}>
+                  <Form onSubmit={handleSearch} disabled={isAuthMembersLoading}>
                     <TextField
                       label=""
                       name="authQuery"
@@ -176,7 +175,7 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
                       }}
                       value={searchQuery}
                       onChange={handleSearchQueryChange}
-                      placeholder="搜尋角色代碼 / 角色名稱（英文字母不分大小寫）"
+                      placeholder="搜尋部門 / 帳號 / 姓名（英文字母不分大小寫）"
                       startIcon={<SearchIcon color="info" />}
                     />
                   </Form>
@@ -186,11 +185,11 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
                     size="small"
                     onClick={handleOpenCreateDialog}
                   >
-                    新增角色
+                    新增成員帳號
                   </Button>
                 </Stack>
               </Stack>
-              <AuthFunctionFilterQuery
+              <AuthRoleFilterQuery
                 checkedList={filterQuery}
                 setCheckedList={setFilterQuery}
                 handleSearch={handleSearch}
@@ -202,15 +201,16 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
             <TableHead>
               <TableRow hover={false}>
                 <TableCell>No.</TableCell>
-                <TableCell>角色代碼</TableCell>
-                <TableCell>角色名稱</TableCell>
+                <TableCell>部門</TableCell>
+                <TableCell>帳號/姓名</TableCell>
+                <TableCell colSpan={2}>角色名稱</TableCell>
                 <TableCell align="right" colSpan={2}>
                   操作
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {isAuthRolesLoading && (
+              {isAuthMembersLoading && (
                 <TableRow>
                   <TableCell colSpan={7}>
                     <Stack
@@ -223,7 +223,7 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
                   </TableCell>
                 </TableRow>
               )}
-              {!isAuthRolesLoading && authRolesList.length === 0 && (
+              {!isAuthMembersLoading && authMembersList.length === 0 && (
                 <TableRow>
                   <TableCell colSpan={7}>
                     <Typography align="center" sx={{ py: 2 }}>
@@ -232,14 +232,14 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
                   </TableCell>
                 </TableRow>
               )}
-              {authRolesList.length > 0 &&
-                authRolesList.map((authRole, idx) => (
-                  <RoleManagementRow
-                    key={`${authRole.authRoleCode}-${idx}`}
+              {authMembersList.length > 0 &&
+                authMembersList.map((authMember, idx) => (
+                  <MemberManagementRow
+                    key={`${authMember.memberAccount}-${idx}`}
                     index={currentPage * 10 - 10 + idx + 1}
-                    authRole={authRole}
-                    handleUpdateRole={handleOpenUpdateDialog}
-                    handleDeleteRole={handleOpenDeleteDialog}
+                    authMember={authMember}
+                    handleUpdateMember={handleOpenUpdateDialog}
+                    handleDeleteMember={handleOpenDeleteDialog}
                   />
                 ))}
             </TableBody>
@@ -253,33 +253,28 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
           />
         </Stack>
       </Paper>
-      <UpdateRoleDialog
+      <CreateMemberDialog
         isOpen={showCreateDialog}
         handleClose={handleCloseCreateDialog}
-        handleSuccess={handleCreateRoleSuccess}
-        type="create"
+        handleSuccess={handleCreateMemberSuccess}
         systemCode={systemCode}
       />
-      <DeleteRoleDialog
-        isOpen={typeof deleteTargetRole !== 'undefined'}
+      <DeleteMemberDialog
+        isOpen={typeof deleteTargetMember !== 'undefined'}
         handleClose={handleCloseDeleteDialog}
-        handleSuccess={handleDeleteRoleSuccess}
-        authRole={deleteTargetRole as AuthRole}
+        handleSuccess={handleDeleteMemberSuccess}
+        authMember={deleteTargetMember as AuthMember}
         systemCode={systemCode}
       />
-      {typeof updateTargetRole !== 'undefined' && (
-        <UpdateRoleDialog
-          isOpen={typeof updateTargetRole !== 'undefined'}
+      {typeof updateTargetMember !== 'undefined' && (
+        <UpdateMemberDialog
+          isOpen={typeof updateTargetMember !== 'undefined'}
           handleClose={handleCloseUpdateDialog}
-          handleSuccess={handleUpdateRoleSuccess}
-          initialData={updateTargetRole as AuthRole}
-          authRoleFunctions={updateTargetRole.authRoleFunctions}
-          type="edit"
+          handleSuccess={handleUpdateMemberSuccess}
+          initialData={updateTargetMember as AuthMember}
           systemCode={systemCode}
         />
       )}
     </>
   );
 };
-
-export default RoleManagement;

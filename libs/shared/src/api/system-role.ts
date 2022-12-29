@@ -30,7 +30,7 @@ export async function getAuthRolesList(options?: {
   );
 }
 
-export type UpdateSystemAuthRoleRequest<> = {
+export type UpdateSystemAuthRoleRequest = {
   systemCode: string;
   authRoleCode: string;
   authRoleName: string;
