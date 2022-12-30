@@ -198,7 +198,7 @@ export const AdminManagement: React.FC<AdminManagementProps> = ({
               )}
               {!isAuthAdminsLoading && authAdminsList.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={7}>
+                  <TableCell colSpan={5}>
                     <Typography align="center" sx={{ py: 2 }}>
                       目前沒有已設定的系統管理員，請點擊【新增管理員】按鈕以新增管理員。
                     </Typography>
