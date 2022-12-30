@@ -12,6 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
+import { makeStyles } from 'tss-react/mui';
 
 interface RoleManagementRowProps {
   authRole: AuthRoleDetail;
@@ -20,6 +21,27 @@ interface RoleManagementRowProps {
   handleDeleteRole: (authRole: AuthRoleDetail) => void;
 }
 
+const useStyles = makeStyles<{ expanded: boolean }>()(
+  (_theme, { expanded }) => ({
+    expanded: {
+      '& *': {
+        transform: expanded ? 'scaleY(1)' : 'scaleY(0)',
+        transformOrigin: 'top',
+        transition: 'all 0.3s ease-in-out',
+        height: expanded ? 'auto' : 0,
+        padding: expanded ? '' : 0,
+      },
+      '& .MuiTableCell-root': {
+        borderBottom: expanded ? '1px solid rgba(224, 224, 224, 1)' : 'none',
+      },
+    },
+    icon: {
+      transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)',
+      transition: 'all 0.3s ease-in-out',
+    },
+  })
+);
+
 export const RoleManagementRow: React.FC<RoleManagementRowProps> = ({
   authRole,
   index,
@@ -27,6 +49,7 @@ export const RoleManagementRow: React.FC<RoleManagementRowProps> = ({
   handleDeleteRole,
 }) => {
   const [expanded, setExpanded] = useState<boolean>(false);
+  const { classes } = useStyles({ expanded });
 
   const handleToggleExpanded = () => {
     setExpanded((prev) => !prev);
@@ -46,7 +69,7 @@ export const RoleManagementRow: React.FC<RoleManagementRowProps> = ({
               onClick={handleToggleExpanded}
               size="small"
             >
-              <KeyboardArrowDownIcon />
+              <KeyboardArrowDownIcon className={classes.icon} />
             </IconButton>
             <Button
               variant="soft"
@@ -69,35 +92,35 @@ export const RoleManagementRow: React.FC<RoleManagementRowProps> = ({
           </Stack>
         </TableCell>
       </TableRow>
-      {expanded && (
-        <TableRow
-          sx={{
-            backgroundColor: (theme) => theme.palette.grey[200],
-            transform: expanded ? 'scaleY(1)' : 'scaleY(0)',
-            transformOrigin: 'top',
-            transition: 'all 0.5s ease-in-out',
-          }}
-        >
-          <TableCell colSpan={5}>
-            <Stack>
-              <Typography variant="body2" mb="1rem">
-                所屬權限
-              </Typography>
-              <Stack direction="row" flexWrap="wrap" gap=".5rem">
-                {authRole.authRoleFunctions.map((authFunction, idx) => (
-                  <Chip
-                    key={`${authFunction.authFunctionCode}-${idx}`}
-                    id={authFunction.authFunctionCode}
-                    defaultCheckedStatus={false}
-                    color="primary"
-                    label={`${authFunction.authFunctionCode} / ${authFunction.authFunctionName}`}
-                  />
-                ))}
-              </Stack>
+      <TableRow
+        sx={{
+          backgroundColor: (theme) => theme.palette.grey[200],
+          transform: expanded ? 'scaleY(1)' : 'scaleY(0)',
+          transformOrigin: 'top',
+          transition: 'all 0.3s ease-in-out',
+          height: expanded ? 'auto' : 0,
+        }}
+        className={classes.expanded}
+      >
+        <TableCell colSpan={5}>
+          <Stack>
+            <Typography variant="body2" mb="1rem">
+              所屬權限
+            </Typography>
+            <Stack direction="row" flexWrap="wrap" gap=".5rem">
+              {authRole.authRoleFunctions.map((authFunction, idx) => (
+                <Chip
+                  key={`${authFunction.authFunctionCode}-${idx}`}
+                  id={authFunction.authFunctionCode}
+                  defaultCheckedStatus={false}
+                  color="primary"
+                  label={`${authFunction.authFunctionCode} / ${authFunction.authFunctionName}`}
+                />
+              ))}
             </Stack>
-          </TableCell>
-        </TableRow>
-      )}
+          </Stack>
+        </TableCell>
+      </TableRow>
     </>
   );
 };
