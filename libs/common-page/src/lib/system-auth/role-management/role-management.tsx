@@ -40,7 +40,9 @@ interface RoleManagementProps {
   systemCode: string;
 }
 
-const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
+export const RoleManagement: React.FC<RoleManagementProps> = ({
+  systemCode,
+}) => {
   const currentPath = `${PageRoutes.SYSTEMS}/${systemCode}/${PageRoutes.SYSTEM_ROLE_MANAGEMENT}`;
   const router = useRouter();
   const { page, q } = router.query;
@@ -281,5 +283,3 @@ const RoleManagement: React.FC<RoleManagementProps> = ({ systemCode }) => {
     </>
   );
 };
-
-export default RoleManagement;

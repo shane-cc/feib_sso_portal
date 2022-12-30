@@ -7,16 +7,17 @@ import '@fontsource/noto-sans-tc/400.css';
 import '@fontsource/noto-sans-tc/500.css';
 import '@fontsource/noto-sans-tc/700.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useBaseState } from '@sso-platform/shared';
+import { AppType, useBaseState } from '@sso-platform/shared';
 
 const queryClient = new QueryClient();
 
 export const decorators = [
   // eslint-disable-next-line @typescript-eslint/ban-types
   (Story: Function) => {
-    const { setAppTitle } = useBaseState();
+    const { setAppTitle, setAppType } = useBaseState();
     useEffect(() => {
-      setAppTitle('SSO Portal');
+      setAppTitle('SSO Admin');
+      setAppType(AppType.SSO_ADMIN);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (

@@ -25,7 +25,7 @@ import {
   Button,
 } from '@sso-platform/common-ui';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { AuthAccountSelection } from './auth-account-selection';
+import { AuthAccountSelection } from '../auth-account-selection';
 
 const validatioCreateSchema = z.object({
   authRoleCode: z.string().min(1, '請選擇要指派的角色'),

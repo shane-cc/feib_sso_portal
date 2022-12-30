@@ -29,7 +29,7 @@ import { useQuery } from 'react-query';
 import SearchIcon from '@mui/icons-material/Search';
 import { MemberManagementRow } from './member-management-row';
 import { AuthRoleFilterQuery } from './auth-role-filter-query';
-import CreateMemberDialog from './create-member-dialog/create-member-dialog';
+import CreateMemberDialog from './create-member-dialog';
 import { DeleteMemberDialog } from './delete-member-dialog';
 import { UpdateMemberDialog } from './update-member-dialog';
 

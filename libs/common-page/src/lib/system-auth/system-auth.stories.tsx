@@ -42,3 +42,15 @@ MemberManagement.parameters = {
     },
   },
 };
+
+export const AdminManagement = () => <SystemAuth />;
+AdminManagement.parameters = {
+  nextRouter: {
+    pathname: '/systems/[systemCode]/admin',
+    path: '/systems/[systemCode]/admin',
+    asPath: '/systems/system-2/admin',
+    query: {
+      systemCode: 'system-2',
+    },
+  },
+};

@@ -6,3 +6,4 @@ export * from './system-auth';
 export * from './system-role';
 export * from './system-member';
 export * from './system-account';
+export * from './system-admin';

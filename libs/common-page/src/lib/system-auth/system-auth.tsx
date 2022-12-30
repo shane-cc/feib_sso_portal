@@ -1,10 +1,12 @@
 import { IBreadcrumb, Layout, PageTitle } from '@sso-platform/common-layout';
 import { Stack } from '@sso-platform/common-ui';
 import {
+  AppType,
   GetSystemDataResponse,
   PageRoutes,
   QueryCacheKey,
   getSystemData,
+  useBaseState,
 } from '@sso-platform/shared';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -12,8 +14,9 @@ import { useQuery } from 'react-query';
 import { SystemInfo } from './system-info';
 import { TableTabs } from './table-tabs';
 import { AuthManagement } from './auth-management';
-import RoleManagement from './role-management/role-management';
+import { RoleManagement } from './role-management/role-management';
 import { MemberManagement } from './member-management';
+import { AdminManagement } from './admin-management/admin-management';
 
 /* eslint-disable-next-line */
 export interface SystemAuthProps {}
@@ -34,6 +37,7 @@ export type SystemAuthTabType =
 export const SystemAuth: React.FC<SystemAuthProps> = () => {
   const router = useRouter();
   const { systemCode } = router.query;
+  const { appType } = useBaseState();
   const [currentTab, setCurrentTab] = useState<SystemAuthTabType>(
     PageRoutes.SYSTEM_AUTH_MANAGEMENT
   );
@@ -77,6 +81,10 @@ export const SystemAuth: React.FC<SystemAuthProps> = () => {
           {currentTab === PageRoutes.SYSTEM_MEMBER_MANAGEMENT && (
             <MemberManagement systemCode={systemCode as string} />
           )}
+          {currentTab === PageRoutes.SYSTEM_AUTH_ADMIN &&
+            appType === AppType.SSO_ADMIN && (
+              <AdminManagement systemCode={systemCode as string} />
+            )}
         </Stack>
       </Stack>
     </Layout>
