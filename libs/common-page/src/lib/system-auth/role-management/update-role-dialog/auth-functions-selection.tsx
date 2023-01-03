@@ -95,13 +95,12 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
 
   const handlePagination = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    refetch();
   };
 
   useEffect(() => {
     refetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [currentPage]);
 
   return (
     <>
