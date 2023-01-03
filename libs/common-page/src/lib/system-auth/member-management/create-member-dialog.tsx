@@ -115,7 +115,7 @@ const CreateMemberDialog: React.FC<CreateMemberDialogProps> = ({
       createSystemMember({
         systemCode,
         accounts: selectedAuthAccounts,
-        ...data,
+        authRoleCode: data.authRoleCode,
       }),
     {
       onSuccess,

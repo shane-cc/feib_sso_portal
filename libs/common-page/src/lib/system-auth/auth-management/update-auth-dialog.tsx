@@ -88,10 +88,12 @@ const UpdateAuthDialog: React.FC<UpdateAuthDialogProps> = ({
 
   const mutation = useMutation(
     (data: ValidationUpdateAuthSchema) =>
-      updateSystemAuthFunction<AuthFunctionDetail>({
+      updateSystemAuthFunction({
         systemCode,
         authFunction: {
-          ...data,
+          authFunctionCode: data.authFunctionCode,
+          authFunctionName: data.authFunctionName,
+          authFunctionCategory: data.authFunctionCategory,
           isActive: data.isActive === BooleanType.TRUE,
         },
       }),

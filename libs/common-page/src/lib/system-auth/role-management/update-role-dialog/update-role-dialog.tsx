@@ -115,7 +115,8 @@ export const UpdateRoleDialog: React.FC<UpdateRoleDialogProps> = ({
       createSystemRole({
         systemCode,
         authFunctions: selectedAuthFunctions,
-        ...data,
+        authRoleCode: data.authRoleCode,
+        authRoleName: data.authRoleName,
       }),
     {
       onSuccess,
@@ -128,7 +129,8 @@ export const UpdateRoleDialog: React.FC<UpdateRoleDialogProps> = ({
       updateSystemRole({
         systemCode,
         authFunctions: selectedAuthFunctions,
-        ...data,
+        authRoleCode: data.authRoleCode,
+        authRoleName: data.authRoleName,
       }),
     {
       onSuccess,
