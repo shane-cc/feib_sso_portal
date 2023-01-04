@@ -136,7 +136,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
                   sx={{
                     width: '500px',
                   }}
-                  placeholder="搜尋系統代碼／系統名稱（英文字母不分大小寫）"
+                  placeholder="搜尋服務代碼／服務名稱（英文字母不分大小寫）"
                   startIcon={<SearchIcon color="info" />}
                   error={!!errors.systemQuery}
                   helperText={errors.systemQuery?.message}
@@ -151,7 +151,7 @@ export const Dashboard: React.FC<DashboardProps> = () => {
               color="secondary"
               onClick={handleCreateSystem}
             >
-              新增子系統
+              新增服務
             </Button>
           )}
           {!isSSOPortal && (
@@ -174,11 +174,18 @@ export const Dashboard: React.FC<DashboardProps> = () => {
               {GeneralMessage.EMPTY_SYSTEM_LIST}
             </Typography>
           )}
-          {systemList?.map((system, idx) => (
-            <Grid item xs={6} md={4} lg={3} key={`${system.systemCode}-${idx}`}>
-              <SystemCard system={system} />
-            </Grid>
-          ))}
+          {systemList.length > 0 &&
+            systemList?.map((system, idx) => (
+              <Grid
+                item
+                xs={6}
+                md={4}
+                lg={3}
+                key={`${system.systemCode}-${idx}`}
+              >
+                <SystemCard system={system} />
+              </Grid>
+            ))}
         </Grid>
         <Grid item xs={12} md={4} lg={3}>
           <Paper

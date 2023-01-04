@@ -14,6 +14,7 @@ import KeyboardArrowUpRoundedIcon from '@mui/icons-material/KeyboardArrowUpRound
 import { AuthFunctionDetail } from '@sso-platform/types';
 import { useQuery } from 'react-query';
 import {
+  GeneralMessage,
   GetAuthFunctionsResponse,
   QueryCacheKey,
   getAuthFunctionsList,
@@ -86,7 +87,7 @@ export const AuthFunctionFilterQuery: React.FC<
         }}
       >
         <Typography variant="h6" fontWeight={500} margin={0}>
-          權限篩選
+          授權碼篩選
         </Typography>
         <Button
           variant="text"
@@ -118,6 +119,11 @@ export const AuthFunctionFilterQuery: React.FC<
           }}
         >
           {isAuthFunctionsLoading && <CircularProgress />}
+          {!isAuthFunctionsLoading && authFunctionsList.length === 0 && (
+            <Typography variant="body2">
+              {GeneralMessage.EMPTY_AUTH_SELECTION_LIST}
+            </Typography>
+          )}
           {authFunctionsList.map((authFunction, idx) => (
             <Chip
               key={`${authFunction.authFunctionCode}-${idx}`}

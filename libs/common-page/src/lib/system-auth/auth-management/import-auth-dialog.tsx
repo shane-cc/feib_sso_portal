@@ -77,7 +77,7 @@ export const ImportAuthDialog: React.FC<ImportAuthDialogProps> = ({
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm">
       <DialogTitle onClose={onClose} icon={<FileUploadRoundedIcon />}>
-        匯入權限
+        匯入授權碼
       </DialogTitle>
       <DialogContent>
         {importAuthError && (

@@ -16,6 +16,7 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
+  GeneralMessage,
   GetAuthRolesResponse,
   PageRoutes,
   QueryCacheKey,
@@ -166,7 +167,7 @@ export const RoleManagement: React.FC<RoleManagementProps> = ({
                 width="100%"
                 alignItems="center"
               >
-                <Typography variant="h6">角色管理</Typography>
+                <Typography variant="h6">群組設定</Typography>
                 <Stack direction="row" gap="1rem">
                   <Form onSubmit={handleSearch} disabled={isAuthRolesLoading}>
                     <TextField
@@ -178,7 +179,7 @@ export const RoleManagement: React.FC<RoleManagementProps> = ({
                       }}
                       value={searchQuery}
                       onChange={handleSearchQueryChange}
-                      placeholder="搜尋角色代碼 / 角色名稱（英文字母不分大小寫）"
+                      placeholder="搜尋群組代碼 / 群組名稱（英文字母不分大小寫）"
                       startIcon={<SearchIcon color="info" />}
                     />
                   </Form>
@@ -188,7 +189,7 @@ export const RoleManagement: React.FC<RoleManagementProps> = ({
                     size="small"
                     onClick={handleOpenCreateDialog}
                   >
-                    新增角色
+                    新增群組
                   </Button>
                 </Stack>
               </Stack>
@@ -204,8 +205,8 @@ export const RoleManagement: React.FC<RoleManagementProps> = ({
             <TableHead>
               <TableRow hover={false}>
                 <TableCell>No.</TableCell>
-                <TableCell>角色代碼</TableCell>
-                <TableCell>角色名稱</TableCell>
+                <TableCell>群組代碼</TableCell>
+                <TableCell>群組名稱</TableCell>
                 <TableCell align="right" colSpan={2}>
                   操作
                 </TableCell>
@@ -229,7 +230,7 @@ export const RoleManagement: React.FC<RoleManagementProps> = ({
                 <TableRow>
                   <TableCell colSpan={7}>
                     <Typography align="center" sx={{ py: 2 }}>
-                      目前沒有已設定的權限，請點擊【新增角色】按鈕以新增角色。
+                      {GeneralMessage.EMPTY_ROLE_LIST}
                     </Typography>
                   </TableCell>
                 </TableRow>

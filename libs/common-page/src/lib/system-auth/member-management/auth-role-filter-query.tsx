@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
+  GeneralMessage,
   GetAuthRolesResponse,
   QueryCacheKey,
   getAuthRolesList,
@@ -93,7 +94,7 @@ export const AuthRoleFilterQuery: React.FC<AuthRoleFilterQueryProps> = ({
         }}
       >
         <Typography variant="h6" fontWeight={500} margin={0}>
-          角色篩選
+          群組篩選
         </Typography>
         <Button
           variant="text"
@@ -125,6 +126,11 @@ export const AuthRoleFilterQuery: React.FC<AuthRoleFilterQueryProps> = ({
           }}
         >
           {isAuthRolesLoading && <CircularProgress />}
+          {!isAuthRolesLoading && authRolesList.length === 0 && (
+            <Typography variant="body2">
+              {GeneralMessage.EMPTY_ROLE_SELECTION_LIST}
+            </Typography>
+          )}
           {authRolesList.map((authRole, idx) => (
             <Chip
               key={`${authRole.authRoleCode}-${idx}`}

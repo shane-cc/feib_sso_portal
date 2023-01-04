@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
+  GeneralMessage,
   GetAuthRolesResponse,
   QueryCacheKey,
   getAuthRolesList,
@@ -119,7 +120,7 @@ export const AuthRoleSelection: React.FC<AuthRoleSelectionProps> = ({
             }}
             value={searchQuery}
             onChange={handleSearchQueryChange}
-            placeholder="搜尋角色代碼／角色名稱（英文字母不分大小寫）"
+            placeholder="搜尋群組代碼／群組名稱（英文字母不分大小寫）"
             startIcon={<SearchIcon color="info" />}
           />
         </Form>
@@ -129,8 +130,8 @@ export const AuthRoleSelection: React.FC<AuthRoleSelectionProps> = ({
           <TableHead>
             <TableRow hover={false}>
               <TableCell>勾選</TableCell>
-              <TableCell colSpan={2}>角色代碼</TableCell>
-              <TableCell colSpan={2}>角色名稱</TableCell>
+              <TableCell colSpan={2}>群組代碼</TableCell>
+              <TableCell colSpan={2}>群組名稱</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -147,7 +148,7 @@ export const AuthRoleSelection: React.FC<AuthRoleSelectionProps> = ({
               <TableRow>
                 <TableCell colSpan={5}>
                   <Typography align="center" sx={{ py: 2 }}>
-                    目前沒有已設定的角色，請至角色管理分頁，點擊【新增角色】按鈕以建立新的角色。
+                    {GeneralMessage.EMPTY_ROLE_SELECTION_LIST}
                   </Typography>
                 </TableCell>
               </TableRow>

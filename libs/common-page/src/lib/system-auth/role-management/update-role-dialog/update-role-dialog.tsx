@@ -5,6 +5,7 @@ import { ApiError, AuthFunction } from '@sso-platform/types';
 import { useEffect, useState } from 'react';
 import {
   ErrorMessage,
+  FormErrorMessage,
   createSystemRole,
   updateSystemRole,
 } from '@sso-platform/shared';
@@ -26,8 +27,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import { AuthFunctionSelection } from './auth-functions-selection';
 
 const validationUpdateSchema = z.object({
-  authRoleCode: z.string().min(1, '請填寫角色代碼'),
-  authRoleName: z.string().min(1, '請填寫角色名稱'),
+  authRoleCode: z.string().min(1, FormErrorMessage.AUTH_ROLE_CODE),
+  authRoleName: z.string().min(1, FormErrorMessage.AUTH_ROLE_NAME),
 });
 
 type ValidationUpdateSchema = z.infer<typeof validationUpdateSchema>;
@@ -163,7 +164,7 @@ export const UpdateRoleDialog: React.FC<UpdateRoleDialogProps> = ({
         onClose={onClose}
         icon={type === 'create' ? <AddCircleIcon /> : <EditIcon />}
       >
-        {type === 'create' ? '新增角色' : '編輯角色'}
+        {type === 'create' ? '新增群組' : '編輯群組'}
       </DialogTitle>
       <DialogContent>
         {updateRoleError && (
@@ -184,7 +185,7 @@ export const UpdateRoleDialog: React.FC<UpdateRoleDialogProps> = ({
             name="authRoleCode"
             render={({ field }) => (
               <TextField
-                label="角色代碼*"
+                label="群組代碼*"
                 disabled={type === 'edit'}
                 {...field}
                 error={!!errors.authRoleCode}
@@ -197,16 +198,16 @@ export const UpdateRoleDialog: React.FC<UpdateRoleDialogProps> = ({
             name="authRoleName"
             render={({ field }) => (
               <TextField
-                label="角色名稱*"
+                label="群組名稱*"
                 {...field}
                 error={!!errors.authRoleName}
                 helperText={errors.authRoleName?.message}
               />
             )}
           />
-          <Typography variant="h6">權限設定</Typography>
+          <Typography variant="h6">功能授權碼設定</Typography>
           <Stack direction="row" gap=".5rem" flexWrap="wrap">
-            <Typography variant="body2">已設定權限</Typography>
+            <Typography variant="body2">已設定授權碼</Typography>
             {selectedAuthFunctions.length === 0 && (
               <Typography variant="body2" px="1rem">
                 無

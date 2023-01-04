@@ -61,7 +61,7 @@ export const SystemInfo: React.FC<SystemInfoProps> = ({ system }) => {
             <Stack gap="12px">
               <Stack>
                 <Typography variant="caption" color="text.secondary">
-                  系統名稱
+                  服務名稱
                 </Typography>
                 <Typography variant="subtitle2" color="text.primary">
                   {system.systemName}
@@ -69,7 +69,7 @@ export const SystemInfo: React.FC<SystemInfoProps> = ({ system }) => {
               </Stack>
               <Stack>
                 <Typography variant="caption" color="text.secondary">
-                  系統代碼
+                  服務代碼
                 </Typography>
                 <Typography variant="subtitle2" color="text.primary">
                   {system.systemCode}
@@ -92,7 +92,7 @@ export const SystemInfo: React.FC<SystemInfoProps> = ({ system }) => {
                 color="info"
                 onClick={handleShowUpdateDialog}
               >
-                編輯系統
+                編輯服務
               </Button>
             </Stack>
           </CardContent>

@@ -21,6 +21,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useQuery } from 'react-query';
 import {
+  GeneralMessage,
   GetAuthFunctionsResponse,
   PageRoutes,
   QueryCacheKey,
@@ -157,7 +158,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
               width="100%"
               alignItems="center"
             >
-              <Typography variant="h6">權限管理</Typography>
+              <Typography variant="h6">授權碼管理</Typography>
               <Stack direction="row" gap="1rem">
                 <Form onSubmit={handleSearch} disabled={isAuthFunctionsLoading}>
                   <TextField
@@ -169,7 +170,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
                     }}
                     value={searchQuery}
                     onChange={handleSearchQueryChange}
-                    placeholder="搜尋權限代碼／權限名稱（英文字母不分大小寫）"
+                    placeholder="搜尋授權代碼／功能名稱（英文字母不分大小寫）"
                     startIcon={<SearchIcon color="info" />}
                   />
                 </Form>
@@ -179,7 +180,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
                   size="small"
                   onClick={handleOpenImportDialog}
                 >
-                  匯入權限
+                  匯入授權碼
                 </Button>
               </Stack>
             </Stack>
@@ -188,8 +189,8 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
             <TableHead>
               <TableRow hover={false}>
                 <TableCell>No.</TableCell>
-                <TableCell>權限代碼</TableCell>
-                <TableCell>權限描述</TableCell>
+                <TableCell>授權代碼</TableCell>
+                <TableCell>功能名稱</TableCell>
                 <TableCell>功能分類</TableCell>
                 <TableCell>是否啟用</TableCell>
                 <TableCell align="right" colSpan={2}>
@@ -215,7 +216,7 @@ export const AuthManagement: React.FC<AuthManagementProps> = ({
                 <TableRow>
                   <TableCell colSpan={7}>
                     <Typography align="center" sx={{ py: 2 }}>
-                      目前沒有已設定的權限，請點擊【匯入權限】按鈕以匯入權限。
+                      {GeneralMessage.EMPTY_AUTH_LIST}
                     </Typography>
                   </TableCell>
                 </TableRow>

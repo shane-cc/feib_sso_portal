@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
+  GeneralMessage,
   GetAuthFunctionsResponse,
   QueryCacheKey,
   getAuthFunctionsList,
@@ -110,7 +111,7 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
         alignItems="center"
         justifyContent="space-between"
       >
-        <Typography variant="h6">可設定權限</Typography>
+        <Typography variant="h6">可設定功能授權碼</Typography>
         <Form onSubmit={handleSearch} disabled={isAuthFunctionsLoading}>
           <TextField
             label=""
@@ -121,7 +122,7 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
             }}
             value={searchQuery}
             onChange={handleSearchQueryChange}
-            placeholder="搜尋權限代碼／權限名稱（英文字母不分大小寫）"
+            placeholder="搜尋授權代碼／功能名稱（英文字母不分大小寫）"
             startIcon={<SearchIcon color="info" />}
           />
         </Form>
@@ -131,8 +132,8 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
           <TableHead>
             <TableRow hover={false}>
               <TableCell>勾選</TableCell>
-              <TableCell colSpan={2}>權限代碼</TableCell>
-              <TableCell colSpan={2}>權限描述</TableCell>
+              <TableCell colSpan={2}>授權代碼</TableCell>
+              <TableCell colSpan={2}>功能名稱</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -149,7 +150,7 @@ export const AuthFunctionSelection: React.FC<AuthFunctionSelectionProps> = ({
               <TableRow>
                 <TableCell colSpan={5}>
                   <Typography align="center" sx={{ py: 2 }}>
-                    目前沒有已設定的權限，請至權限管理分頁，點擊【匯入權限】按鈕以匯入權限。
+                    {GeneralMessage.EMPTY_AUTH_SELECTION_LIST}
                   </Typography>
                 </TableCell>
               </TableRow>

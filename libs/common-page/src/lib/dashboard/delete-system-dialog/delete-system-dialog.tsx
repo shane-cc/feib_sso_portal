@@ -55,7 +55,7 @@ export const DeleteSystemDialog: React.FC<DeleteSystemDialogProps> = ({
       }}
       onConfirm={onConfirm}
     >
-      <DialogContentText>是否確認刪除以下系統？</DialogContentText>
+      <DialogContentText>是否確認刪除以下服務？</DialogContentText>
       <DialogContentText
         sx={{
           fontWeight: 'bold',

@@ -69,31 +69,31 @@ export const SystemCard: React.FC<SystemCardProps> = ({ system }) => {
   const menuItemList: MenuItemData[] = [
     {
       icon: <EditIcon />,
-      text: '編輯系統',
+      text: '編輯服務',
       show: !isSSOPortal && hasAuthFunc(AdminAuth.EDIT_SYSTEM),
       onClick: handleUpdateDialog,
     },
     {
       icon: <EditIcon />,
-      text: '編輯權限',
+      text: '編輯服務設定',
       show: system.auth?.isAuthEditable && isSSOPortal,
       onClick: handleGoToAuthPage,
     },
     {
       icon: <ManageAccountsIcon />,
-      text: '管理員管理',
+      text: '管理員設定',
       show: !isSSOPortal && hasAuthFunc(AdminAuth.ASSIGN_SYSTEM_ADMIN),
       onClick: handleGoToAuthAdminPage,
     },
     {
       icon: <PolicyIcon />,
-      text: '查看權限',
+      text: '查看服務設定',
       show: !isSSOPortal && hasAuthFunc(AdminAuth.READ_SYSTEM_AUTH),
       onClick: handleGoToAuthPage,
     },
     {
       icon: <DeleteForeverIcon htmlColor={COLORS.secondary.dark} />,
-      text: '刪除系統',
+      text: '刪除服務',
       show: !isSSOPortal && hasAuthFunc(AdminAuth.DELETE_SYSTEM),
       onClick: handleDeleteConfirmDialog,
       divider: true,

@@ -39,7 +39,7 @@ function CustomApp({
 
   useEffect(() => {
     setAppType(AppType.SSO_ADMIN);
-    setAppTitle('權限管理系統');
+    setAppTitle('Bankee 服務管理與稽核系統');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,7 +47,7 @@ function CustomApp({
     <>
       <CacheProvider value={emotionCache}>
         <Head>
-          <title>SSO Admin｜權限管理後台</title>
+          <title>Bankee 服務管理與稽核系統</title>
         </Head>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>

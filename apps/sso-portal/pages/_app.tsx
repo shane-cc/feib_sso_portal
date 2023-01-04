@@ -39,7 +39,7 @@ function CustomApp({
 
   useEffect(() => {
     setAppType(AppType.SSO_PORTAL);
-    setAppTitle('Bankee SSO Portal');
+    setAppTitle('Bankee 單一登入入口');
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -47,7 +47,7 @@ function CustomApp({
     <>
       <CacheProvider value={emotionCache}>
         <Head>
-          <title>SSO Portal</title>
+          <title>Bankee 單一登入入口</title>
         </Head>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>

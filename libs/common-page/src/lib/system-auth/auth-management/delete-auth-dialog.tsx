@@ -62,7 +62,7 @@ export const DeleteAuthDialog: React.FC<DeleteAuthDialogProps> = ({
       }}
       onConfirm={onConfirm}
     >
-      <DialogContentText>是否確認刪除以下權限？</DialogContentText>
+      <DialogContentText>是否確認刪除以下授權碼？</DialogContentText>
       <DialogContentText
         sx={{
           fontWeight: 'bold',

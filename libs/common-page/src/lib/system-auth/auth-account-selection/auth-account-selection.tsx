@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
+  GeneralMessage,
   GetAuthAccountsResponse,
   QueryCacheKey,
   getAuthAccountsList,
@@ -147,7 +148,7 @@ export const AuthAccountSelection: React.FC<AuthAccountSelectionProps> = ({
               <TableRow>
                 <TableCell colSpan={5}>
                   <Typography align="center" sx={{ py: 2 }}>
-                    目前沒有可選擇的成員帳號，請聯絡相關網管資安人員。
+                    {GeneralMessage.EMPTY_ACCOUNT_LIST}
                   </Typography>
                 </TableCell>
               </TableRow>

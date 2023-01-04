@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { ApiError, AuthAccount } from '@sso-platform/types';
 import {
   ErrorMessage,
+  FormErrorMessage,
   GetAuthRolesResponse,
   QueryCacheKey,
   createSystemMember,
@@ -28,7 +29,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { AuthAccountSelection } from '../auth-account-selection';
 
 const validatioCreateSchema = z.object({
-  authRoleCode: z.string().min(1, '請選擇要指派的角色'),
+  authRoleCode: z.string().min(1, FormErrorMessage.MEMBER_AUTH_ROLE_CODE),
 });
 
 type ValidationUpdateSchema = z.infer<typeof validatioCreateSchema>;
@@ -164,7 +165,7 @@ const CreateMemberDialog: React.FC<CreateMemberDialogProps> = ({
             name="authRoleCode"
             render={({ field }) => (
               <Select
-                label="指派角色*"
+                label="指派群組*"
                 {...field}
                 disabled={isAuthRolesLoading}
                 error={!!errors.authRoleCode}

@@ -16,6 +16,7 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
+  GeneralMessage,
   GetAuthAdminsResponse,
   PageRoutes,
   QueryCacheKey,
@@ -144,7 +145,7 @@ export const AdminManagement: React.FC<AdminManagementProps> = ({
               width="100%"
               alignItems="center"
             >
-              <Typography variant="h6">管理員管理</Typography>
+              <Typography variant="h6">管理員設定</Typography>
               <Stack direction="row" gap="1rem">
                 <Form onSubmit={handleSearch} disabled={isAuthAdminsLoading}>
                   <TextField
@@ -200,7 +201,7 @@ export const AdminManagement: React.FC<AdminManagementProps> = ({
                 <TableRow>
                   <TableCell colSpan={5}>
                     <Typography align="center" sx={{ py: 2 }}>
-                      目前沒有已設定的系統管理員，請點擊【新增管理員】按鈕以新增管理員。
+                      {GeneralMessage.EMPTY_ADMIN_LIST}
                     </Typography>
                   </TableCell>
                 </TableRow>

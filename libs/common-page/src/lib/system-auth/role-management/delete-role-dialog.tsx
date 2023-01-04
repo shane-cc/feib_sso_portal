@@ -62,7 +62,7 @@ export const DeleteRoleDialog: React.FC<DeleteRoleDialogProps> = ({
       }}
       onConfirm={onConfirm}
     >
-      <DialogContentText>是否確認刪除以下角色？</DialogContentText>
+      <DialogContentText>是否確認刪除以下群組？</DialogContentText>
       <DialogContentText
         sx={{
           fontWeight: 'bold',

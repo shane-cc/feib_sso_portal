@@ -14,6 +14,7 @@ import {
 } from '@sso-platform/common-ui';
 import {
   ErrorMessage,
+  GeneralMessage,
   GetActionHistoryResponse,
   LoadingStateType,
   PageRoutes,
@@ -81,9 +82,9 @@ export const ActionHistory: React.FC<ActionHistoryProps> = () => {
             <Table>
               <TableHead>
                 <TableRow hover={false}>
-                  <TableCell>系統名稱</TableCell>
+                  <TableCell>服務名稱</TableCell>
                   <TableCell>功能分類</TableCell>
-                  <TableCell colSpan={2}>動作權限名稱／權限代碼</TableCell>
+                  <TableCell colSpan={2}>功能名稱／功能授權碼</TableCell>
                   <TableCell colSpan={2}>紀錄時間</TableCell>
                 </TableRow>
               </TableHead>
@@ -99,7 +100,9 @@ export const ActionHistory: React.FC<ActionHistoryProps> = () => {
                   isError) && (
                   <TableRow>
                     <TableCell colSpan={6} align="center" sx={{ padding: 5 }}>
-                      <Typography>目前沒有相關的活動紀錄</Typography>
+                      <Typography>
+                        {GeneralMessage.EMPTY_ACTION_HISTORY}
+                      </Typography>
                     </TableCell>
                   </TableRow>
                 )}

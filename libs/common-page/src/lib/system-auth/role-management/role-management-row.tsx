@@ -105,7 +105,7 @@ export const RoleManagementRow: React.FC<RoleManagementRowProps> = ({
         <TableCell colSpan={5}>
           <Stack>
             <Typography variant="body2" mb="1rem">
-              所屬權限
+              所屬功能授權碼
             </Typography>
             <Stack direction="row" flexWrap="wrap" gap=".5rem">
               {authRole.authRoleFunctions.map((authFunction, idx) => (

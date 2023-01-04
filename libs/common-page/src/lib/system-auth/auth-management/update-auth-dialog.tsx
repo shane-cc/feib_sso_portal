@@ -7,6 +7,7 @@ import { ApiError, AuthFunctionDetail } from '@sso-platform/types';
 import {
   BooleanType,
   ErrorMessage,
+  FormErrorMessage,
   updateSystemAuthFunction,
 } from '@sso-platform/shared';
 import {
@@ -23,9 +24,11 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 
 const validationUpdateAuthSchema = z.object({
-  authFunctionCode: z.string().min(1, '請填寫權限代碼'),
-  authFunctionName: z.string().min(1, '請填寫權限描述'),
-  authFunctionCategory: z.string().min(1, '請填寫功能分類'),
+  authFunctionCode: z.string().min(1, FormErrorMessage.AUTH_FUNCTION_CODE),
+  authFunctionName: z.string().min(1, FormErrorMessage.AUTH_FUNCTION_NAME),
+  authFunctionCategory: z
+    .string()
+    .min(1, FormErrorMessage.AUTH_FUNCTION_CATEGORY),
   isActive: z.nativeEnum(BooleanType),
 });
 type ValidationUpdateAuthSchema = z.infer<typeof validationUpdateAuthSchema>;
@@ -110,7 +113,7 @@ const UpdateAuthDialog: React.FC<UpdateAuthDialogProps> = ({
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm">
       <DialogTitle onClose={onClose} icon={<EditIcon />}>
-        編輯權限
+        編輯授權碼
       </DialogTitle>
       <DialogContent>
         {updateAuthError && (
@@ -131,7 +134,7 @@ const UpdateAuthDialog: React.FC<UpdateAuthDialogProps> = ({
             name="authFunctionCode"
             render={({ field }) => (
               <TextField
-                label="權限代碼*"
+                label="授權代碼*"
                 disabled
                 {...field}
                 error={!!errors.authFunctionCode}
@@ -144,7 +147,7 @@ const UpdateAuthDialog: React.FC<UpdateAuthDialogProps> = ({
             name="authFunctionName"
             render={({ field }) => (
               <TextField
-                label="權限描述*"
+                label="功能名稱*"
                 {...field}
                 error={!!errors.authFunctionName}
                 helperText={errors.authFunctionName?.message}

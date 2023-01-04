@@ -16,6 +16,7 @@ import { Controller, useForm } from 'react-hook-form';
 import {
   createSystem,
   ErrorMessage,
+  FormErrorMessage,
   QueryCacheKey,
   updateSystem,
 } from '@sso-platform/shared';
@@ -23,9 +24,9 @@ import { useMutation, useQueryClient } from 'react-query';
 import { ApiError } from 'next/dist/server/api-utils';
 
 const validationUpdateSchema = z.object({
-  systemCode: z.string().min(1, '請填寫系統代碼'),
-  systemName: z.string().min(1, '請填寫系統名稱'),
-  systemUrl: z.string().url({ message: '請填寫正確的網址' }),
+  systemCode: z.string().min(1, FormErrorMessage.SYSTEM_CODE),
+  systemName: z.string().min(1, FormErrorMessage.SYSTEM_NAME),
+  systemUrl: z.string().url({ message: FormErrorMessage.SYSTEM_URL }),
 });
 
 export type ValidationUpdateSchema = z.infer<typeof validationUpdateSchema>;
@@ -111,7 +112,7 @@ export const UpdateSystemDialog: React.FC<UpdateSystemDialogProps> = ({
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm">
       <DialogTitle onClose={onClose} icon={<AddCircleIcon />}>
-        {type === 'create' ? '新增系統' : '編輯系統'}
+        {type === 'create' ? '新增服務' : '編輯服務'}
       </DialogTitle>
       <DialogContent>
         {updateSystemError && (
@@ -132,7 +133,7 @@ export const UpdateSystemDialog: React.FC<UpdateSystemDialogProps> = ({
             name="systemCode"
             render={({ field }) => (
               <TextField
-                label="系統代碼*"
+                label="服務代碼*"
                 disabled={type === 'edit'}
                 {...field}
                 error={!!errors.systemCode}
@@ -145,7 +146,7 @@ export const UpdateSystemDialog: React.FC<UpdateSystemDialogProps> = ({
             name="systemName"
             render={({ field }) => (
               <TextField
-                label="系統名稱*"
+                label="服務名稱*"
                 {...field}
                 error={!!errors.systemName}
                 helperText={errors.systemName?.message}

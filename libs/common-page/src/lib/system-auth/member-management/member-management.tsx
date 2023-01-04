@@ -16,6 +16,7 @@ import {
   Typography,
 } from '@sso-platform/common-ui';
 import {
+  GeneralMessage,
   GetAuthMembersResponse,
   PageRoutes,
   QueryCacheKey,
@@ -163,7 +164,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                 width="100%"
                 alignItems="center"
               >
-                <Typography variant="h6">成員角色管理</Typography>
+                <Typography variant="h6">成員群組管理</Typography>
                 <Stack direction="row" gap="1rem">
                   <Form onSubmit={handleSearch} disabled={isAuthMembersLoading}>
                     <TextField
@@ -203,7 +204,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                 <TableCell>No.</TableCell>
                 <TableCell>部門</TableCell>
                 <TableCell>帳號/姓名</TableCell>
-                <TableCell colSpan={2}>角色名稱</TableCell>
+                <TableCell colSpan={2}>群組名稱</TableCell>
                 <TableCell align="right" colSpan={2}>
                   操作
                 </TableCell>
@@ -227,7 +228,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                 <TableRow>
                   <TableCell colSpan={7}>
                     <Typography align="center" sx={{ py: 2 }}>
-                      目前沒有已設定的權限，請點擊【新增角色】按鈕以新增角色。
+                      {GeneralMessage.EMPTY_MEMBER_LIST}
                     </Typography>
                   </TableCell>
                 </TableRow>

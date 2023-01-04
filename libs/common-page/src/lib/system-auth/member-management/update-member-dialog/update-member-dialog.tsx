@@ -126,9 +126,9 @@ export const UpdateMemberDialog: React.FC<UpdateMemberDialogProps> = ({
             disabled
             value={`${initialData?.memberDepartment} - ${initialData?.memberAccount}/${initialData?.memberName}`}
           />
-          <Typography variant="h6">角色設定</Typography>
+          <Typography variant="h6">群組設定</Typography>
           <Stack direction="row" gap=".5rem" flexWrap="wrap">
-            <Typography variant="body2">已設定角色</Typography>
+            <Typography variant="body2">已指派群組</Typography>
             {selectedAuthRoles.length === 0 && (
               <Typography variant="body2" px="1rem">
                 無
