@@ -1467,6 +1467,7 @@
 | POST   |          | [編輯單一成員群組](#編輯單一成員群組)                 | 此api由個別服務的管理員於sso portal個別服務設定管理之【成員群組設定】分頁呼叫 |
 | POST   |          | [刪除單一成員帳號](#刪除單一成員帳號)                 | 此api由個別服務的管理員於sso portal個別服務設定管理之【成員群組設定】分頁呼叫 |
 | POST   |          | [取得可設定的成員帳號清單](#取得可設定的成員帳號清單) | 此api由個別服務的管理員於sso portal個別服務設定管理之【成員群組設定】分頁呼叫 |
+| POST   |          | [匯出成員群組設定](#匯出成員群組設定)                 | 此api由個別服務的管理員於sso portal個別服務設定管理之【成員群組設定】分頁呼叫 |
 
 
 
@@ -1883,6 +1884,36 @@
 		"isChecked": false
 	}],
 	"totalPage": 2
+}
+```
+
+
+
+#### 匯出成員群組設定
+
+##### Request body
+
+| KEY       | TYPE   | DESCRIPTION                      | MEMO |
+| --------- | ------ | -------------------------------- | ---- |
+| systemId* | string | 欲匯出成員群組設定之服務的系統ID |      |
+
+##### Response data
+
+| KEY      | TYPE   | DESCRIPTION                             | MEMO |
+| -------- | ------ | --------------------------------------- | ---- |
+| filePath | string | 所產生之成員群組設定資料csv檔之下載位址 |      |
+
+##### Example
+
+```json
+// Request body
+{
+  "systemId": "248e6886-f9c2-4e0f-a69c-47d9c6945e7c",
+}
+
+// Response data
+{
+  "filePath": "https://sso-platform.bankee.com.tw/system/248e6886-f9c2-4e0f-a69c-47d9c6945e7c/auth-member/2023011015512330.csv"
 }
 ```
 
