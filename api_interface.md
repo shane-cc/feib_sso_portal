@@ -127,6 +127,108 @@
 
 
 
+## 個人操作記錄查詢
+
+### API List
+
+| METHOD | ENDPOINT | USAGE                                 | MEMO                                                         |
+| ------ | -------- | ------------------------------------- | ------------------------------------------------------------ |
+| POST   |          | [取得個人操作記錄](#取得個人操作記錄) | 此api於sso portal或sso admin之Dashboard或【個人操作記錄查詢】分頁呼叫 |
+
+
+
+#### 取得個人操作記錄
+
+##### Request body
+
+| KEY   | TYPE   | DESCRIPTION          | MEMO |
+| ----- | ------ | -------------------- | ---- |
+| limit | number | 欲限制的查詢結果筆數 |      |
+
+##### Response data
+
+| KEY            | TYPE                                     | DESCRIPTION          | MEMO |
+| -------------- | ---------------------------------------- | -------------------- | ---- |
+| actionHistory* | array of [ActionHistory](#ActionHistory) | 所查詢的操作記錄列表 |      |
+
+##### Example
+
+```json
+// Request body
+{
+  "limit": 5
+}
+
+// Response data
+{
+	"actionHistory": [{
+		"actionHistoryId": "9be71c2b-5a9a-4fad-8103-811bacbfe477",
+		"platform": "SSO單一登入平台",
+		"authFunctionCategory": "登入/登出",
+		"authFunctionName": "登出SSO",
+		"authFunctionCode": "logout",
+		"actionStatus": "SUCCESS",
+		"actionIp": "1.34.556.789",
+		"actionDate": "2022.11.05 19:32:49"
+	}, {
+		"actionHistoryId": "a300eae8-37a8-4a0f-8f52-88d50e0aa2de",
+		"platform": "會員管理系統",
+		"authFunctionCategory": "系統",
+		"authFunctionName": "編輯會員所有資訊",
+		"authFunctionCode": "edit_member",
+		"actionStatus": "SUCCESS",
+		"actionIp": "1.34.556.789",
+		"actionDate": "2022.11.05 09:36:56"
+	}, {
+		"actionHistoryId": "edb735ce-67dd-434f-b3f6-482f8647ca56",
+		"platform": "會員管理系統",
+		"authFunctionCategory": "系統",
+		"authFunctionName": "新建新的會員",
+		"authFunctionCode": "create_new_member",
+		"actionStatus": "SUCCESS",
+		"actionIp": "1.34.556.789",
+		"actionDate": "2022.11.05 09:04:13"
+	}, {
+		"actionHistoryId": "48d9bdcd-5d2c-461b-a576-b35f33f8481d",
+		"platform": "會員管理系統",
+		"authFunctionCategory": "系統",
+		"authFunctionName": "新建新的的會員",
+		"authFunctionCode": "create_new_member",
+		"actionStatus": "FAIL",
+		"actionIp": "1.34.556.789",
+		"actionDate": "2022.11.04 19:32:49"
+	}, {
+		"actionHistoryId": "35a17fb7-b4da-42c7-831d-c8182ac16e24",
+		"platform": "會員管理系統",
+		"authFunctionCategory": "登入/登出",
+		"authFunctionName": "登入",
+		"authFunctionCode": "login",
+		"actionStatus": "SUCCESS",
+		"actionIp": "1.34.556.789",
+		"actionDate": "2022.11.04 09:03:12"
+	}]
+}
+```
+
+
+
+### Data Modal
+
+###### ActionHistory
+
+| FIELD NAME           | TYPE                | DESCRIPTION          | MEMO |
+| -------------------- | ------------------- | -------------------- | ---- |
+| actionHistoryId      | string              | 該操作記錄的系統ID   |      |
+| platform             | string              | 該操作動作的服務名稱 |      |
+| authFunctionCategory | string              | 該操作動作的功能分類 |      |
+| authFunctionName     | string              | 該操作動作的功能名稱 |      |
+| authFunctionCode     | string              | 該操作動作的授權代碼 |      |
+| actionStatus         | "SUCCESS" \| "FAIL" | 該操作動作的狀態     |      |
+| actionIp             | string              | 該操作動作的使用者IP |      |
+| actionDate           | string              | 該操作動作的操作時間 |      |
+
+
+
 ## 服務上下架與查詢
 
 ### API List

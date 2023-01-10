@@ -1,7 +1,10 @@
 export interface IndividualActionHistory {
+  actionHistoryId: string;
   platform: string;
   authFunctionCategory: string;
   authFunctionName: string;
   authFunctionCode: string;
-  date: string;
+  actionStatus: 'SUCCESS' | 'FAIL';
+  actionIp: string;
+  actionDate: string;
 }
