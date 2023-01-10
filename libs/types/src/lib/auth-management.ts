@@ -1,5 +1,3 @@
-import { Auth } from './auth';
-
 export interface AuthFunction {
   authFunctionCode: string;
   authFunctionName: string;
@@ -16,7 +14,7 @@ export interface AuthRole {
 }
 
 export interface AuthRoleDetail extends AuthRole {
-  authRoleFunctions: Auth[];
+  authRoleFunctions: AuthFunction[];
 }
 
 export interface AuthAccount {
