@@ -46,6 +46,7 @@ export enum ErrorMessage {
   'UPDATE_MEMBER_FAILED' = '成員帳號編輯失敗！',
   'NO_SELECTED_ACCOUNT' = '請至少選擇一個成員帳號',
   'NO_SELECTED_AUTH_ROLE' = '請至少選擇一個群組',
+  'EXPORT_MEMBER_FAILED' = '成員群組帳號匯出失敗！',
   'CREATE_ADMIN_FAILED' = '管理員帳號新增失敗！',
   'DELETE_ADMIN_FAILED' = '管理員帳號刪除失敗！',
 }

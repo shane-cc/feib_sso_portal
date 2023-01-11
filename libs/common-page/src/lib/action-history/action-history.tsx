@@ -22,6 +22,7 @@ import {
   getActionHistory,
   useLoadingState,
 } from '@sso-platform/shared';
+import { ActionStatus } from '@sso-platform/types';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 
@@ -85,6 +86,8 @@ export const ActionHistory: React.FC<ActionHistoryProps> = () => {
                   <TableCell>服務名稱</TableCell>
                   <TableCell>功能分類</TableCell>
                   <TableCell colSpan={2}>功能名稱／功能授權碼</TableCell>
+                  <TableCell colSpan={1}>操作狀態</TableCell>
+                  <TableCell colSpan={2}>IP Address</TableCell>
                   <TableCell colSpan={2}>紀錄時間</TableCell>
                 </TableRow>
               </TableHead>
@@ -114,17 +117,36 @@ export const ActionHistory: React.FC<ActionHistoryProps> = () => {
                         authFunctionCategory,
                         authFunctionName,
                         authFunctionCode,
-                        date,
+                        actionStatus,
+                        actionIp,
+                        actionDate,
                       },
                       idx
                     ) => (
-                      <TableRow key={`${date}-${idx}`}>
+                      <TableRow key={`${actionDate}-${idx}`}>
                         <TableCell>{platform}</TableCell>
                         <TableCell>{authFunctionCategory}</TableCell>
                         <TableCell
                           colSpan={2}
                         >{`${authFunctionName} / ${authFunctionCode}`}</TableCell>
-                        <TableCell colSpan={2}>{date}</TableCell>
+                        <TableCell
+                          colSpan={1}
+                          sx={
+                            actionStatus === ActionStatus.FAIL
+                              ? {
+                                  color: (theme) =>
+                                    theme.palette.secondary.main,
+                                  fontWeight: 'bold',
+                                }
+                              : {}
+                          }
+                        >
+                          {actionStatus === ActionStatus.SUCCESS
+                            ? '成功'
+                            : '失敗'}
+                        </TableCell>
+                        <TableCell colSpan={2}>{actionIp}</TableCell>
+                        <TableCell colSpan={2}>{actionDate}</TableCell>
                       </TableRow>
                     )
                   )}

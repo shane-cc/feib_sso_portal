@@ -1,4 +1,5 @@
 import {
+  ApiError,
   AuthAccount,
   AuthMember,
   AuthRole,
@@ -67,4 +68,26 @@ export async function deleteSystemAuthMember(
   return await apiFetcher(`/authMembers/${data.memberAccount}`, data, {
     method: 'delete',
   });
+}
+
+type ExportSystemAuthMember = {
+  filePath: string;
+};
+export type ExportSystemAuthMemberResponse =
+  BaseResponse<ExportSystemAuthMember>;
+export async function exportSystemAuthMember(data: {
+  systemId: string;
+}): Promise<ExportSystemAuthMemberResponse> {
+  throw new ApiError({
+    status: 500,
+    message: 'Export failed!',
+  });
+  return await {
+    data: {
+      filePath:
+        'https://jgdev.jgallop.com/cstest/order/excel/001_20230111153100045.xlsx',
+    },
+    status: 'Success',
+    error: false,
+  };
 }

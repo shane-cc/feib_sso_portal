@@ -33,6 +33,7 @@ import { AuthRoleFilterQuery } from './auth-role-filter-query';
 import CreateMemberDialog from './create-member-dialog';
 import { DeleteMemberDialog } from './delete-member-dialog';
 import { UpdateMemberDialog } from './update-member-dialog';
+import { ExportMemberDialog } from './export-member-dialog';
 
 interface MemberManagementProps {
   systemCode: string;
@@ -44,6 +45,7 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
   const currentPath = `${PageRoutes.SYSTEMS}/${systemCode}/${PageRoutes.SYSTEM_MEMBER_MANAGEMENT}`;
   const router = useRouter();
   const { page, q } = router.query;
+  const [showExportDialog, setShowExportDialog] = useState<boolean>(false);
   const [showCreateDialog, setShowCreateDialog] = useState<boolean>(false);
   const [deleteTargetMember, setDeleteTargetMember] = useState<AuthMember>();
   const [updateTargetMember, setUpdateTargetMember] = useState<AuthMember>();
@@ -105,6 +107,14 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
       { shallow: true }
     );
     refetch();
+  };
+
+  const handleOpenExportDialog = () => {
+    setShowExportDialog(true);
+  };
+
+  const handleCloseExportDialog = () => {
+    setShowExportDialog(false);
   };
 
   const handleCloseCreateDialog = () => {
@@ -182,6 +192,14 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
                   </Form>
                   <Button
                     variant="contained"
+                    color="info"
+                    size="small"
+                    onClick={handleOpenExportDialog}
+                  >
+                    匯出成員群組設定
+                  </Button>
+                  <Button
+                    variant="contained"
                     color="secondary"
                     size="small"
                     onClick={handleOpenCreateDialog}
@@ -254,6 +272,11 @@ export const MemberManagement: React.FC<MemberManagementProps> = ({
           />
         </Stack>
       </Paper>
+      <ExportMemberDialog
+        isOpen={showExportDialog}
+        handleClose={handleCloseExportDialog}
+        systemId={systemCode}
+      />
       <CreateMemberDialog
         isOpen={showCreateDialog}
         handleClose={handleCloseCreateDialog}

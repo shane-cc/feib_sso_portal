@@ -29,12 +29,12 @@ export const TableTabs: React.FC<TableTabsProps> = ({ currentTab }) => {
         onChange={handleChange}
         sx={{ backgroundColor: 'transparent' }}
       >
-        <Tab label="授權碼管理" value={PageRoutes.SYSTEM_AUTH_MANAGEMENT} />
-        <Tab label="群組設定" value={PageRoutes.SYSTEM_ROLE_MANAGEMENT} />
-        <Tab label="成員群組設定" value={PageRoutes.SYSTEM_MEMBER_MANAGEMENT} />
         {isSSOAdmin && (
           <Tab label="管理員設定" value={PageRoutes.SYSTEM_AUTH_ADMIN} />
         )}
+        <Tab label="授權碼管理" value={PageRoutes.SYSTEM_AUTH_MANAGEMENT} />
+        <Tab label="群組設定" value={PageRoutes.SYSTEM_ROLE_MANAGEMENT} />
+        <Tab label="成員群組設定" value={PageRoutes.SYSTEM_MEMBER_MANAGEMENT} />
       </Tabs>
     </Box>
   );

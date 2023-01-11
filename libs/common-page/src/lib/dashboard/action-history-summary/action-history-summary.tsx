@@ -22,7 +22,7 @@ export const ActionHistorySummary: React.FC<ActionHistorySummaryProps> = ({
 }) => {
   return (
     <Timeline>
-      {timelineData.map(({ platform, date, authFunctionName }, idx) => (
+      {timelineData.map(({ platform, actionDate, authFunctionName }, idx) => (
         <TimelineItem key={idx}>
           <TimelineSeparator>
             <TimelineDot color="primary" />
@@ -37,7 +37,7 @@ export const ActionHistorySummary: React.FC<ActionHistorySummaryProps> = ({
               color={COLORS.primary.greyish}
               sx={{ display: 'block' }}
             >
-              {date}
+              {actionDate}
             </Typography>
           </TimelineContent>
         </TimelineItem>
